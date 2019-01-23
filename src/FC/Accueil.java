@@ -10,5 +10,6 @@ package FC;
  * @author noraz
  */
 public class Accueil {
+    String Accueil; 
     
 }
