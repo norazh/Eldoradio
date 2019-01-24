@@ -11,5 +11,8 @@ package FC;
  */
 public class Accueil {
     String Accueil; 
-    
+    public void suceMaTeub(){
+        
+        
+    }
 }
