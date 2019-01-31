@@ -164,6 +164,15 @@ public class Date implements Comparable {
             return false;// si l'objet n'est pas une date, on retourne false
         }
     
+    public boolean sup(Object o) {
+        if (o instanceof Date) {
+            Date d = (Date) o;
+            return (getAnnee() >= d.getAnnee()) && (getMois() >= d.getMois()) && (getJour() >= d.getJour());
+        } else {
+            return false;
+        }
+    }
+    
     // precondition : 'o' est une instance de 'Date' : 
     public int compareTo(Object o) {
         Date d = (Date)o;// variable d prend les valeurs de l'objet
@@ -223,6 +232,47 @@ public class Date implements Comparable {
 		return minute;
 	}
 	
+        public static Date getDateHourFromString(String stringT){
+        String j = stringT.substring(0, 2);
+        String m = stringT.substring(2, 4);
+        String a = stringT.substring(4, 8);
+        String h = stringT.substring(8, 10);
+        String mi = stringT.substring(10, 12);
+        Date date = new Date(Integer.parseInt(j),Integer.parseInt(m),Integer.parseInt(a),Integer.parseInt(h),Integer.parseInt(mi));
+        return date;
+    }
+        
+         /**
+     * Permet d'obtenir l'annee, le mois et le jour
+     *
+     * @return un String
+     */ 
+    public String toStringSql() {
+        String s = "";
+        
+        if (getJour() < 10) {
+            s += "0" + getJour();
+        } else {
+            s += getJour();
+        }
+        if (getMois() < 10) {
+            s += "0" + getMois();
+        } else {
+            s += getMois();
+        }
+        s += getAnnee();
+        if (getHeure() < 10) {
+            s += "0" + getHeure();
+        } else {
+            s += getHeure();
+        }
+        if (getMinute() < 10) {
+            s += "0" + getMinute();
+        } else {
+            s += getMinute();
+        }
+        return s;
+    }
 	
     
     }
