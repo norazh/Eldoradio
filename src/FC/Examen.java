@@ -16,7 +16,7 @@ public class Examen {
     private CompteRendu CR;
     private PACS pacs;
     
-    public Examen (Date date, Ph ph, TypeExamen type, CompteRendu CR, PACS pacs){
+    public Examen (Date date, PH ph, TypeExamen type, CompteRendu CR, PACS pacs){
         this.date=date;
         this.type= type;
         this.CR=CR;

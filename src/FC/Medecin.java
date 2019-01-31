@@ -9,15 +9,6 @@ package FC;
  *
  * @author menar
  */
-public enum Sexe {
-    H ("H"),
-    F ("F");
-    private String sexe;
-    private Sexe (String sexe){
-        this.sexe=sexe;
-        
-    }
-    public String toString() {
-        return sexe;
-    }
+public class Medecin {
+    
 }

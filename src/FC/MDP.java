@@ -9,15 +9,10 @@ package FC;
  *
  * @author menar
  */
-public enum Sexe {
-    H ("H"),
-    F ("F");
-    private String sexe;
-    private Sexe (String sexe){
-        this.sexe=sexe;
-        
+public class MDP {
+    private String mdp;
+    public MDP (String mdp){
+        this.mdp=mdp;
     }
-    public String toString() {
-        return sexe;
-    }
+    
 }
