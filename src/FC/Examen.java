@@ -11,12 +11,12 @@ package FC;
  */
 public class Examen {
     private Date date;
-    private PH ph;
+    private Personnel personnel;
     private TypeExamen type;
     private CompteRendu CR;
     private PACS pacs;
     
-    public Examen (Date date, PH ph, TypeExamen type, CompteRendu CR, PACS pacs){
+    public Examen (Date date, Personnel personnel, TypeExamen type, CompteRendu CR, PACS pacs){
         this.date=date;
         this.type= type;
         this.CR=CR;

@@ -9,6 +9,6 @@ package FC;
  *
  * @author menar
  */
-public class PH {
-    
+public class SIR {
+    private arrayList<DMR>= new arrayList<>();
 }
