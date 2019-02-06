@@ -17,8 +17,15 @@ public class DMR {
     private ArrayList<Examen> listeExamen= new ArrayList<Examen>();
     
     public DMR(String idDMR, Patient patient, ArrayList<Examen> liste){
+     
         this.idDMR=idDMR;
-        this.patient=patient;
+        if(patient.getidDMR()==null){
+            this.patient=patient;
+            this.patient.setidDMR(idDMR);
+        }
+        else{
+            System.out.println("Ce patient a déjà un DMR");
+        }
         this.listeExamen=liste;
     }
     public String getidDMR(){

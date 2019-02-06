@@ -23,7 +23,7 @@ public class Patient {
 	private Sexe sexe;
 	
     
-    public Patient(String nom, String prenom, String adresse, String ville, String codePostal, String idSIR, String idSIH, Date date, String idDMR,  Sexe sexe) {
+    public Patient(String nom, String prenom, String adresse, String ville, String codePostal, String idSIR, String idSIH, Date date,   Sexe sexe) {
         this.nom = nom;
         this.prenom = prenom;
 		this.adresse= adresse;
@@ -31,11 +31,11 @@ public class Patient {
 		this.codePostal= codePostal;
 		this.idSIR=idSIR;
                 this.idSIH= idSIH;
-                this.idDMR=idDMR;
 		this.dateNaissance= date;
 		this.sexe=sexe;
 		
         }
+   
     
     public String toString() {
         return getPrenom() + " " + getNom() + " - " + getDateDeNaissance().toString() + " / " + getSexe()+ " / " ;
