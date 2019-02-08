@@ -48,7 +48,18 @@ public class DMR {
         this.patient=p;
     }
     public void ajouterExamen (Examen exam){
-        
+        String id=exam.getidExamen();
+        int i=0;
+        while(i<listeExamen.size() && !listeExamen.get(i).getidExamen().equals(id)){
+            i++;
+        }
+        if(i<listeExamen.size()){
+            System.out.println("Cet examen possède un identifiant déjà utilisé dans ce DMR");
+            
+        }
+        else{
+            listeExamen.add(exam);
+        }
     }
            
 }

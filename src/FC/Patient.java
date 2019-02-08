@@ -35,10 +35,22 @@ public class Patient {
 		this.sexe=sexe;
 		
         }
-   
+       public Patient(String nom, String prenom, String adresse, String ville, String codePostal, String idSIR, String idSIH,String idDMR, Date date,   Sexe sexe) {
+        this.nom = nom;
+        this.prenom = prenom;
+		this.adresse= adresse;
+		this.ville=ville;
+		this.codePostal= codePostal;
+		this.idSIR=idSIR;
+                this.idSIH= idSIH;
+                this.idDMR=idDMR;
+		this.dateNaissance= date;
+		this.sexe=sexe;
+		
+        }
     
     public String toString() {
-        return getPrenom() + " " + getNom() + " - " + getDateDeNaissance().toString() + " / " + getSexe()+ " / " ;
+        return "FICHE PATIENT"+"\n"+"Prénom: "+getPrenom() + "\n " +"Nom : "+ getNom() + " \n " +"Adresse: "+getAdresse()+"\n"+"Ville : "+getVille()+"\n"+"Code Postal: "+getCodePostal()+"\n"+"idSIR: "+getidSIR()+"\n"+"idSIH: "+getidSIH()+"\n"+"idDMR: "+getidDMR()+"\n"+"Date de naissance: "+ getDateDeNaissance().toString() + " \n " + "Sexe : "+getSexe()+ " \n " ;
         }
     
     public String toStringNom(){
@@ -120,7 +132,28 @@ public class Patient {
 	public void setSexe (Sexe s){
 		this.sexe=s;
 	}
+           
         
+        /*public int compareTo(Object o) {
+        String n= (String)o;
+        n=n.toLowerCase();
+        if (!nom.equals(n)){// si c'est pas la même année
+            int nom1= (int)
+            if ((char)nom>(char)n){
+            return annee - d.annee;
+            }
+        }
+        if (mois != d.mois) //si passe a ce deuxieme if annee égale
+            return mois  - d.mois;// renvoie la différence des mois
+        // ici on a forcement annee == d.annee et mois == d.mois :
+		if (getJour() != d.getJour()){// si passe à ce if, mois égal
+			return jour - d.jour;// renvoie la différence des jours
+		}
+		if ( heure != d.heure){// si passe à ce if, jour égal
+			return heure - d.heure ; // renvoie la différence d'heures 
+		}
+        return minute - d.minute;// différence des minutes
+        }*/
 	
     }
 

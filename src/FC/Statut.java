@@ -12,13 +12,12 @@ package FC;
 public enum Statut {
     DECO ("DECO"),
     INTERNE ("INTERNE"),
-    RADIOLOGUE ("RADIOLOGUE"),
+    MEDECIN ("MEDECIN"),
     MANIP ("MANIP"),
     SECRET ("SECRET");
     private String statut;
     private Statut (String statut){
         this.statut=statut;
-        
     }
     public String toString() {
         return statut;
