@@ -6,6 +6,7 @@
 package FC;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  *
@@ -120,17 +121,100 @@ public class SIR {
         return i;
       
     }
-    public Patient RecherchePatientParNom (Patient P){
+    public Patient RecherchePatientParNom (String nom){
+        String p1= nom.toLowerCase();
         int i=0;
-        while(i<listePatient.size() && !listePatient.get(i).equals(P)){
+        while(i<listePatient.size() && !listePatient.get(i).getNom().toLowerCase().equals(p1)){
                     i++;
         }
-        
         return listePatient.get(i);
-        
-            
-        
     }        
       
+    public Patient RecherchePatientParPrenom (String prenom){
+        String p1= prenom.toLowerCase();
+        int i=0;
+        while(i<listePatient.size() && !listePatient.get(i).getPrenom().toLowerCase().equals(p1)){
+                    i++;
+        }
+        return listePatient.get(i);
+    }    
         
+    public DMR RechercheDMRParNomPatient (String nom){
+        String p1=nom.toLowerCase();
+        int i=0;
+        while (i<listeDMR.size() && !listeDMR.get(i).getPatient().getNom().toLowerCase().equals(p1)){
+            i++;
+        }
+        return listeDMR.get(i);
+    }
+    
+     public DMR RechercheDMRParPrenomPatient (String prenom){
+        String p1=prenom.toLowerCase();
+        int i=0;
+        while (i<listeDMR.size() && !listeDMR.get(i).getPatient().getPrenom().toLowerCase().equals(p1)){
+            i++;
+        }
+        return listeDMR.get(i);
+    }
+     
+     public DMR RechercheDMRParidDMR (String id){
+        String p1=id.toLowerCase();
+        int i=0;
+        while (i<listeDMR.size() && !listeDMR.get(i).getidDMR().toLowerCase().equals(p1)){
+            i++;
+        }
+        return listeDMR.get(i);
+    }
+     
+      public void triDMRDateDernierExamen() {
+        ArrayList <DMR> copieListeDMR = new ArrayList<>();//création d'un nouveau vecteur égale à fiche de soins
+        for (int i=0; i<listeDMR.size(); i++){ //recopie tous les éléments de listeDMR dans copieListeDMR
+            copieListeDMR.add(listeDMR.get(i));
+        }
+        while (!copieListeDMR.isEmpty()) {// tant que copieFiches n'est pas vide, faire:
+            // on cherche la fiche de soins de date minimale :
+            int imin = 0;
+            DMR d1 = copieListeDMR.get(imin);
+            for (int i = 1; i < copieListeDMR.size(); i++) {
+                DMR d2 = copieListeDMR.get(i);
+                for (int j = 0; j < d2.getListeExamen().size(); j++) {
+                    if (d2.getListeExamen().get(j).getDate().compareTo(d1.getListeExamen().get(j).getDate()) < 0) {
+                        imin = i;
+                        d1 = d2;
+                    }
+                }
+            }
+            // on affiche la fiche de soins trouvee :
+            d1.toString();
+            System.out.println("------------------------");
+            //on la supprime de la liste :
+            copieListeDMR.remove(imin);
+        }
+    }
+      
+      public void trierDMRParNomPatient(){
+           ArrayList <DMR> copieListeDMR = new ArrayList<>();//création d'un nouveau vecteur égale à fiche de soins
+        for (int i=0; i<listeDMR.size(); i++){ //recopie tous les éléments de listeDMR dans copieListeDMR
+            copieListeDMR.add(listeDMR.get(i));
+        }
+        int i=0;
+       // Collections.sort(copieListeDMR.get(i).getPatient().getNom());
+      }
+      
+      
+      public void ajouterCR (String idDMR, String idExam, String cr){
+          DMR d= this.RechercheDMRParidDMR(idDMR);
+          int i=0;
+          while (i<d.getListeExamen().size() && !d.getListeExamen().get(i).getidExamen().toLowerCase().equals(idExam.toLowerCase())){
+              i++;
+          }
+          if(i<d.getListeExamen().size()){//il existe l'examen dans lequel on veut rajouter le compte rendu
+              d.getListeExamen().get(i).setCR(cr);
+          }
+          else {
+              System.out.println ("Cet examen n'existe pas dans le DMR à l'identifiant "+idExam);
+          }
+          
+      }
+              
  }
