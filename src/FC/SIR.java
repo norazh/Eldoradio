@@ -14,7 +14,7 @@ import java.util.Collections;
  */
 public class SIR {
     private ArrayList<DMR> listeDMR = new ArrayList<>();
-    private Statut statut;
+    private Statut statutConnexion;
     private ArrayList<Personnel> listePersonnel= new ArrayList<>();
     private ArrayList<Patient> listePatient= new ArrayList<>();
     private String idSIR;
@@ -24,7 +24,7 @@ public class SIR {
         this.listeDMR=listeDMR;
         this.listePersonnel=listePersonnel;
         this.listePatient=listePatient;
-        this.statut=statut;
+        this.statutConnexion=statut;
     }
     
     public ArrayList<DMR> getListeDMR (){
@@ -32,7 +32,7 @@ public class SIR {
     }
     
     public Statut getStatut(){
-        return statut;
+        return statutConnexion;
     }
     
     public ArrayList<Personnel> getListePersonnel(){
@@ -202,19 +202,95 @@ public class SIR {
       }
       
       
-      public void ajouterCR (String idDMR, String idExam, String cr){
-          DMR d= this.RechercheDMRParidDMR(idDMR);
-          int i=0;
-          while (i<d.getListeExamen().size() && !d.getListeExamen().get(i).getidExamen().toLowerCase().equals(idExam.toLowerCase())){
-              i++;
-          }
-          if(i<d.getListeExamen().size()){//il existe l'examen dans lequel on veut rajouter le compte rendu
-              d.getListeExamen().get(i).setCR(cr);
-          }
-          else {
-              System.out.println ("Cet examen n'existe pas dans le DMR à l'identifiant "+idExam);
-          }
-          
+      public void ajouterCR (String idDMR, String idExam, String cr ){
+          if(getStatut()==Statut.valueOf("MEDECIN")){
+            DMR d= this.RechercheDMRParidDMR(idDMR);
+            int i=0;
+            while (i<d.getListeExamen().size() && !d.getListeExamen().get(i).getidExamen().toLowerCase().equals(idExam.toLowerCase())){
+                i++;
+            }
+            if(i<d.getListeExamen().size()){//il existe l'examen dans lequel on veut rajouter le compte rendu
+                d.getListeExamen().get(i).setCR(cr);
+            }
+            else {
+                System.out.println ("Cet examen n'existe pas dans le DMR à l'identifiant "+idExam);
+            }
+            }
       }
-              
+      
+      public void ajouterPatient (Patient patient){
+          if (!listePatient.contains(patient) && statutConnexion == Statut.valueOf("SECRET")){
+               listePatient.add(patient);
+          }
+          else{
+                 System.out.println("Ce patient existe déjà");
+          }
+      }
+      
+      public void ajouterPersonnel (Personnel personnel){
+          if (!listePersonnel.contains(personnel) && statutConnexion == Statut.valueOf("SECRET")){
+               listePersonnel.add(personnel);
+          }
+          else{
+                 System.out.println("Ce personnel existe déjà");
+          }
+      }
+      
+      public void ajouterExamen (Examen examen, String idDMR){
+          if (!this.RechercheDMRParidDMR(idDMR).equals(null)){// si le DMR dans lequel on veut rajouter l'examen existe
+              int i=0;
+              DMR dm=this.RechercheDMRParidDMR(idDMR);
+              while(i<dm.getListeExamen().size() && !dm.getListeExamen().get(i).equals(examen)){
+                  i++;
+              }
+              if(i<dm.getListeExamen().size()){
+                  System.out.println("Cet examen existe déjà par le DMR d'id : "+dm.getidDMR());
+              }
+              else{
+                  dm.ajouterExamen(examen);
+              }
+          }
+          else{
+              System.out.println("Le DMR dans lequel vous voulez rajouter l'examen n'existe pas");
+          }
+      }
+      
+      
+      public ArrayList<Examen> RechercheExamenParTypeExamen (TypeExamen type){
+          ArrayList<Examen> list = new ArrayList<>();
+          for (int i=0;i<listeDMR.size(); i++){//parcour des DMR
+              for (int j=0; j<listeDMR.get(i).getListeExamen().size();j++){//parcour des listes d'examen pour chaque DMR
+                  if(listeDMR.get(i).getListeExamen().get(j).getTypeExamen().equals(type)){
+                      list.add(listeDMR.get(i).getListeExamen().get(j));
+                  }
+              }
+          }
+          return list;
+      }
+      
+      public ArrayList<Examen> RechercheExamenParNomMedecin(String nom){
+          String n=nom.toLowerCase();
+          ArrayList<Examen> list = new ArrayList<>();
+          for (int i=0;i<listeDMR.size(); i++){//parcour des DMR
+              for (int j=0; j<listeDMR.get(i).getListeExamen().size();j++){//parcour des listes d'examen pour chaque DMR
+                  if(listeDMR.get(i).getListeExamen().get(j).getMedecin().getNom().toLowerCase().equals(n)){
+                      list.add(listeDMR.get(i).getListeExamen().get(j));
+                  }
+              }
+          }
+          return list;
+      }
+      public ArrayList<Examen> RechercheExamenParPrenomMedecin(String nom){
+          String n=nom.toLowerCase();
+          ArrayList<Examen> list = new ArrayList<>();
+          for (int i=0;i<listeDMR.size(); i++){//parcour des DMR
+              for (int j=0; j<listeDMR.get(i).getListeExamen().size();j++){//parcour des listes d'examen pour chaque DMR
+                  if(listeDMR.get(i).getListeExamen().get(j).getMedecin().getPrenom().toLowerCase().equals(n)){
+                      list.add(listeDMR.get(i).getListeExamen().get(j));
+                  }
+              }
+          }
+          return list;
+      }
+          
  }

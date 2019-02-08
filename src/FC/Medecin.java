@@ -9,6 +9,14 @@ package FC;
  *
  * @author menar
  */
-public class Medecin {
+public class Medecin extends Personnel{
+    String specialite;
+    public Medecin (String nom, String prenom, String id, MDP mdp, String specialite){
+        
+            super(nom,prenom,id,mdp);
+            this.setStatut(Statut.MEDECIN);
+            this.specialite=specialite;
+            
+    }
     
 }

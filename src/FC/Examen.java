@@ -12,22 +12,22 @@ package FC;
 public class Examen {
     private String idExamen;
     private Date date;
-    private Personnel personnel;
+    private Medecin medecin;
     private TypeExamen type;
     private String CR;
     private PACS pacs;
     
-    public Examen (String idExamen,Date date, Personnel personnel, TypeExamen type, String CR, PACS pacs){
+    public Examen (String idExamen,Date date, Medecin medecin, TypeExamen type, String CR, PACS pacs){
         this.idExamen=idExamen;
         this.date=date;
-        this.personnel=personnel;
+        this.medecin=medecin;
         this.type= type;
         this.CR=CR;
         this.pacs=pacs;
     }
-     public Examen (String idExamen, Date date, Personnel personnel, TypeExamen type, PACS pacs){
+     public Examen (String idExamen, Date date, Medecin medecin, TypeExamen type, PACS pacs){
        this.idExamen=idExamen;
-       this.personnel=personnel;
+       this.medecin=medecin;
        this.date=date;
        this.type= type;
        this.pacs=pacs;
@@ -39,8 +39,8 @@ public class Examen {
     public Date getDate(){
         return date;
     }
-    public Personnel getPersonnel(){
-        return personnel;
+    public Medecin getMedecin(){
+        return medecin;
     }
     public TypeExamen getTypeExamen(){
         return type;
@@ -53,5 +53,8 @@ public class Examen {
     }
     public void setCR (String cr){
         this.CR=cr;
+    }
+    public void setMedecin (Medecin medecin){
+        this.medecin=medecin;
     }
 }
