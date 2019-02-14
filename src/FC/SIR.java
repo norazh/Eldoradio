@@ -39,6 +39,17 @@ public class SIR {
         return listePersonnel;
     }
     
+    public ArrayList<Medecin> getListeMedecin (){
+        ArrayList<Medecin> liste=new ArrayList<>();
+        for(int i=0;i<this.getListePersonnel().size(); i++){
+            if(this.getListePersonnel().get(i) instanceof Medecin){
+                Medecin med= (Medecin)this.getListePersonnel().get(i);
+                liste.add(med);
+            }
+        }
+        return liste;
+    }
+    
     public String getIdSIR(){
         return idSIR;
     }
@@ -202,11 +213,11 @@ public class SIR {
       }
       
       
-      public void ajouterCR (String idDMR, String idExam, String cr ){
+      public void ajouterCR (String idDMR, int idExam, String cr ){
           if(getStatut()==Statut.valueOf("MEDECIN")){
             DMR d= this.RechercheDMRParidDMR(idDMR);
             int i=0;
-            while (i<d.getListeExamen().size() && !d.getListeExamen().get(i).getidExamen().toLowerCase().equals(idExam.toLowerCase())){
+            while (i<d.getListeExamen().size() && d.getListeExamen().get(i).getidExamen()!=idExam){
                 i++;
             }
             if(i<d.getListeExamen().size()){//il existe l'examen dans lequel on veut rajouter le compte rendu
