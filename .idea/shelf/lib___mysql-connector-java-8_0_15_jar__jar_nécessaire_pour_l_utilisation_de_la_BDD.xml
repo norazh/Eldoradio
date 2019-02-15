@@ -1,0 +1,49 @@
+<changelist name="lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD" date="1549905883798" recycled="false">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD/shelved.patch" />
+  <option name="DESCRIPTION" value="lib &gt; mysql-connector-java-8.0.15.jar .jar nécessaire pour l'utilisation de la BDD" />
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/Eldoradio/eldoradio/Eldoradio.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD/Eldoradio.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/Eldoradio/FC/Accueil.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD/Accueil.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/Eldoradio/FC/Date.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD/Date.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/Eldoradio/FC/Imprimer.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD/Imprimer.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/Eldoradio/FC/MDP.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD/MDP.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/Eldoradio/FC/PACS.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD/PACS.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/Eldoradio/FC/Sexe.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD/Sexe.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="out/production/Eldoradio/FC/TypeExamen.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD/TypeExamen.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" />
+    <option name="AFTER_PATH" value="mysql-connector-java-8.0.15.jar" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/lib___mysql-connector-java-8_0_15_jar__jar_nécessaire_pour_l'utilisation_de_la_BDD/mysql-connector-java-8.0.15.jar" />
+  </binary>
+</changelist>
