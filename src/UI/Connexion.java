@@ -7,19 +7,21 @@ package UI;
 
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author noraz
  */
-public class Connexion2 extends javax.swing.JFrame {
+public class Connexion extends javax.swing.JFrame {
 
     /**
      * Creates new form Connexion2
      */
-    public Connexion2() {
+    public Connexion() {
         initComponents();
+        this.setResizable(false);
+        jPanel2.requestFocusInWindow();
         
     jTextField1.addFocusListener(new FocusListener(){
         @Override
@@ -100,7 +102,7 @@ public class Connexion2 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jTextField1);
-        jTextField1.setBounds(360, 150, 305, 60);
+        jTextField1.setBounds(360, 160, 300, 50);
 
         jButton1.setBackground(new java.awt.Color(225, 182, 0));
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -127,7 +129,7 @@ public class Connexion2 extends javax.swing.JFrame {
 
         jPasswordField1.setText("Mot de passe");
         jPanel2.add(jPasswordField1);
-        jPasswordField1.setBounds(360, 230, 300, 60);
+        jPasswordField1.setBounds(360, 240, 300, 50);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Donnees/logoELDOrogne (1).png"))); // NOI18N
         jPanel2.add(jLabel5);
@@ -162,7 +164,7 @@ public class Connexion2 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Votre identifiant et/ou votre mot de passe sont erronés \n                          Veuillez réessayer", "Erreur", JOptionPane.WARNING_MESSAGE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -195,20 +197,21 @@ public class Connexion2 extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Connexion2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Connexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Connexion2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Connexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Connexion2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Connexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Connexion2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Connexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Connexion2().setVisible(true);
+                new Connexion().setVisible(true);
             }
         });
     }
