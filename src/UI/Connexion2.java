@@ -24,24 +24,35 @@ public class Connexion2 extends javax.swing.JFrame {
     jTextField1.addFocusListener(new FocusListener(){
         @Override
          public void focusGained(FocusEvent e){
-            jTextField1.setText("");
+            if (jTextField1.getText().equals("Identifiant")){
+                jTextField1.setText("");
+            }
         }
+            
 
             @Override
             public void focusLost(FocusEvent e) {
+                if (jTextField1.getText().equals("")){
+                   jTextField1.setText("Identifiant"); 
+                }
+                
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
             });
             
         
-    jTextField2.addFocusListener(new FocusListener(){
+    jPasswordField1.addFocusListener(new FocusListener(){
         @Override
          public void focusGained(FocusEvent e){
-            jTextField2.setText("");
+            if (jPasswordField1.getText().equals("Mot de passe")){
+                jPasswordField1.setText("");
+            }
         }
 
             @Override
             public void focusLost(FocusEvent e) {
+                 if (jPasswordField1.getText().equals("")){
+                   jPasswordField1.setText("Mot de passe"); }
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
     });
@@ -58,11 +69,12 @@ public class Connexion2 extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jPasswordField1 = new javax.swing.JPasswordField();
+        jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -88,18 +100,7 @@ public class Connexion2 extends javax.swing.JFrame {
             }
         });
         jPanel2.add(jTextField1);
-        jTextField1.setBounds(360, 150, 305, 64);
-
-        jTextField2.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField2.setText("Mot de passe");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jTextField2);
-        jTextField2.setBounds(360, 230, 305, 66);
+        jTextField1.setBounds(360, 150, 305, 60);
 
         jButton1.setBackground(new java.awt.Color(225, 182, 0));
         jButton1.setForeground(new java.awt.Color(0, 0, 0));
@@ -123,6 +124,14 @@ public class Connexion2 extends javax.swing.JFrame {
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Donnees/preferencesdesktopuserpassword_94510.png"))); // NOI18N
         jPanel2.add(jLabel4);
         jLabel4.setBounds(280, 220, 70, 80);
+
+        jPasswordField1.setText("Mot de passe");
+        jPanel2.add(jPasswordField1);
+        jPasswordField1.setBounds(360, 230, 300, 60);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Donnees/logoELDOrogne (1).png"))); // NOI18N
+        jPanel2.add(jLabel5);
+        jLabel5.setBounds(850, 10, 110, 90);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Donnees/City_Centre_Princeton_802.jpg"))); // NOI18N
         jPanel2.add(jLabel2);
@@ -155,10 +164,6 @@ public class Connexion2 extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here
@@ -214,8 +219,9 @@ public class Connexion2 extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }
