@@ -1,0 +1,1204 @@
+Index: .idea/libraries/mysql_connector_java_8_0_15.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/libraries/mysql_connector_java_8_0_15.xml	(date 1549632778000)
++++ .idea/libraries/mysql_connector_java_8_0_15.xml	(date 1549632778000)
+@@ -0,0 +1,9 @@
++<component name="libraryTable">
++  <library name="mysql-connector-java-8.0.15">
++    <CLASSES>
++      <root url="jar://$PROJECT_DIR$/mysql-connector-java-8.0.15.jar!/" />
++    </CLASSES>
++    <JAVADOC />
++    <SOURCES />
++  </library>
++</component>
+\ No newline at end of file
+Index: .idea/dataSources.local.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/dataSources.local.xml	(date 1549632778000)
++++ .idea/dataSources.local.xml	(date 1549632778000)
+@@ -0,0 +1,11 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="dataSourceStorageLocal">
++    <data-source name="ldancelme_eldoradio@mysql-ldancelme.alwaysdata.net" uuid="5ef9e9e7-d9e2-4ef0-82d4-8e1d35797838">
++      <database-info product="" version="" jdbc-version="" driver-name="" driver-version="" />
++      <secret-storage>master_key</secret-storage>
++      <first-sync>true</first-sync>
++      <user-name>ldancelme</user-name>
++    </data-source>
++  </component>
++</project>
+\ No newline at end of file
+Index: .idea/dataSources.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/dataSources.xml	(date 1549632778000)
++++ .idea/dataSources.xml	(date 1549632778000)
+@@ -0,0 +1,19 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<project version="4">
++  <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
++    <data-source source="LOCAL" name="ldancelme_eldoradio@mysql-ldancelme.alwaysdata.net" uuid="5ef9e9e7-d9e2-4ef0-82d4-8e1d35797838">
++      <driver-ref>mysql</driver-ref>
++      <synchronize>true</synchronize>
++      <jdbc-driver>com.mysql.jdbc.Driver</jdbc-driver>
++      <jdbc-url>jdbc:mysql://mysql-ldancelme.alwaysdata.net:3306/ldancelme_eldoradio</jdbc-url>
++      <driver-properties>
++        <property name="autoReconnect" value="true" />
++        <property name="zeroDateTimeBehavior" value="convertToNull" />
++        <property name="tinyInt1isBit" value="false" />
++        <property name="characterEncoding" value="utf8" />
++        <property name="characterSetResults" value="utf8" />
++        <property name="yearIsDateType" value="false" />
++      </driver-properties>
++    </data-source>
++  </component>
++</project>
+\ No newline at end of file
+Index: src/FC/LinkDB.java
+===================================================================
+--- src/FC/LinkDB.java	(date 1549632778000)
++++ src/FC/LinkDB.java	(date 1549632778000)
+@@ -1,27 +0,0 @@
+-package FC;
+-
+-import java.sql.*;
+-
+-public class LinkDB {
+-    public String url;
+-    public String user;
+-    public String mdp;
+-    public Connection connection = null;
+-    public Statement statement = null;
+-    public ResultSet resultSet = null;
+-
+-    public LinkDB(String url, String user, String mdp){
+-        this.url = url;
+-        this.user = user;
+-        this.mdp = mdp;
+-    }
+-
+-    public LinkDB(){
+-        this.url = "";
+-        this.user = user;
+-        this.mdp = mdp;
+-
+-    }
+-}
+-
+-
+Index: src/FC/SIR.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\r\n * To change this license header, choose License Headers in Project Properties.\r\n * To change this template file, choose Tools | Templates\r\n * and open the template in the editor.\r\n */\r\npackage FC;\r\n\r\nimport java.util.ArrayList;\r\nimport java.util.Collections;\r\n\r\n/**\r\n *\r\n * @author menar\r\n */\r\npublic class SIR {\r\n    private ArrayList<DMR> listeDMR = new ArrayList<>();\r\n    private Statut statutConnexion;\r\n    private ArrayList<Personnel> listePersonnel= new ArrayList<>();\r\n    private ArrayList<Patient> listePatient= new ArrayList<>();\r\n    private String idSIR;\r\n    \r\n    public SIR(ArrayList<DMR> listeDMR,Statut statut,ArrayList<Personnel> listePersonnel,ArrayList<Patient> listePatient,String idSIR){\r\n        this.idSIR=idSIR;\r\n        this.listeDMR=listeDMR;\r\n        this.listePersonnel=listePersonnel;\r\n        this.listePatient=listePatient;\r\n        this.statutConnexion=statut;\r\n    }\r\n    \r\n    public ArrayList<DMR> getListeDMR (){\r\n        return listeDMR;\r\n    }\r\n    \r\n    public Statut getStatut(){\r\n        return statutConnexion;\r\n    }\r\n    \r\n    public ArrayList<Personnel> getListePersonnel(){\r\n        return listePersonnel;\r\n    }\r\n    \r\n    public String getIdSIR(){\r\n        return idSIR;\r\n    }\r\n    // if (ExistencePatientListe(P,list)){\r\n    public ArrayList<Patient> getListePatientSansDMR(){   // crée une liste de tous les patients qui n'ont pas de DMR\r\n\t\tArrayList<Patient> liste= new ArrayList<> ();\r\n                for (int i=0; i<listePatient.size();i++){//on recopie la liste de tous les patients dans liste\r\n                 liste.add(listePatient.get(i));\r\n                }\r\n                ArrayList<Patient> listePatientAEnlever= this.getListePatientAvecDMR();\r\n                for(int i =0;i<listePatientAEnlever.size();i++){\r\n                    liste.remove(listePatientAEnlever.get(i));\r\n                }\r\n                return liste;\r\n\t}\r\n    \r\n       public ArrayList<Patient> getListePatientAvecDMR(){   // crée une liste de tous les patients qui ont un DMR\r\n\t\tArrayList<Patient> liste= new ArrayList<> ();\r\n\t\tfor (int i=0; i<listeDMR.size(); i++){\r\n\t\t\tif (!liste.contains(listeDMR.get(i).getPatient())){\r\n\t\t\t\tliste.add(listeDMR.get(i).getPatient());\r\n\t\t\t}\r\n\t\t}\r\n\t\treturn liste;\r\n\t}\r\n    \r\n    public void ajouterDMR (DMR dmr){ //ajoute un nouveau DMR \r\n        int i=0;\r\n        int j=0;\r\n        while(i<listeDMR.size() && dmr.getidDMR()!=listeDMR.get(i).getidDMR() ){\r\n            i++;\r\n        }\r\n        if (i<listeDMR.size()){\r\n            while (j<listeDMR.size() && !listeDMR.get(j).equals(dmr)){\r\n                j++;\r\n            }\r\n            if(j<listeDMR.size()){\r\n            listeDMR.add(dmr);\r\n            }\r\n            else{\r\n                System.out.println(\"Ce DMR existe déjà\");\r\n            }\r\n        }\r\n        else{\r\n            System.out.println(\"Ce DMR a un identifiant idDMR déjà existant\");\r\n        }\r\n        \r\n    }\r\n    public boolean ExistencePatient (Patient patient){ // permet de savoir si un patient patient existe\r\n        int i=0;\r\n        boolean b=false;\r\n   \r\n        while(patient!=listePatient.get(i) && i<listePatient.size()){ //recherche du patient dans la liste des patients qui ont un DMR\r\n            i++;\r\n        }\r\n        if (i<listePatient.size()){\r\n            b=true;\r\n        }\r\n        return b;\r\n    }\r\n    \r\n      public boolean ExistencePatientListe (Patient patient,ArrayList<Patient>list){ // permet de savoir si un patient patient est présent dans une liste donnée de patients\r\n        int i=0;\r\n        boolean b=false;\r\n   \r\n        while(patient!=list.get(i) && i<list.size()){ //recherche du patient dans la liste de patients donnés\r\n            i++;\r\n        }\r\n        if (i<list.size()){\r\n            b=true;\r\n        }\r\n        return b;\r\n    }\r\n      \r\n    public int RechercheIndicePatientDansListe (ArrayList<Patient> list, Patient P){\r\n        int i=0;\r\n        while (i<list.size() && !list.get(i).equals(P)){\r\n            i++;\r\n        }\r\n        return i;\r\n      \r\n    }\r\n    public Patient RecherchePatientParNom (String nom){\r\n        String p1= nom.toLowerCase();\r\n        int i=0;\r\n        while(i<listePatient.size() && !listePatient.get(i).getNom().toLowerCase().equals(p1)){\r\n                    i++;\r\n        }\r\n        return listePatient.get(i);\r\n    }        \r\n      \r\n    public Patient RecherchePatientParPrenom (String prenom){\r\n        String p1= prenom.toLowerCase();\r\n        int i=0;\r\n        while(i<listePatient.size() && !listePatient.get(i).getPrenom().toLowerCase().equals(p1)){\r\n                    i++;\r\n        }\r\n        return listePatient.get(i);\r\n    }    \r\n        \r\n    public DMR RechercheDMRParNomPatient (String nom){\r\n        String p1=nom.toLowerCase();\r\n        int i=0;\r\n        while (i<listeDMR.size() && !listeDMR.get(i).getPatient().getNom().toLowerCase().equals(p1)){\r\n            i++;\r\n        }\r\n        return listeDMR.get(i);\r\n    }\r\n    \r\n     public DMR RechercheDMRParPrenomPatient (String prenom){\r\n        String p1=prenom.toLowerCase();\r\n        int i=0;\r\n        while (i<listeDMR.size() && !listeDMR.get(i).getPatient().getPrenom().toLowerCase().equals(p1)){\r\n            i++;\r\n        }\r\n        return listeDMR.get(i);\r\n    }\r\n     \r\n     public DMR RechercheDMRParidDMR (String id){\r\n        String p1=id.toLowerCase();\r\n        int i=0;\r\n        while (i<listeDMR.size() && !listeDMR.get(i).getidDMR().toLowerCase().equals(p1)){\r\n            i++;\r\n        }\r\n        return listeDMR.get(i);\r\n    }\r\n     \r\n      public void triDMRDateDernierExamen() {\r\n        ArrayList <DMR> copieListeDMR = new ArrayList<>();//création d'un nouveau vecteur égale à fiche de soins\r\n        for (int i=0; i<listeDMR.size(); i++){ //recopie tous les éléments de listeDMR dans copieListeDMR\r\n            copieListeDMR.add(listeDMR.get(i));\r\n        }\r\n        while (!copieListeDMR.isEmpty()) {// tant que copieFiches n'est pas vide, faire:\r\n            // on cherche la fiche de soins de date minimale :\r\n            int imin = 0;\r\n            DMR d1 = copieListeDMR.get(imin);\r\n            for (int i = 1; i < copieListeDMR.size(); i++) {\r\n                DMR d2 = copieListeDMR.get(i);\r\n                for (int j = 0; j < d2.getListeExamen().size(); j++) {\r\n                    if (d2.getListeExamen().get(j).getDate().compareTo(d1.getListeExamen().get(j).getDate()) < 0) {\r\n                        imin = i;\r\n                        d1 = d2;\r\n                    }\r\n                }\r\n            }\r\n            // on affiche la fiche de soins trouvee :\r\n            d1.toString();\r\n            System.out.println(\"------------------------\");\r\n            //on la supprime de la liste :\r\n            copieListeDMR.remove(imin);\r\n        }\r\n    }\r\n      \r\n      public void trierDMRParNomPatient(){\r\n           ArrayList <DMR> copieListeDMR = new ArrayList<>();//création d'un nouveau vecteur égale à fiche de soins\r\n        for (int i=0; i<listeDMR.size(); i++){ //recopie tous les éléments de listeDMR dans copieListeDMR\r\n            copieListeDMR.add(listeDMR.get(i));\r\n        }\r\n        int i=0;\r\n       // Collections.sort(copieListeDMR.get(i).getPatient().getNom());\r\n      }\r\n      \r\n      \r\n      public void ajouterCR (String idDMR, String idExam, String cr ){\r\n          if(getStatut()==Statut.valueOf(\"MEDECIN\")){\r\n            DMR d= this.RechercheDMRParidDMR(idDMR);\r\n            int i=0;\r\n            while (i<d.getListeExamen().size() && !d.getListeExamen().get(i).getidExamen().toLowerCase().equals(idExam.toLowerCase())){\r\n                i++;\r\n            }\r\n            if(i<d.getListeExamen().size()){//il existe l'examen dans lequel on veut rajouter le compte rendu\r\n                d.getListeExamen().get(i).setCR(cr);\r\n            }\r\n            else {\r\n                System.out.println (\"Cet examen n'existe pas dans le DMR à l'identifiant \"+idExam);\r\n            }\r\n            }\r\n      }\r\n      \r\n      public void ajouterPatient (Patient patient){\r\n          if (!listePatient.contains(patient) && statutConnexion == Statut.valueOf(\"SECRET\")){\r\n               listePatient.add(patient);\r\n          }\r\n          else{\r\n                 System.out.println(\"Ce patient existe déjà\");\r\n          }\r\n      }\r\n      \r\n      public void ajouterPersonnel (Personnel personnel){\r\n          if (!listePersonnel.contains(personnel) && statutConnexion == Statut.valueOf(\"SECRET\")){\r\n               listePersonnel.add(personnel);\r\n          }\r\n          else{\r\n                 System.out.println(\"Ce personnel existe déjà\");\r\n          }\r\n      }\r\n      \r\n      public void ajouterExamen (Examen examen, String idDMR){\r\n          if (!this.RechercheDMRParidDMR(idDMR).equals(null)){// si le DMR dans lequel on veut rajouter l'examen existe\r\n              int i=0;\r\n              DMR dm=this.RechercheDMRParidDMR(idDMR);\r\n              while(i<dm.getListeExamen().size() && !dm.getListeExamen().get(i).equals(examen)){\r\n                  i++;\r\n              }\r\n              if(i<dm.getListeExamen().size()){\r\n                  System.out.println(\"Cet examen existe déjà par le DMR d'id : \"+dm.getidDMR());\r\n              }\r\n              else{\r\n                  dm.ajouterExamen(examen);\r\n              }\r\n          }\r\n          else{\r\n              System.out.println(\"Le DMR dans lequel vous voulez rajouter l'examen n'existe pas\");\r\n          }\r\n      }\r\n      \r\n      \r\n      public ArrayList<Examen> RechercheExamenParTypeExamen (TypeExamen type){\r\n          ArrayList<Examen> list = new ArrayList<>();\r\n          for (int i=0;i<listeDMR.size(); i++){//parcour des DMR\r\n              for (int j=0; j<listeDMR.get(i).getListeExamen().size();j++){//parcour des listes d'examen pour chaque DMR\r\n                  if(listeDMR.get(i).getListeExamen().get(j).getTypeExamen().equals(type)){\r\n                      list.add(listeDMR.get(i).getListeExamen().get(j));\r\n                  }\r\n              }\r\n          }\r\n          return list;\r\n      }\r\n      \r\n      public ArrayList<Examen> RechercheExamenParNomMedecin(String nom){\r\n          String n=nom.toLowerCase();\r\n          ArrayList<Examen> list = new ArrayList<>();\r\n          for (int i=0;i<listeDMR.size(); i++){//parcour des DMR\r\n              for (int j=0; j<listeDMR.get(i).getListeExamen().size();j++){//parcour des listes d'examen pour chaque DMR\r\n                  if(listeDMR.get(i).getListeExamen().get(j).getMedecin().getNom().toLowerCase().equals(n)){\r\n                      list.add(listeDMR.get(i).getListeExamen().get(j));\r\n                  }\r\n              }\r\n          }\r\n          return list;\r\n      }\r\n      public ArrayList<Examen> RechercheExamenParPrenomMedecin(String nom){\r\n          String n=nom.toLowerCase();\r\n          ArrayList<Examen> list = new ArrayList<>();\r\n          for (int i=0;i<listeDMR.size(); i++){//parcour des DMR\r\n              for (int j=0; j<listeDMR.get(i).getListeExamen().size();j++){//parcour des listes d'examen pour chaque DMR\r\n                  if(listeDMR.get(i).getListeExamen().get(j).getMedecin().getPrenom().toLowerCase().equals(n)){\r\n                      list.add(listeDMR.get(i).getListeExamen().get(j));\r\n                  }\r\n              }\r\n          }\r\n          return list;\r\n      }\r\n          \r\n }
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/FC/SIR.java	(date 1549632778000)
++++ src/FC/SIR.java	(date 1549632778000)
+@@ -55,14 +55,23 @@
+                 return liste;
+ 	}
+     
++<<<<<<< Updated upstream
+        public ArrayList<Patient> getListePatientAvecDMR(){   // crée une liste de tous les patients qui ont un DMR
+ 		ArrayList<Patient> liste= new ArrayList<> ();
++=======
++    public ArrayList<Patient> getListePatient(){   // crée une liste de tous les patients présents dans la liste DMR
++		ArrayList<Patient> listePatient= new ArrayList<> ();
++>>>>>>> Stashed changes
+ 		for (int i=0; i<listeDMR.size(); i++){
+ 			if (!liste.contains(listeDMR.get(i).getPatient())){
+ 				liste.add(listeDMR.get(i).getPatient());
+ 			}
+ 		}
++<<<<<<< Updated upstream
+ 		return liste;
++=======
++		return listePatient;
++>>>>>>> Stashed changes
+ 	}
+     
+     public void ajouterDMR (DMR dmr){ //ajoute un nouveau DMR 
+@@ -99,6 +108,7 @@
+         }
+         return b;
+     }
++<<<<<<< Updated upstream
+     
+       public boolean ExistencePatientListe (Patient patient,ArrayList<Patient>list){ // permet de savoir si un patient patient est présent dans une liste donnée de patients
+         int i=0;
+@@ -293,4 +303,8 @@
+           return list;
+       }
+           
+- }
+\ No newline at end of file
++ }
++=======
++}
++
++>>>>>>> Stashed changes
+Index: Eldoradio.iml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<module type=\"JAVA_MODULE\" version=\"4\">\n  <component name=\"NewModuleRootManager\" inherit-compiler-output=\"true\">\n    <exclude-output />\n    <content url=\"file://$MODULE_DIR$\">\n      <sourceFolder url=\"file://$MODULE_DIR$/src\" isTestSource=\"false\" />\n    </content>\n    <orderEntry type=\"inheritedJdk\" />\n    <orderEntry type=\"sourceFolder\" forTests=\"false\" />\n  </component>\n</module>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- Eldoradio.iml	(date 1549632778000)
++++ Eldoradio.iml	(date 1549632778000)
+@@ -7,5 +7,7 @@
+     </content>
+     <orderEntry type="inheritedJdk" />
+     <orderEntry type="sourceFolder" forTests="false" />
++    <orderEntry type="library" name="java" level="application" />
++    <orderEntry type="library" name="mysql-connector-java-8.0.15" level="project" />
+   </component>
+ </module>
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"0f4fc9be-70ca-4610-9f3a-0ab693396351\" name=\"Default\" comment=\"\">\n      <change afterPath=\"$PROJECT_DIR$/.idea/misc.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/modules.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/uiDesigner.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/vcs.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/Eldoradio.iml\" afterDir=\"false\" />\n      <change afterPath=\"$PROJECT_DIR$/src/FC/LinkDB.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/src/FC/Patient.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/FC/Patient.java\" afterDir=\"false\" />\n    </list>\n    <ignored path=\"$PROJECT_DIR$/out/\" />\n    <option name=\"EXCLUDED_CONVERTED_TO_IGNORED\" value=\"true\" />\n    <option name=\"TRACKING_ENABLED\" value=\"true\" />\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"DatabaseView\">\n    <option name=\"SHOW_INTERMEDIATE\" value=\"true\" />\n    <option name=\"GROUP_DATA_SOURCES\" value=\"true\" />\n    <option name=\"GROUP_SCHEMA\" value=\"true\" />\n    <option name=\"GROUP_CONTENTS\" value=\"false\" />\n    <option name=\"SORT_POSITIONED\" value=\"false\" />\n    <option name=\"SHOW_EMPTY_GROUPS\" value=\"false\" />\n    <option name=\"AUTO_SCROLL_FROM_SOURCE\" value=\"false\" />\n    <option name=\"HIDDEN_KINDS\">\n      <set />\n    </option>\n    <expand />\n    <select />\n  </component>\n  <component name=\"FileEditorManager\">\n    <leaf>\n      <file leaf-file-name=\"LinkDB.java\" pinned=\"false\" current-in-tab=\"true\">\n        <entry file=\"file://$PROJECT_DIR$/src/FC/LinkDB.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"330\">\n              <caret line=\"22\" lean-forward=\"true\" selection-start-line=\"22\" selection-end-line=\"22\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file leaf-file-name=\"DriverManager.java\" pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/DriverManager.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"690\">\n              <caret line=\"81\" column=\"13\" selection-start-line=\"81\" selection-start-column=\"13\" selection-end-line=\"81\" selection-end-column=\"13\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file leaf-file-name=\"ResultSet.java\" pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/ResultSet.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"185\">\n              <caret line=\"148\" column=\"17\" selection-start-line=\"148\" selection-start-column=\"17\" selection-end-line=\"148\" selection-end-column=\"17\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file leaf-file-name=\"Statement.java\" pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Statement.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"185\">\n              <caret line=\"46\" column=\"17\" selection-start-line=\"46\" selection-start-column=\"17\" selection-end-line=\"46\" selection-end-column=\"17\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n      <file leaf-file-name=\"Connection.java\" pinned=\"false\" current-in-tab=\"false\">\n        <entry file=\"jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Connection.java\">\n          <provider selected=\"true\" editor-type-id=\"text-editor\">\n            <state relative-caret-position=\"-8368\">\n              <caret line=\"84\" column=\"17\" selection-start-line=\"84\" selection-start-column=\"17\" selection-end-line=\"84\" selection-end-column=\"17\" />\n            </state>\n          </provider>\n        </entry>\n      </file>\n    </leaf>\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"IdeDocumentHistory\">\n    <option name=\"CHANGED_PATHS\">\n      <list>\n        <option value=\"$PROJECT_DIR$/src/FC/TypeExamen.java\" />\n        <option value=\"$PROJECT_DIR$/src/FC/Patient.java\" />\n        <option value=\"$PROJECT_DIR$/src/FC/ConnexionBD.java\" />\n        <option value=\"$PROJECT_DIR$/src/FC/LinkDB.java\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"JsBuildToolGruntFileManager\" detection-done=\"true\" sorting=\"DEFINITION_ORDER\" />\n  <component name=\"JsBuildToolPackageJson\" detection-done=\"true\" sorting=\"DEFINITION_ORDER\" />\n  <component name=\"JsGulpfileManager\">\n    <detection-done>true</detection-done>\n    <sorting>DEFINITION_ORDER</sorting>\n  </component>\n  <component name=\"NodePackageJsonFileManager\">\n    <packageJsonPaths />\n  </component>\n  <component name=\"ProjectFrameBounds\">\n    <option name=\"x\" value=\"281\" />\n    <option name=\"width\" value=\"1158\" />\n    <option name=\"height\" value=\"876\" />\n  </component>\n  <component name=\"ProjectView\">\n    <navigator proportions=\"\" version=\"1\">\n      <foldersAlwaysOnTop value=\"true\" />\n    </navigator>\n    <panes>\n      <pane id=\"Scope\" />\n      <pane id=\"ProjectPane\">\n        <subPane>\n          <expand>\n            <path>\n              <item name=\"Eldoradio\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"Eldoradio\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"Eldoradio\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"Eldoradio\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"src\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"Eldoradio\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"Eldoradio\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"src\" type=\"462c0819:PsiDirectoryNode\" />\n              <item name=\"FC\" type=\"462c0819:PsiDirectoryNode\" />\n            </path>\n            <path>\n              <item name=\"Eldoradio\" type=\"b2602c69:ProjectViewProjectNode\" />\n              <item name=\"External Libraries\" type=\"cb654da1:ExternalLibrariesNode\" />\n            </path>\n          </expand>\n          <select />\n        </subPane>\n      </pane>\n      <pane id=\"PackagesPane\" />\n      <pane id=\"AndroidView\" />\n    </panes>\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"aspect.path.notification.shown\" value=\"true\" />\n    <property name=\"com.intellij.database.dataSource.DataSourceTemplate\" value=\"MySQL\" />\n    <property name=\"nodejs_interpreter_path.stuck_in_default_project\" value=\"undefined stuck path\" />\n    <property name=\"nodejs_npm_path_reset_for_default_project\" value=\"true\" />\n  </component>\n  <component name=\"RunDashboard\">\n    <option name=\"ruleStates\">\n      <list>\n        <RuleState>\n          <option name=\"name\" value=\"ConfigurationTypeDashboardGroupingRule\" />\n        </RuleState>\n        <RuleState>\n          <option name=\"name\" value=\"StatusDashboardGroupingRule\" />\n        </RuleState>\n      </list>\n    </option>\n  </component>\n  <component name=\"RunManager\">\n    <configuration default=\"true\" type=\"Application\" factoryName=\"Application\">\n      <option name=\"WORKING_DIRECTORY\" value=\"$PROJECT_DIR$\" />\n    </configuration>\n    <configuration default=\"true\" type=\"JUnit\" factoryName=\"JUnit\">\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"PACKAGE_NAME\" />\n      <option name=\"MAIN_CLASS_NAME\" />\n      <option name=\"METHOD_NAME\" />\n      <option name=\"TEST_OBJECT\" value=\"class\" />\n      <option name=\"VM_PARAMETERS\" value=\"-ea\" />\n      <option name=\"PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"%MODULE_WORKING_DIR%\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <option name=\"TEST_SEARCH_SCOPE\">\n        <value defaultName=\"singleModule\" />\n      </option>\n      <patterns />\n    </configuration>\n    <configuration default=\"true\" type=\"TestNG\" factoryName=\"TestNG\">\n      <option name=\"ALTERNATIVE_JRE_PATH_ENABLED\" value=\"false\" />\n      <option name=\"ALTERNATIVE_JRE_PATH\" />\n      <option name=\"SUITE_NAME\" />\n      <option name=\"PACKAGE_NAME\" />\n      <option name=\"MAIN_CLASS_NAME\" />\n      <option name=\"METHOD_NAME\" />\n      <option name=\"GROUP_NAME\" />\n      <option name=\"TEST_OBJECT\" value=\"CLASS\" />\n      <option name=\"VM_PARAMETERS\" value=\"-ea\" />\n      <option name=\"PARAMETERS\" />\n      <option name=\"WORKING_DIRECTORY\" value=\"%MODULE_WORKING_DIR%\" />\n      <option name=\"OUTPUT_DIRECTORY\" />\n      <option name=\"PASS_PARENT_ENVS\" value=\"true\" />\n      <option name=\"TEST_SEARCH_SCOPE\">\n        <value defaultName=\"singleModule\" />\n      </option>\n      <option name=\"USE_DEFAULT_REPORTERS\" value=\"false\" />\n      <option name=\"PROPERTIES_FILE\" />\n      <properties />\n      <listeners />\n    </configuration>\n  </component>\n  <component name=\"SvnConfiguration\">\n    <configuration />\n  </component>\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"0f4fc9be-70ca-4610-9f3a-0ab693396351\" name=\"Default\" comment=\"\" />\n      <created>1548716316237</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1548716316237</updated>\n      <workItem from=\"1548716319762\" duration=\"9947000\" />\n    </task>\n    <servers />\n  </component>\n  <component name=\"TimeTrackingManager\">\n    <option name=\"totallyTimeSpent\" value=\"9947000\" />\n  </component>\n  <component name=\"ToolWindowManager\">\n    <frame x=\"281\" y=\"0\" width=\"1158\" height=\"876\" extended-state=\"0\" />\n    <editor active=\"true\" />\n    <layout>\n      <window_info anchor=\"right\" id=\"Palette\" />\n      <window_info anchor=\"bottom\" id=\"TODO\" order=\"6\" />\n      <window_info anchor=\"right\" id=\"Palette&#9;\" />\n      <window_info id=\"Image Layers\" />\n      <window_info anchor=\"right\" id=\"Capture Analysis\" />\n      <window_info anchor=\"bottom\" id=\"Event Log\" sideWeight=\"0.50086355\" side_tool=\"true\" visible=\"true\" weight=\"0.21197008\" />\n      <window_info anchor=\"right\" id=\"Maven Projects\" />\n      <window_info anchor=\"bottom\" id=\"Database Changes\" show_stripe_button=\"false\" />\n      <window_info anchor=\"bottom\" id=\"Run\" order=\"2\" />\n      <window_info anchor=\"bottom\" id=\"Version Control\" sideWeight=\"0.49913645\" visible=\"true\" weight=\"0.21197008\" />\n      <window_info anchor=\"bottom\" id=\"Terminal\" />\n      <window_info id=\"Capture Tool\" />\n      <window_info id=\"Designer\" />\n      <window_info content_ui=\"combo\" id=\"Project\" order=\"0\" visible=\"true\" weight=\"0.18221071\" />\n      <window_info active=\"true\" anchor=\"right\" id=\"Database\" visible=\"true\" weight=\"0.1701209\" />\n      <window_info id=\"Structure\" order=\"1\" side_tool=\"true\" weight=\"0.25\" />\n      <window_info anchor=\"right\" id=\"Ant Build\" order=\"1\" weight=\"0.25\" />\n      <window_info id=\"UI Designer\" />\n      <window_info anchor=\"right\" id=\"Theme Preview\" />\n      <window_info anchor=\"bottom\" id=\"Debug\" order=\"3\" weight=\"0.4\" />\n      <window_info id=\"Favorites\" side_tool=\"true\" />\n      <window_info anchor=\"bottom\" id=\"Find\" order=\"1\" />\n      <window_info anchor=\"right\" id=\"Commander\" internal_type=\"SLIDING\" order=\"0\" type=\"SLIDING\" weight=\"0.4\" />\n      <window_info anchor=\"bottom\" id=\"Inspection\" order=\"5\" weight=\"0.4\" />\n      <window_info anchor=\"right\" content_ui=\"combo\" id=\"Hierarchy\" order=\"2\" weight=\"0.25\" />\n      <window_info anchor=\"bottom\" id=\"Message\" order=\"0\" />\n      <window_info anchor=\"bottom\" id=\"Cvs\" order=\"4\" weight=\"0.25\" />\n    </layout>\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"1\" />\n  </component>\n  <component name=\"VcsContentAnnotationSettings\">\n    <option name=\"myLimit\" value=\"2678400000\" />\n  </component>\n  <component name=\"editorHistoryManager\">\n    <entry file=\"file://$PROJECT_DIR$/src/FC/Date.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"75\">\n          <caret line=\"9\" column=\"10\" selection-start-line=\"9\" selection-start-column=\"10\" selection-end-line=\"9\" selection-end-column=\"10\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/FC/Examen.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/build.xml\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/nbproject/project.properties\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"-735\" />\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/.idea/vcs.xml\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/.idea/workspace.xml\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"-35\" />\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/nbproject/private/private.properties\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/FC/TypeExamen.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"134\">\n          <caret line=\"13\" column=\"15\" lean-forward=\"true\" selection-start-line=\"13\" selection-start-column=\"15\" selection-end-line=\"13\" selection-end-column=\"15\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/eldoradio/Eldoradio.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"105\">\n          <caret line=\"11\" column=\"13\" selection-start-line=\"11\" selection-start-column=\"13\" selection-end-line=\"11\" selection-end-column=\"13\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/Eldoradio.iml\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\n    </entry>\n    <entry file=\"jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/DriverManager.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"690\">\n          <caret line=\"81\" column=\"13\" selection-start-line=\"81\" selection-start-column=\"13\" selection-end-line=\"81\" selection-end-column=\"13\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Statement.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"185\">\n          <caret line=\"46\" column=\"17\" selection-start-line=\"46\" selection-start-column=\"17\" selection-end-line=\"46\" selection-end-column=\"17\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/UI/Accueil.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"105\">\n          <caret line=\"11\" column=\"13\" selection-start-line=\"11\" selection-start-column=\"13\" selection-end-line=\"11\" selection-end-column=\"13\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$APPLICATION_CONFIG_DIR$/consoles/db/b0fb9071-011b-4b40-ba33-8b468954340f/console.sql\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\" />\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/FC/Sexe.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state>\n          <folding>\n            <element signature=\"e#396#397#0\" expanded=\"true\" />\n            <element signature=\"e#423#424#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/ResultSet.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"185\">\n          <caret line=\"148\" column=\"17\" selection-start-line=\"148\" selection-start-column=\"17\" selection-end-line=\"148\" selection-end-column=\"17\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/FC/Accueil.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"105\">\n          <caret line=\"11\" column=\"13\" selection-start-line=\"11\" selection-start-column=\"13\" selection-end-line=\"11\" selection-end-column=\"13\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/FC/DMR.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"-30\" />\n      </provider>\n    </entry>\n    <entry file=\"jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Connection.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"-8368\">\n          <caret line=\"84\" column=\"17\" selection-start-line=\"84\" selection-start-column=\"17\" selection-end-line=\"84\" selection-end-column=\"17\" />\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/FC/Patient.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"-159\">\n          <caret line=\"10\" lean-forward=\"true\" selection-start-line=\"10\" selection-end-line=\"10\" />\n          <folding>\n            <element signature=\"e#1169#1170#0\" expanded=\"true\" />\n            <element signature=\"e#1200#1201#0\" expanded=\"true\" />\n            <element signature=\"e#1241#1242#0\" expanded=\"true\" />\n            <element signature=\"e#1292#1293#0\" expanded=\"true\" />\n          </folding>\n        </state>\n      </provider>\n    </entry>\n    <entry file=\"file://$PROJECT_DIR$/src/FC/LinkDB.java\">\n      <provider selected=\"true\" editor-type-id=\"text-editor\">\n        <state relative-caret-position=\"330\">\n          <caret line=\"22\" lean-forward=\"true\" selection-start-line=\"22\" selection-end-line=\"22\" />\n        </state>\n      </provider>\n    </entry>\n  </component>\n  <component name=\"masterDetails\">\n    <states>\n      <state key=\"ProjectJDKs.UI\">\n        <settings>\n          <last-edited>11</last-edited>\n          <splitter-proportions>\n            <option name=\"proportions\">\n              <list>\n                <option value=\"0.2\" />\n              </list>\n            </option>\n          </splitter-proportions>\n        </settings>\n      </state>\n    </states>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .idea/workspace.xml	(date 1549632778000)
++++ .idea/workspace.xml	(date 1549905643000)
+@@ -2,14 +2,24 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="0f4fc9be-70ca-4610-9f3a-0ab693396351" name="Default" comment="">
+-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/Eldoradio.iml" afterDir="false" />
+-      <change afterPath="$PROJECT_DIR$/src/FC/LinkDB.java" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/.idea/libraries/mysql_connector_java_8_0_15.xml" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/mysql-connector-java-8.0.15.jar" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/Accueil.class" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/Date.class" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/Imprimer.class" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/MDP.class" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/PACS.class" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/Sexe.class" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/TypeExamen.class" afterDir="false" />
++      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/eldoradio/Eldoradio.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Eldoradio.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Eldoradio.iml" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/FC/LinkDB.java" beforeDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/FC/Patient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FC/Patient.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/FC/SIR.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FC/SIR.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/FC/Test.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FC/Test.java" afterDir="false" />
+     </list>
+     <ignored path="$PROJECT_DIR$/out/" />
+     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+@@ -34,48 +44,33 @@
+     <select />
+   </component>
+   <component name="FileEditorManager">
+-    <leaf>
+-      <file leaf-file-name="LinkDB.java" pinned="false" current-in-tab="true">
+-        <entry file="file://$PROJECT_DIR$/src/FC/LinkDB.java">
++    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
++      <file leaf-file-name="TestBD.java" pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/src/FC/TestBD.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="330">
+-              <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
+-            </state>
+-          </provider>
+-        </entry>
+-      </file>
+-      <file leaf-file-name="DriverManager.java" pinned="false" current-in-tab="false">
+-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/DriverManager.java">
+-          <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="690">
+-              <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
++            <state relative-caret-position="184">
++              <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
+             </state>
+           </provider>
+         </entry>
+       </file>
+-      <file leaf-file-name="ResultSet.java" pinned="false" current-in-tab="false">
+-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/ResultSet.java">
++      <file leaf-file-name="SIR.java" pinned="false" current-in-tab="true">
++        <entry file="file://$PROJECT_DIR$/src/FC/SIR.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="185">
+-              <caret line="148" column="17" selection-start-line="148" selection-start-column="17" selection-end-line="148" selection-end-column="17" />
++            <state relative-caret-position="1480">
++              <caret line="117" column="16" lean-forward="true" selection-start-line="117" selection-start-column="16" selection-end-line="117" selection-end-column="16" />
+             </state>
+           </provider>
+         </entry>
+       </file>
+-      <file leaf-file-name="Statement.java" pinned="false" current-in-tab="false">
+-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Statement.java">
++      <file leaf-file-name="Connexion.java" pinned="false" current-in-tab="false">
++        <entry file="file://$PROJECT_DIR$/src/FC/Connexion.java">
+           <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="185">
+-              <caret line="46" column="17" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
+-            </state>
+-          </provider>
+-        </entry>
+-      </file>
+-      <file leaf-file-name="Connection.java" pinned="false" current-in-tab="false">
+-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Connection.java">
+-          <provider selected="true" editor-type-id="text-editor">
+-            <state relative-caret-position="-8368">
+-              <caret line="84" column="17" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
++            <state relative-caret-position="370">
++              <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
++              <folding>
++                <element signature="imports" expanded="true" />
++              </folding>
+             </state>
+           </provider>
+         </entry>
+@@ -89,6 +84,12 @@
+       </list>
+     </option>
+   </component>
++  <component name="FindInProjectRecents">
++    <findStrings>
++      <find>getconnection</find>
++      <find>driv</find>
++    </findStrings>
++  </component>
+   <component name="Git.Settings">
+     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+   </component>
+@@ -96,9 +97,17 @@
+     <option name="CHANGED_PATHS">
+       <list>
+         <option value="$PROJECT_DIR$/src/FC/TypeExamen.java" />
+-        <option value="$PROJECT_DIR$/src/FC/Patient.java" />
+         <option value="$PROJECT_DIR$/src/FC/ConnexionBD.java" />
++        <option value="$PROJECT_DIR$/src/FC/Patient.java" />
++        <option value="$PROJECT_DIR$/nbproject/private/db.properties" />
++        <option value="$PROJECT_DIR$/src/FC/MyDataSourceFactory.java" />
++        <option value="$PROJECT_DIR$/src/FC/Test.java" />
++        <option value="$PROJECT_DIR$/src/testBDD/ConnexionDB.java" />
+         <option value="$PROJECT_DIR$/src/FC/LinkDB.java" />
++        <option value="$PROJECT_DIR$/src/testBDD/TestBD.java" />
++        <option value="$PROJECT_DIR$/src/FC/Connexion.java" />
++        <option value="$PROJECT_DIR$/src/FC/TestBD.java" />
++        <option value="$PROJECT_DIR$/src/FC/SIR.java" />
+       </list>
+     </option>
+   </component>
+@@ -112,8 +121,8 @@
+     <packageJsonPaths />
+   </component>
+   <component name="ProjectFrameBounds">
+-    <option name="x" value="281" />
+-    <option name="width" value="1158" />
++    <option name="x" value="290" />
++    <option name="width" value="1157" />
+     <option name="height" value="876" />
+   </component>
+   <component name="ProjectView">
+@@ -121,7 +130,6 @@
+       <foldersAlwaysOnTop value="true" />
+     </navigator>
+     <panes>
+-      <pane id="Scope" />
+       <pane id="ProjectPane">
+         <subPane>
+           <expand>
+@@ -132,6 +140,11 @@
+             <path>
+               <item name="Eldoradio" type="b2602c69:ProjectViewProjectNode" />
+               <item name="Eldoradio" type="462c0819:PsiDirectoryNode" />
++              <item name="out" type="462c0819:PsiDirectoryNode" />
++            </path>
++            <path>
++              <item name="Eldoradio" type="b2602c69:ProjectViewProjectNode" />
++              <item name="Eldoradio" type="462c0819:PsiDirectoryNode" />
+               <item name="src" type="462c0819:PsiDirectoryNode" />
+             </path>
+             <path>
+@@ -148,8 +161,9 @@
+           <select />
+         </subPane>
+       </pane>
+-      <pane id="PackagesPane" />
+       <pane id="AndroidView" />
++      <pane id="Scope" />
++      <pane id="PackagesPane" />
+     </panes>
+   </component>
+   <component name="PropertiesComponent">
+@@ -158,6 +172,15 @@
+     <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
++    <property name="project.structure.last.edited" value="Libraries" />
++    <property name="project.structure.proportion" value="0.15" />
++    <property name="project.structure.side.proportion" value="0.2" />
++    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
++  </component>
++  <component name="RecentsManager">
++    <key name="MoveFile.RECENT_KEYS">
++      <recent name="$PROJECT_DIR$/src/testBDD" />
++    </key>
+   </component>
+   <component name="RunDashboard">
+     <option name="ruleStates">
+@@ -171,7 +194,51 @@
+       </list>
+     </option>
+   </component>
+-  <component name="RunManager">
++  <component name="RunManager" selected="Application.TestBD">
++    <configuration name="LinkDB" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="FC.LinkDB" />
++      <module name="Eldoradio" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="FC.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++    </configuration>
++    <configuration name="TestBD (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="testBDD.TestBD" />
++      <module name="Eldoradio" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="testBDD.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++    </configuration>
++    <configuration name="TestBD$TestBD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="FC.TestBD$TestBD" />
++      <module name="Eldoradio" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="FC.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++    </configuration>
++    <configuration name="TestBD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
++      <option name="MAIN_CLASS_NAME" value="FC.TestBD" />
++      <module name="Eldoradio" />
++      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
++      <extension name="coverage">
++        <pattern>
++          <option name="PATTERN" value="FC.*" />
++          <option name="ENABLED" value="true" />
++        </pattern>
++      </extension>
++    </configuration>
+     <configuration default="true" type="Application" factoryName="Application">
+       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+     </configuration>
+@@ -213,6 +280,20 @@
+       <properties />
+       <listeners />
+     </configuration>
++    <list>
++      <item itemvalue="Application.LinkDB" />
++      <item itemvalue="Application.TestBD" />
++      <item itemvalue="Application.TestBD (1)" />
++      <item itemvalue="Application.TestBD$TestBD" />
++    </list>
++    <recent_temporary>
++      <list>
++        <item itemvalue="Application.TestBD" />
++        <item itemvalue="Application.TestBD$TestBD" />
++        <item itemvalue="Application.TestBD (1)" />
++        <item itemvalue="Application.LinkDB" />
++      </list>
++    </recent_temporary>
+   </component>
+   <component name="SvnConfiguration">
+     <configuration />
+@@ -224,53 +305,187 @@
+       <option name="number" value="Default" />
+       <option name="presentableId" value="Default" />
+       <updated>1548716316237</updated>
+-      <workItem from="1548716319762" duration="9947000" />
++      <workItem from="1548716319762" duration="13535000" />
++      <workItem from="1549100767957" duration="26351000" />
++      <workItem from="1549526753573" duration="1804000" />
++      <workItem from="1549529198866" duration="910000" />
++      <workItem from="1549531840010" duration="10389000" />
+     </task>
+     <servers />
+   </component>
+   <component name="TimeTrackingManager">
+-    <option name="totallyTimeSpent" value="9947000" />
++    <option name="totallyTimeSpent" value="52989000" />
+   </component>
+   <component name="ToolWindowManager">
+-    <frame x="281" y="0" width="1158" height="876" extended-state="0" />
+-    <editor active="true" />
++    <frame x="290" y="0" width="1157" height="876" extended-state="0" />
+     <layout>
+-      <window_info anchor="right" id="Palette" />
++      <window_info anchor="right" id="Palette" order="3" />
+       <window_info anchor="bottom" id="TODO" order="6" />
+-      <window_info anchor="right" id="Palette&#9;" />
+-      <window_info id="Image Layers" />
+-      <window_info anchor="right" id="Capture Analysis" />
+-      <window_info anchor="bottom" id="Event Log" sideWeight="0.50086355" side_tool="true" visible="true" weight="0.21197008" />
+-      <window_info anchor="right" id="Maven Projects" />
+-      <window_info anchor="bottom" id="Database Changes" show_stripe_button="false" />
+-      <window_info anchor="bottom" id="Run" order="2" />
+-      <window_info anchor="bottom" id="Version Control" sideWeight="0.49913645" visible="true" weight="0.21197008" />
+-      <window_info anchor="bottom" id="Terminal" />
+-      <window_info id="Capture Tool" />
+-      <window_info id="Designer" />
+-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18221071" />
+-      <window_info active="true" anchor="right" id="Database" visible="true" weight="0.1701209" />
++      <window_info anchor="bottom" id="Messages" order="7" sideWeight="0.4866033" weight="0.23441397" />
++      <window_info anchor="right" id="Palette&#9;" order="3" />
++      <window_info id="Image Layers" order="2" />
++      <window_info anchor="right" id="Capture Analysis" order="3" />
++      <window_info anchor="bottom" id="Event Log" order="7" sideWeight="0.5021608" side_tool="true" visible="true" weight="0.10598504" />
++      <window_info anchor="right" id="Maven Projects" order="3" />
++      <window_info anchor="bottom" id="Database Changes" order="7" show_stripe_button="false" />
++      <window_info active="true" anchor="bottom" id="Version Control" order="7" sideWeight="0.49783924" visible="true" weight="0.10598504" />
++      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.58859116" weight="0.276808" />
++      <window_info anchor="bottom" id="Terminal" order="7" />
++      <window_info id="Capture Tool" order="2" />
++      <window_info id="Designer" order="2" />
++      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16594641" />
++      <window_info anchor="right" id="Database" order="3" weight="0.17026794" />
++      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49783924" weight="0.32917705" />
+       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+-      <window_info id="UI Designer" />
+-      <window_info anchor="right" id="Theme Preview" />
+-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+-      <window_info id="Favorites" side_tool="true" />
+-      <window_info anchor="bottom" id="Find" order="1" />
+-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
++      <window_info id="UI Designer" order="2" />
++      <window_info anchor="right" id="Theme Preview" order="3" />
++      <window_info id="Favorites" order="2" side_tool="true" />
++      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49611062" weight="0.3990025" />
+       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
++      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
++      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+       <window_info anchor="bottom" id="Message" order="0" />
+       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+     </layout>
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+     <option name="version" value="1" />
++  </component>
++  <component name="Vcs.Log.Tabs.Properties">
++    <option name="TAB_STATES">
++      <map>
++        <entry key="MAIN">
++          <value>
++            <State>
++              <option name="RECENTLY_FILTERED_USER_GROUPS">
++                <collection />
++              </option>
++              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
++                <collection />
++              </option>
++              <option name="COLUMN_ORDER">
++                <list>
++                  <option value="0" />
++                  <option value="1" />
++                  <option value="2" />
++                  <option value="3" />
++                </list>
++              </option>
++            </State>
++          </value>
++        </entry>
++      </map>
++    </option>
+   </component>
+   <component name="VcsContentAnnotationSettings">
+     <option name="myLimit" value="2678400000" />
++  </component>
++  <component name="XDebuggerManager">
++    <breakpoint-manager>
++      <breakpoints-dialog>
++        <breakpoints-dialog />
++      </breakpoints-dialog>
++      <option name="time" value="13" />
++    </breakpoint-manager>
+   </component>
+   <component name="editorHistoryManager">
++    <entry file="file://$PROJECT_DIR$/src/FC/LinkDB.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="1702">
++          <caret line="76" selection-start-line="76" selection-end-line="76" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/TestBD.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="230">
++          <caret line="10" column="5" selection-start-line="10" selection-start-column="5" selection-end-line="10" selection-end-column="5" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/LinkDB.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="506">
++          <caret line="22" column="5" lean-forward="true" selection-start-line="22" selection-start-column="5" selection-end-line="22" selection-end-column="5" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/TestBD.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="207">
++          <caret line="9" column="6" lean-forward="true" selection-start-line="9" selection-start-column="6" selection-end-line="9" selection-end-column="6" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/LinkDB.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="1080">
++          <caret line="74" column="13" selection-start-line="74" selection-start-column="13" selection-end-line="74" selection-end-column="13" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Connection.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="2355">
++          <caret line="157" column="33" selection-start-line="157" selection-start-column="33" selection-end-line="157" selection-end-column="33" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/TestBD.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="135">
++          <caret line="9" column="29" selection-start-line="9" selection-start-column="28" selection-end-line="9" selection-end-column="29" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/LinkDB.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="810">
++          <caret line="54" column="9" lean-forward="true" selection-start-line="54" selection-start-column="9" selection-end-line="54" selection-end-column="9" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/DriverManager.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="1215">
++          <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/ResultSet.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="2220">
++          <caret line="148" column="17" selection-start-line="148" selection-start-column="17" selection-end-line="148" selection-end-column="17" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Statement.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="690">
++          <caret line="46" column="17" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Connection.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="1260">
++          <caret line="84" column="17" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
++        </state>
++      </provider>
++    </entry>
+     <entry file="file://$PROJECT_DIR$/src/FC/Date.java">
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="75">
+@@ -300,61 +515,114 @@
+     <entry file="file://$PROJECT_DIR$/nbproject/private/private.properties">
+       <provider selected="true" editor-type-id="text-editor" />
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/FC/TypeExamen.java">
++    <entry file="file://$PROJECT_DIR$/src/eldoradio/Eldoradio.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="134">
+-          <caret line="13" column="15" lean-forward="true" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
++        <state relative-caret-position="105">
++          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/eldoradio/Eldoradio.java">
++    <entry file="file://$PROJECT_DIR$/Eldoradio.iml">
++      <provider selected="true" editor-type-id="text-editor" />
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/UI/Accueil.java">
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="105">
+           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/Eldoradio.iml">
++    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b0fb9071-011b-4b40-ba33-8b468954340f/console.sql">
+       <provider selected="true" editor-type-id="text-editor" />
+     </entry>
+-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/DriverManager.java">
++    <entry file="file://$PROJECT_DIR$/src/FC/DMR.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="-30" />
++      </provider>
++    </entry>
++    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.desktop/sun/awt/www/content/image/gif.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="690">
+-          <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
++        <state relative-caret-position="255">
++          <caret line="44" column="36" lean-forward="true" selection-start-line="44" selection-end-line="45" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/Sexe.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="105">
++          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
++          <folding>
++            <element signature="e#396#397#0" expanded="true" />
++            <element signature="e#423#424#0" expanded="true" />
++          </folding>
+         </state>
+       </provider>
+     </entry>
+     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Statement.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="185">
++        <state relative-caret-position="-4578">
+           <caret line="46" column="17" selection-start-line="46" selection-start-column="17" selection-end-line="46" selection-end-column="17" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/UI/Accueil.java">
++    <entry file="file://$PROJECT_DIR$/src/FC/Personnel.java">
+       <provider selected="true" editor-type-id="text-editor">
+         <state relative-caret-position="105">
+           <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/b0fb9071-011b-4b40-ba33-8b468954340f/console.sql">
+-      <provider selected="true" editor-type-id="text-editor" />
++    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/ResultSet.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="1210">
++          <caret line="148" column="17" selection-start-line="148" selection-start-column="17" selection-end-line="148" selection-end-column="17" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/DriverManager.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="39">
++          <caret line="701" selection-start-line="701" selection-end-line="701" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/jdk/internal/loader/BuiltinClassLoader.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="171">
++          <caret line="582" selection-start-line="582" selection-end-line="582" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/MyDataSourceFactory.java" />
++    <entry file="file://$PROJECT_DIR$/nbproject/private/db.properties" />
++    <entry file="file://$PROJECT_DIR$/src/FC/MDP.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="105">
++          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
++        </state>
++      </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/FC/Sexe.java">
++    <entry file="file://$PROJECT_DIR$/src/testBDD/ConnexionDB.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state>
++        <state relative-caret-position="315">
++          <caret line="44" column="17" selection-start-line="44" selection-start-column="17" selection-end-line="44" selection-end-column="17" />
+           <folding>
+-            <element signature="e#396#397#0" expanded="true" />
+-            <element signature="e#423#424#0" expanded="true" />
++            <element signature="imports" expanded="true" />
+           </folding>
+         </state>
+       </provider>
+     </entry>
+-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/ResultSet.java">
++    <entry file="file://$PROJECT_DIR$/src/FC/Patient.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="185">
+-          <caret line="148" column="17" selection-start-line="148" selection-start-column="17" selection-end-line="148" selection-end-column="17" />
++        <state relative-caret-position="510">
++          <caret line="38" selection-start-line="38" selection-end-line="38" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/Test.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="150">
++          <caret line="14" selection-start-line="14" selection-end-line="14" />
+         </state>
+       </provider>
+     </entry>
+@@ -365,44 +633,188 @@
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/FC/DMR.java">
++    <entry file="jar://$PROJECT_DIR$/mysql-connector-java-8.0.15.jar!/com/mysql/cj/jdbc/JdbcStatement.class">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="60">
++          <caret line="16" column="21" selection-start-line="16" selection-start-column="21" selection-end-line="16" selection-end-column="21" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="jar://$PROJECT_DIR$/mysql-connector-java-8.0.15.jar!/com/mysql/jdbc/Driver.class">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="-30" />
++        <state relative-caret-position="90">
++          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
++        </state>
+       </provider>
+     </entry>
+     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Connection.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="-8368">
+-          <caret line="84" column="17" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
++        <state relative-caret-position="3059">
++          <caret line="157" column="33" selection-start-line="157" selection-start-column="33" selection-end-line="157" selection-end-column="33" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/5ef9e9e7-d9e2-4ef0-82d4-8e1d35797838/console.sql">
++      <provider selected="true" editor-type-id="text-editor" />
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/LinkDB.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="208">
++          <caret line="35" column="16" selection-start-line="35" selection-start-column="16" selection-end-line="40" selection-end-column="17" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
+         </state>
+       </provider>
+     </entry>
+-    <entry file="file://$PROJECT_DIR$/src/FC/Patient.java">
++    <entry file="file://$PROJECT_DIR$/src/testBDD/TestBD.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="-159">
+-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
++        <state relative-caret-position="228">
++          <caret line="12" column="68" lean-forward="true" selection-start-line="12" selection-start-column="68" selection-end-line="12" selection-end-column="68" />
+           <folding>
+-            <element signature="e#1169#1170#0" expanded="true" />
+-            <element signature="e#1200#1201#0" expanded="true" />
+-            <element signature="e#1241#1242#0" expanded="true" />
+-            <element signature="e#1292#1293#0" expanded="true" />
++            <element signature="imports" expanded="true" />
+           </folding>
+         </state>
+       </provider>
+     </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/TypeExamen.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="134">
++          <caret line="13" column="15" lean-forward="true" selection-start-line="13" selection-start-column="15" selection-end-line="13" selection-end-column="15" />
++        </state>
++      </provider>
++    </entry>
+     <entry file="file://$PROJECT_DIR$/src/FC/LinkDB.java">
+       <provider selected="true" editor-type-id="text-editor">
+-        <state relative-caret-position="330">
+-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
++        <state relative-caret-position="1035">
++          <caret line="45" column="30" selection-start-line="45" selection-start-column="30" selection-end-line="45" selection-end-column="30" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/Connexion 2.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="161">
++          <caret line="9" column="24" lean-forward="true" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/Connexion.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="370">
++          <caret line="81" column="13" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="13" />
++          <folding>
++            <element signature="imports" expanded="true" />
++          </folding>
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/TestBD.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="184">
++          <caret line="8" column="1" lean-forward="true" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
++        </state>
++      </provider>
++    </entry>
++    <entry file="file://$PROJECT_DIR$/src/FC/SIR.java">
++      <provider selected="true" editor-type-id="text-editor">
++        <state relative-caret-position="1480">
++          <caret line="117" column="16" lean-forward="true" selection-start-line="117" selection-start-column="16" selection-end-line="117" selection-end-column="16" />
+         </state>
+       </provider>
+     </entry>
+   </component>
+   <component name="masterDetails">
+     <states>
++      <state key="ArtifactsStructureConfigurable.UI">
++        <settings>
++          <artifact-editor />
++          <splitter-proportions>
++            <option name="proportions">
++              <list>
++                <option value="0.2" />
++              </list>
++            </option>
++          </splitter-proportions>
++        </settings>
++      </state>
++      <state key="FacetStructureConfigurable.UI">
++        <settings>
++          <last-edited>No facets are configured</last-edited>
++          <splitter-proportions>
++            <option name="proportions">
++              <list>
++                <option value="0.2" />
++              </list>
++            </option>
++          </splitter-proportions>
++        </settings>
++      </state>
++      <state key="GlobalLibrariesConfigurable.UI">
++        <settings>
++          <last-edited>java</last-edited>
++          <splitter-proportions>
++            <option name="proportions">
++              <list>
++                <option value="0.2" />
++              </list>
++            </option>
++          </splitter-proportions>
++        </settings>
++      </state>
++      <state key="JdkListConfigurable.UI">
++        <settings>
++          <last-edited>1.8</last-edited>
++          <splitter-proportions>
++            <option name="proportions">
++              <list>
++                <option value="0.2" />
++              </list>
++            </option>
++          </splitter-proportions>
++        </settings>
++      </state>
++      <state key="ModuleStructureConfigurable.UI">
++        <settings>
++          <last-edited>Eldoradio</last-edited>
++          <splitter-proportions>
++            <option name="proportions">
++              <list>
++                <option value="0.2" />
++                <option value="0.6" />
++              </list>
++            </option>
++          </splitter-proportions>
++        </settings>
++      </state>
+       <state key="ProjectJDKs.UI">
+         <settings>
+           <last-edited>11</last-edited>
++          <splitter-proportions>
++            <option name="proportions">
++              <list>
++                <option value="0.2" />
++              </list>
++            </option>
++          </splitter-proportions>
++        </settings>
++      </state>
++      <state key="ProjectLibrariesConfigurable.UI">
++        <settings>
++          <last-edited>mysql-connector-java-8.0.15</last-edited>
++          <splitter-proportions>
++            <option name="proportions">
++              <list>
++                <option value="0.2" />
++              </list>
++            </option>
++          </splitter-proportions>
++        </settings>
++      </state>
++      <state key="ScopeChooserConfigurable.UI">
++        <settings>
+           <splitter-proportions>
+             <option name="proportions">
+               <list>
+Index: src/FC/Patient.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\r\n * To change this license header, choose License Headers in Project Properties.\r\n * To change this template file, choose Tools | Templates\r\n * and open the template in the editor.\r\n */\r\npackage FC;\r\n\r\n/**\r\n *\r\n * @author menar\r\n */\r\n\r\npublic class Patient {\r\n    private String nom;\r\n    private String prenom;\r\n\tprivate String adresse;\r\n\tprivate String ville;\r\n\tprivate String codePostal;\r\n        private String idSIR;\r\n        private String idSIH;\r\n        private String idDMR;\r\n\tprivate Date dateNaissance;\r\n\tprivate Sexe sexe;\r\n\t\r\n    \r\n    public Patient(String nom, String prenom, String adresse, String ville, String codePostal, String idSIR, String idSIH, Date date,   Sexe sexe) {\r\n        this.nom = nom;\r\n        this.prenom = prenom;\r\n\t\tthis.adresse= adresse;\r\n\t\tthis.ville=ville;\r\n\t\tthis.codePostal= codePostal;\r\n\t\tthis.idSIR=idSIR;\r\n                this.idSIH= idSIH;\r\n\t\tthis.dateNaissance= date;\r\n\t\tthis.sexe=sexe;\r\n\t\t\r\n        }\r\n       public Patient(String nom, String prenom, String adresse, String ville, String codePostal, String idSIR, String idSIH,String idDMR, Date date,   Sexe sexe) {\r\n        this.nom = nom;\r\n        this.prenom = prenom;\r\n\t\tthis.adresse= adresse;\r\n\t\tthis.ville=ville;\r\n\t\tthis.codePostal= codePostal;\r\n\t\tthis.idSIR=idSIR;\r\n                this.idSIH= idSIH;\r\n                this.idDMR=idDMR;\r\n\t\tthis.dateNaissance= date;\r\n\t\tthis.sexe=sexe;\r\n\t\t\r\n        }\r\n    \r\n    public String toString() {\r\n        return \"FICHE PATIENT\"+\"\\n\"+\"Prénom: \"+getPrenom() + \"\\n \" +\"Nom : \"+ getNom() + \" \\n \" +\"Adresse: \"+getAdresse()+\"\\n\"+\"Ville : \"+getVille()+\"\\n\"+\"Code Postal: \"+getCodePostal()+\"\\n\"+\"idSIR: \"+getidSIR()+\"\\n\"+\"idSIH: \"+getidSIH()+\"\\n\"+\"idDMR: \"+getidDMR()+\"\\n\"+\"Date de naissance: \"+ getDateDeNaissance().toString() + \" \\n \" + \"Sexe : \"+getSexe()+ \" \\n \" ;\r\n        }\r\n    \r\n    public String toStringNom(){\r\n        return getNom();\r\n    }\r\n    public String toStringNomPrenom(){\r\n        return getNom() +\" \"+ getPrenom();\r\n    }\r\n    \r\n    public boolean equals(Object o) {\r\n        if (o instanceof Patient) {\r\n            Patient p = (Patient)o;\r\n            return nom.equals(p.nom) && prenom.equals(p.prenom);\r\n            }\r\n        else\r\n            return false;\r\n        }    \r\n\t\t\r\n\t\t\r\n\tpublic String getNom (){\r\n\t\treturn nom;\r\n\t}\r\n\tpublic String getPrenom (){\r\n\t\treturn prenom;\r\n\t}\r\n\tpublic String getAdresse (){\r\n\t\treturn adresse;\r\n\t}\r\n\tpublic String getVille (){\r\n\t\treturn ville;\r\n\t}\r\n\tpublic String\tgetCodePostal(){\r\n\t\treturn codePostal;\r\n\t}\r\n\tpublic String getidSIR(){\r\n            return idSIR;\r\n        }\r\n        public String getidSIH (){\r\n            return idSIH;\r\n        }\r\n        public String getidDMR(){\r\n            return idDMR;\r\n        }\r\n\tpublic Date getDateDeNaissance(){\r\n\t\treturn dateNaissance;\r\n\t}\r\n\tpublic Sexe getSexe(){\r\n\t\treturn sexe;\r\n\t}\r\n\tpublic void setNom ( String n){\r\n\t\tthis.nom = n;\r\n\t}\r\n\tpublic void setPrenom (String p){\r\n\t\tthis.prenom= p;\r\n\t}\r\n\t\r\n\tpublic void setAdresse (String a){\r\n\t\tthis.adresse=a;\r\n\t}\r\n\tpublic void setVille (String v){\r\n\t\tthis.ville= v;\r\n\t}\r\n\t\r\n\tpublic void setCodePostal ( String cp){\r\n\t\tthis.codePostal= cp;\r\n\t}\r\n\tpublic void setidSIR (String id){\r\n            this.idSIR=id;\r\n        }\r\n        public void setidSIH(String id){\r\n            this.idSIH=id;\r\n        }\r\n        public void setidDMR(String id){\r\n            this.idDMR=id;\r\n        }\r\n\tpublic void setDateNaissance( Date d){\r\n\t\tthis.dateNaissance=d;\r\n\t}\r\n\tpublic void setSexe (Sexe s){\r\n\t\tthis.sexe=s;\r\n\t}\r\n           \r\n        \r\n        /*public int compareTo(Object o) {\r\n        String n= (String)o;\r\n        n=n.toLowerCase();\r\n        if (!nom.equals(n)){// si c'est pas la même année\r\n            int nom1= (int)\r\n            if ((char)nom>(char)n){\r\n            return annee - d.annee;\r\n            }\r\n        }\r\n        if (mois != d.mois) //si passe a ce deuxieme if annee égale\r\n            return mois  - d.mois;// renvoie la différence des mois\r\n        // ici on a forcement annee == d.annee et mois == d.mois :\r\n\t\tif (getJour() != d.getJour()){// si passe à ce if, mois égal\r\n\t\t\treturn jour - d.jour;// renvoie la différence des jours\r\n\t\t}\r\n\t\tif ( heure != d.heure){// si passe à ce if, jour égal\r\n\t\t\treturn heure - d.heure ; // renvoie la différence d'heures \r\n\t\t}\r\n        return minute - d.minute;// différence des minutes\r\n        }*/\r\n\t\r\n    }\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/FC/Patient.java	(date 1549632778000)
++++ src/FC/Patient.java	(date 1549632778000)
+@@ -6,26 +6,26 @@
+ package FC;
+ 
+ /**
+- *
+  * @author menar
+  */
+ 
+ public class Patient {
+     private String nom;
+     private String prenom;
+-	private String adresse;
+-	private String ville;
+-	private String codePostal;
+-        private String idSIR;
+-        private String idSIH;
+-        private String idDMR;
+-	private Date dateNaissance;
+-	private Sexe sexe;
+-	
+-    
+-    public Patient(String nom, String prenom, String adresse, String ville, String codePostal, String idSIR, String idSIH, Date date,   Sexe sexe) {
++    private String adresse;
++    private String ville;
++    private String codePostal;
++    private String idSIR;
++    private String idSIH;
++    private String idDMR;
++    private Date dateNaissance;
++    private Sexe sexe;
++
++
++    public Patient(String nom, String prenom, String adresse, String ville, String codePostal, String idSIR, String idSIH, Date date, String idDMR, Sexe sexe) {
+         this.nom = nom;
+         this.prenom = prenom;
++<<<<<<< Updated upstream
+ 		this.adresse= adresse;
+ 		this.ville=ville;
+ 		this.codePostal= codePostal;
+@@ -54,19 +54,39 @@
+         }
+     
+     public String toStringNom(){
++=======
++        this.adresse = adresse;
++        this.ville = ville;
++        this.codePostal = codePostal;
++        this.idSIR = idSIR;
++        this.idSIH = idSIH;
++        this.idDMR = idDMR;
++        this.dateNaissance = date;
++        this.sexe = sexe;
++
++    }
++
++
++    public String toString() {
++        return getPrenom() + " " + getNom() + " - " + getDateDeNaissance().toString() + " / " + getSexe() + " / ";
++    }
++
++    public String toStringNom() {
++>>>>>>> Stashed changes
+         return getNom();
+     }
+-    public String toStringNomPrenom(){
+-        return getNom() +" "+ getPrenom();
++
++    public String toStringNomPrenom() {
++        return getNom() + " " + getPrenom();
+     }
+-    
++
+     public boolean equals(Object o) {
+         if (o instanceof Patient) {
+-            Patient p = (Patient)o;
++            Patient p = (Patient) o;
+             return nom.equals(p.nom) && prenom.equals(p.prenom);
+-            }
+-        else
++        } else
+             return false;
++<<<<<<< Updated upstream
+         }    
+ 		
+ 		
+@@ -155,6 +175,92 @@
+         return minute - d.minute;// différence des minutes
+         }*/
+ 	
++=======
++>>>>>>> Stashed changes
+     }
++
++
++    public String getNom() {
++        return nom;
++    }
++
++    public String getPrenom() {
++        return prenom;
++    }
++
++    public String getAdresse() {
++        return adresse;
++    }
++
++    public String getVille() {
++        return ville;
++    }
++
++    public String getCodePostal() {
++        return codePostal;
++    }
++
++    public String getidSIR() {
++        return idSIR;
++    }
++
++    public String getidSIH() {
++        return idSIH;
++    }
++
++    public String getidDMR() {
++        return idDMR;
++    }
++
++    public Date getDateDeNaissance() {
++        return dateNaissance;
++    }
++
++    public Sexe getSexe() {
++        return sexe;
++    }
++
++    public void setNom(String n) {
++        this.nom = n;
++    }
++
++    public void setPrenom(String p) {
++        this.prenom = p;
++    }
++
++    public void setAdresse(String a) {
++        this.adresse = a;
++    }
++
++    public void setVille(String v) {
++        this.ville = v;
++    }
++
++    public void setCodePostal(String cp) {
++        this.codePostal = cp;
++    }
++
++    public void setidSIR(String id) {
++        this.idSIR = id;
++    }
++
++    public void setidSIH(String id) {
++        this.idSIH = id;
++    }
++
++    public void setidDMR(String id) {
++        this.idDMR = id;
++    }
++
++    public void setDateNaissance(Date d) {
++        this.dateNaissance = d;
++    }
++
++    public void setSexe(Sexe s) {
++        this.sexe = s;
++    }
++
++
++}
+ 
+ 
+Index: src/FC/Test.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>/*\r\n * To change this license header, choose License Headers in Project Properties.\r\n * To change this template file, choose Tools | Templates\r\n * and open the template in the editor.\r\n */\r\npackage FC;\r\n\r\n/**\r\n *\r\n * @author menar\r\n */\r\n class Test {\r\n        public static void main(String[] args){\r\n            \r\n        }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- src/FC/Test.java	(date 1549632778000)
++++ src/FC/Test.java	(date 1549632778000)
+@@ -5,12 +5,15 @@
+  */
+ package FC;
+ 
++import java.sql.*;
++
+ /**
+- *
+  * @author menar
+  */
+- class Test {
+-        public static void main(String[] args){
+-            
+-        }
++class Test {
++    public static void main(String[] args) {
++
++
++    }
+ }
++

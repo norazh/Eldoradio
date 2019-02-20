@@ -9,6 +9,6 @@ package FC;
  *
  * @author menar
  */
-public class CompteRendu {
-    
+public interface ComparaisonPatient {
+    public int comparerPatient(Patient p1,Patient p2);
 }

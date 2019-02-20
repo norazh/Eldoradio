@@ -9,6 +9,8 @@ package FC;
  *
  * @author menar
  */
-public class PH {
-    
+ class Test {
+        public static void main(String[] args){
+            
+        }
 }

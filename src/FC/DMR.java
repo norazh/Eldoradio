@@ -17,8 +17,15 @@ public class DMR {
     private ArrayList<Examen> listeExamen= new ArrayList<Examen>();
     
     public DMR(String idDMR, Patient patient, ArrayList<Examen> liste){
+     
         this.idDMR=idDMR;
-        this.patient=patient;
+        if(patient.getidDMR()==null){
+            this.patient=patient;
+            this.patient.setidDMR(idDMR);
+        }
+        else{
+            System.out.println("Ce patient a déjà un DMR");
+        }
         this.listeExamen=liste;
     }
     public String getidDMR(){
@@ -41,7 +48,24 @@ public class DMR {
         this.patient=p;
     }
     public void ajouterExamen (Examen exam){
-        
+        int id=exam.getidExamen();
+        int i=0;
+        while(i<listeExamen.size() && listeExamen.get(i).getidExamen()!=id){
+            i++;
+        }
+        if(i<listeExamen.size()){
+            System.out.println("Cet examen possède un identifiant déjà utilisé dans ce DMR");
+            
+        }
+        else{
+            listeExamen.add(exam);
+        }
     }
+    public int getidDernierExamen(){
+        int taille=this.getListeExamen().size();
+        return this.getListeExamen().get(taille-1).getidExamen();
+    }
+    
+    
            
 }
