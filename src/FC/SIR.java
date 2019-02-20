@@ -122,6 +122,19 @@ public class SIR {
         }
         return b;
     }
+    
+    public boolean ExistenceExamenDansDMR (DMR dmr, Examen exam){
+        boolean bool = false;
+        int i=0;
+        ArrayList<Examen> list= dmr.getListeExamen();
+        while(i<list.size() && !list.get(i).equals(exam)){
+            i++;
+        }
+        if(i<list.size()){
+            bool=true;
+        }
+        return bool;
+    }
 
     public int RechercheIndicePatientDansListe(ArrayList<Patient> list, Patient P) {
         int i = 0;

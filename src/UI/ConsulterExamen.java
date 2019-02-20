@@ -4,18 +4,29 @@
  * and open the template in the editor.
  */
 package UI;
-
+import FC.*;
 /**
  *
  * @author Imane
  */
 public class ConsulterExamen extends javax.swing.JPanel {
-
+    SIR sir;
+    DMR dmr;
+    Examen examen ;
     /**
      * Creates new form Imagerie
      */
-    public ConsulterExamen() {
+    public ConsulterExamen(SIR sir, DMR dmr, Examen examen) {
+        this.sir=sir;
+        this.dmr=dmr;
+        this.examen=examen;
         initComponents();
+        jLabel3.setText(this.dmr.getPatient().getNom());
+        jLabel4.setText(this.dmr.getPatient().getPrenom());
+        jLabel6.setText(this.dmr.getPatient().getDateDeNaissance().toStringBasique());
+        jLabel8.setText(this.examen.getTypeExamen().toString());
+        jLabel12.setText(this.examen.getMedecin().toStringNomPrenom());
+        jLabel14.setText(this.examen.getSalle().toString());
     }
 
     /**
@@ -39,6 +50,10 @@ public class ConsulterExamen extends javax.swing.JPanel {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel13 = new javax.swing.JLabel();
+        jLabel14 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
@@ -82,6 +97,14 @@ public class ConsulterExamen extends javax.swing.JPanel {
 
         jLabel10.setText("Date");
 
+        jLabel11.setText("Médecin référent :");
+
+        jLabel12.setText("jLabel12");
+
+        jLabel13.setText("Salle : ");
+
+        jLabel14.setText("jLabel14");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -106,12 +129,21 @@ public class ConsulterExamen extends javax.swing.JPanel {
                         .addGap(54, 54, 54)
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6))
+                        .addComponent(jLabel6)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel9)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel10)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jLabel10)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(56, 56, 56)
+                        .addComponent(jLabel13)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(320, 320, 320))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +161,11 @@ public class ConsulterExamen extends javax.swing.JPanel {
                     .addComponent(jLabel7)
                     .addComponent(jLabel8)
                     .addComponent(jLabel9)
-                    .addComponent(jLabel10))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel11)
+                    .addComponent(jLabel12)
+                    .addComponent(jLabel13)
+                    .addComponent(jLabel14))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
@@ -162,9 +198,19 @@ public class ConsulterExamen extends javax.swing.JPanel {
         jButton5.setText("Retour");
 
         jTextPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Compte-rendu"));
+        jTextPane1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTextPane1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTextPane1);
 
         jButton1.setText("Enregistrer");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -205,12 +251,26 @@ public class ConsulterExamen extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jTextPane1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextPane1MouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jTextPane1MouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        this.examen.setCR(jTextPane1.getText());
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
+    private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

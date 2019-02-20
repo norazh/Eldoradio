@@ -65,5 +65,7 @@ public class DMR {
         int taille=this.getListeExamen().size();
         return this.getListeExamen().get(taille-1).getidExamen();
     }
+    
+    
            
 }
