@@ -11,16 +11,23 @@ import FC.*;
  *
  * @author menar
  */
-public class RechercheManip extends javax.swing.JPanel {
+public class RechercheEamenDMR extends javax.swing.JPanel {
 
     /**
-     * Creates new form RechercheManip
+     * Creates new form RechercheEamenDMR
      */
-    AccueilManip3 accueil;
+    AccueilManip3 accueilManip;
+    AccueilPH accueilPH;
     SIR sir;
-    public RechercheManip(SIR sir,AccueilManip3 accueil) {
+    public RechercheEamenDMR(SIR sir,AccueilManip3 accueil) {
         this.sir=sir;
-        this.accueil=accueil;
+        this.accueilManip=accueil;
+        initComponents();
+    }
+    
+    public RechercheEamenDMR(SIR sir,AccueilPH accueil) {
+        this.sir=sir;
+        this.accueilPH=accueil;
         initComponents();
     }
 
