@@ -174,12 +174,13 @@ public class DbConnection {
 
     // ArrayList 2D, requête SELECT avec condition 
     public ArrayList<ArrayList<String>> select(String field, String table, String condition) throws SQLException {
-        String query = "SELECT " + field + " FROM " + table + "WHERE " + condition;
+        String query = "SELECT " + field + " FROM " + table + " WHERE " + condition;
         ArrayList<String> sepField = separate(field);
         try {
             if (field == "*") {
                 ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>();
                 this.res = select(query);
+                // System.out.println(query); // Test valeur de query (Erreur SQLSyntax)
                 this.resMeta = res.getMetaData();
                 int col = resMeta.getColumnCount();
                 for (int i = 0; i < col; i++) {
