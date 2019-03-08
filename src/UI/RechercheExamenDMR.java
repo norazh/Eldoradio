@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author menar
  */
-public class RechercheEamenDMR extends javax.swing.JPanel {
+public class RechercheExamenDMR extends javax.swing.JPanel {
 
     /**
      * Creates new form RechercheEamenDMR
@@ -21,13 +21,13 @@ public class RechercheEamenDMR extends javax.swing.JPanel {
     AccueilManip3 accueilManip;
     AccueilPH accueilPH;
     SIR sir;
-    public RechercheEamenDMR(SIR sir,AccueilManip3 accueil) {
+    public RechercheExamenDMR(SIR sir,AccueilManip3 accueil) {
         this.sir=sir;
         this.accueilManip=accueil;
         initComponents();
     }
     
-    public RechercheEamenDMR(SIR sir,AccueilPH accueil) {
+    public RechercheExamenDMR(SIR sir,AccueilPH accueil) {
         this.sir=sir;
         this.accueilPH=accueil;
         initComponents();
