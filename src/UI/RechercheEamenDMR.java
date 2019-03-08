@@ -426,8 +426,16 @@ public class RechercheEamenDMR extends javax.swing.JPanel {
                 //affichage du DMR trouvé dans le tableau d'Accueil
                 }
             }
+            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
+                ArrayList<Examen> listeExamen= sir.RechercherExamenAvecCR();
+                //affichage du DMR trouvé dans le tableau d'Accueil
+            }
+            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& jCheckBox11.isSelected()){
+                ArrayList<Examen> listeExamen= sir.RechercherExamenSansCR();
+                //affichage du DMR trouvé dans le tableau d'Accueil
+            }
             else{
-                JOptionPane.showMessageDialog(null, "Veuillez sélectionner et renseigner un champs de recherche d'Examen à savoir soit idDMR et idExamen, soit type d'examen, soit par nom du médecin, soit par date , soit avec ou sans compte rendu."+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+                JOptionPane.showMessageDialog(null, "Veuillez sélectionner et renseigner UN champs de recherche d'Examen à savoir soit idDMR et idExamen, soit type d'examen, soit par nom du médecin, soit par date , soit avec ou sans compte rendu."+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
             }
         }
         else if(!jCheckBox1.isSelected() && !jCheckBox2.isSelected()){

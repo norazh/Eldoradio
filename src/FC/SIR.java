@@ -188,6 +188,31 @@ public class SIR {
         }
         return listeDMR.get(i);
     }
+    
+    public ArrayList<Examen> RechercherExamenSansCR (){
+        ArrayList<Examen> liste= new ArrayList<>();
+        for (int i=0; i<this.listeDMR.size();i++ ){
+            for (int j=0; j<this.listeDMR.get(i).getListeExamen().size();j++){
+                if (this.listeDMR.get(i).getListeExamen().get(j).getCR().isEmpty()){
+                    liste.add(this.listeDMR.get(i).getListeExamen().get(j));
+                }
+            }
+        }
+        return liste;
+    }
+    public ArrayList<Examen> RechercherExamenAvecCR (){
+        ArrayList<Examen> liste= new ArrayList<>();
+        for (int i=0; i<this.listeDMR.size();i++ ){
+            for (int j=0; j<this.listeDMR.get(i).getListeExamen().size();j++){
+                if (!this.listeDMR.get(i).getListeExamen().get(j).getCR().isEmpty()){
+                    liste.add(this.listeDMR.get(i).getListeExamen().get(j));
+                }
+            }
+        }
+        return liste;
+    }
+    
+    
 
     public DMR RechercheDMRParidDMR(String id) {
         String p1 = id.toLowerCase();
