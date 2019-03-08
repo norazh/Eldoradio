@@ -4,17 +4,21 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DbConnection {
 
     private String url;
     private String user;
     private String pwd;
-    private Connection connection = null;
-    private String query = null;
+    private Connection con = null;
     private ResultSet res = null;
     private ResultSetMetaData resMeta = null;
     private Statement stmt = null;
+    private PreparedStatement pstmt = null;
 
     public DbConnection() {
         this.url = "jdbc:mysql://mysql-ldancelme.alwaysdata.net/ldancelme_eldoradio";
@@ -29,14 +33,37 @@ public class DbConnection {
         this.pwd = pwd;
     }
 
-    public Connection getConnection() throws ClassNotFoundException {
-        if (connection == null) {
-            setConnection();
-            return connection;
-        } else {
-            return connection;
+    // Parrain variable boolean assurant la connexion
+    public boolean connexionP() {
+        /* Chargement du drier JDBC par MySQL */
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
         }
+        try {
+            con = DriverManager.getConnection(url, user, pwd);
+            stmt = con.createStatement();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("SQLException: " + e.getMessage());
+            System.out.println("SQLState: " + e.getSQLState());
+            System.out.println("VendorError: " + e.getErrorCode());
+        }
+        return false;
+    }
 
+    public Connection getConnection() throws ClassNotFoundException, SQLException {
+        try {
+            if (con == null) {
+                setConnection();
+            }
+            return con;
+        } finally {
+            if (con != null) {
+                con.close();
+            }
+        }
     }
 
     private void setConnection() throws ClassNotFoundException {
@@ -45,35 +72,50 @@ public class DbConnection {
         try {
             Connection connection = DriverManager.getConnection(url, user, pwd);
             stmt = connection.createStatement();
-        } catch (SQLException ex) {
+        } catch (SQLException ex) {;
             System.out.println("SQLException: " + ex.getMessage());
             System.out.println("SQLState: " + ex.getSQLState());
             System.out.println("VendorError: " + ex.getErrorCode());
         } finally {
-            if (connection != null)
-                try {
-                    // Fermeture de la connexion
-                    connection.close();
-                } catch (SQLException ignore) {
-                    // Si une erreur survient lors de la fermeture, il suffit de l'ignorer.
-                    System.out.println("pas connecté");
-                }
-            else {
-                System.out.println("connecté");
+            if (con == null) {
+                System.out.println("pas connecté");
             }
-
-
         }
     }
 
-    // Stocke le résultat d'une requête ("query") dans un objet de type Resultset
-    public ResultSet result(String query) {
-        this.query = query;
+    // ferme le lien avec la BD
+    public void close() {
+        if (res != null) {
+            try {
+                res.close();
+            } catch (SQLException ignore) {
+            }
+        }
+        if (stmt != null) {
+            try {
+                stmt.close();
+            } catch (SQLException ignore) {
+            }
+        }
+
+        if (pstmt != null) {
+            try {
+                pstmt.close();
+            } catch (SQLException ignore) {
+            }
+        }
+        if (con != null) {
+            try {
+                con.close();
+            } catch (SQLException ignore) {
+            }
+        }
+    }
+
+    // Stocke le résultat d'une requête SQL de type SELECT dans un objet de type Resultset
+    public ResultSet select(String query) {
         try {
             res = stmt.executeQuery(query);
-            this.res = res;
-            resMeta = res.getMetaData();
-            this.resMeta = resMeta;
             return res;
         } catch (SQLException ex) {
             Logger.getLogger(DbConnection.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,99 +123,195 @@ public class DbConnection {
         return null;
     }
 
+    // ------------------------ Traitement générique des requête SQL ----------------------
+    // Stocke les éléments d'un String dans un ArrayList<String>
+    public ArrayList<String> separate(String StringtoSeparate) {
+        Pattern pat = Pattern.compile("([0-9]+)|([a-z]|[A-Z]|é)+([^,])");
+        Matcher mat = pat.matcher(StringtoSeparate);
+        ArrayList<String> arrField = new ArrayList<String>();
+        while (mat.find()) {
+            arrField.add(mat.group());
+        }
+        return arrField;
+    }
 
-    public void afficherPersonnel(ResultSet resultat) {
+    // ArrayList 2 dimensions contenant les données d'un ResultSet / SELECT
+    public ArrayList<ArrayList<String>> select(String field, String table) throws SQLException {
+        String query = "SELECT " + field + " FROM " + table;
+        ArrayList<String> sepField = separate(field);
         try {
-
-            System.out.println();
-            while (resultat.next()) {
-                System.out.println("--------------------------------------------------------------------------------------");
-                System.out.print("\t" + resultat.getInt("IDPERS") + "\t |");
-                System.out.print("\t" + resultat.getString("Nom") + "\t |");
-                System.out.print("\t" + resultat.getString("Prénom") + "\t |");
-                System.out.print("\t" + resultat.getString("Spécialité") + "\t |");
-                System.out.print("\t" + resultat.getString("ID") + "\t |");
-                System.out.print("\t" + resultat.getInt("MDP") + "\t |");
-                System.out.println("\n--------------------------------------------------------------------------------------");
+            if (field == "*") {
+                ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>();
+                this.res = select(query);
+                this.resMeta = res.getMetaData();
+                int col = resMeta.getColumnCount();
+                for (int i = 0; i < col; i++) {
+                    arr2D.add(new ArrayList<String>());
+                }
+                while (res.next()) {
+                    for (int i = 1; i < col + 1; i++) {
+                        arr2D.get(i - 1).add(res.getString(i));
+                    }
+                }
+                return arr2D;
+            } else {
+                ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>(sepField.size());
+                this.res = select(query);
+                for (int i = 0; i < sepField.size(); i++) {
+                    arr2D.add(new ArrayList<String>());
+                }
+                while (res.next()) {
+                    for (int i = 0; i < sepField.size(); i++) {
+                        arr2D.get(i).add(res.getString(sepField.get(i)));
+                    }
+                }
+                return arr2D;
             }
-        } catch (SQLException e) {
+        } finally {
+            res.close();
         }
     }
 
+    // ArrayList 2D, requête SELECT avec condition 
+    public ArrayList<ArrayList<String>> select(String field, String table, String condition) throws SQLException {
+        String query = "SELECT " + field + " FROM " + table + " WHERE " + condition;
+        ArrayList<String> sepField = separate(field);
+        try {
+            if (field == "*") {
+                ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>();
+                this.res = select(query);
+                // System.out.println(query); // Test valeur de query (Erreur SQLSyntax)
+                this.resMeta = res.getMetaData();
+                int col = resMeta.getColumnCount();
+                for (int i = 0; i < col; i++) {
+                    arr2D.add(new ArrayList<String>());
+                }
+                while (res.next()) {
+                    for (int i = 1; i < col + 1; i++) {
+                        arr2D.get(i - 1).add(res.getString(i));
+                    }
+                }
+                return arr2D;
+            } else {
+                ArrayList<ArrayList<String>> arr2D = new ArrayList<>(sepField.size());
+                this.res = select(query);
+                for (int i = 0; i < sepField.size(); i++) {
+                    arr2D.add(new ArrayList<String>());
+                }
+                while (res.next()) {
+                    for (int i = 0; i < sepField.size(); i++) {
+                        arr2D.get(i).add(res.getString(sepField.get(i)));
+                    }
+                }
+                return arr2D;
+            }
+        } finally {
+            res.close();
+        }
+    }
 
-    public ArrayList<ArrayList<String>> requete(String champs, String table, String condition) throws SQLException { //gestion des resultats de requetes vides a implementer, tester avec éléments nulls
+    // Génére un PreparedStatement à modifier selon les valeurs à ajouter dans la BDD
+        public void insert(String table, String field) throws SQLException {
+        ArrayList<String> sepField = separate(field);
+        int nbValues = sepField.size();
+        String query = "INSERT INTO " + table + "(" + field + ") VALUES (";
+        for (int i = 0; i < nbValues - 1; i++) {
+            query += "?, ";
+        }
+        query += "?)";
+        try {
+            pstmt = con.prepareStatement(query);
+            pstmt.execute();
+        } finally {
+            close();
+        }
+    }
 
-        String stringToSplit = new String(champs);
-        String[] tempArray;
-        String delimiter = ",";
-        String compositionRequete = "";
-        ResultSet resultatRequete;
-        int nbChamps = 0;
-        tempArray = stringToSplit.split(delimiter);// les champs sont séparés et stocké dans un Array
-        nbChamps = tempArray.length;
-        //élaboration de la requete à partir des paramètres
-        compositionRequete = "SELECT " + champs + " FROM " + table + " " + condition + ";";
-        resultatRequete = result(compositionRequete);
-        ArrayList<ArrayList<String>> listResultat = new ArrayList<ArrayList<String>>(nbChamps);
-        for (int i = 0; i < nbChamps; i++) {
-            listResultat.add(new ArrayList<String>());
+    public ArrayList<ArrayList<String>> info(ResultSet res) throws SQLException {
+        resMeta = res.getMetaData();
+        int arrSize = resMeta.getColumnCount();
+        ArrayList<ArrayList<String>> listResultat = new ArrayList<>(arrSize);
+        for (int i = 0; i < arrSize; i++) {
+            listResultat.add(new ArrayList<>());
         }
         try {
-            while (resultatRequete.next()) {
-                for (int i = 0; i < nbChamps; i++) {
-                    listResultat.get(i).add(resultatRequete.getString(tempArray[i]));
+            while (res.next()) {
+                for (int i = 0; i < arrSize; i++) {
+                    listResultat.get(i).add(res.getString(resMeta.getColumnLabel(i)));
                 }
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException SqlEx) {
+            System.out.println("SQLException: " + SqlEx.getMessage());
+            System.out.println("SQLState: " + SqlEx.getSQLState());
+            System.out.println("VendorError: " + SqlEx.getErrorCode());
         }
         return listResultat;
     }
-
-
-    /*
-    // Stocke le contenu d'un ResultSet dans une Arraylist
-    public ArrayList listePersonnel(ResultSet resultat) throws SQLException {
-        ArrayList liste = new ArrayList();
-        while (resultat.next()) {
-            for (int i = 1; i < liste.size(); i++) {
-                if (resultat.getObject(i) != null) {
-                    liste.add(resultat.getObject(i).toString());
+    
+    
+    // -------------------------------------- Historique des Méthodes  --------------------------------------
+    
+    /*   
+    
+    public ArrayList<String> requetePstmt(Personnel pers) throws SQLException, ClassNotFoundException {
+            int arrSize = 3;
+            ArrayList<String> listResultat = new ArrayList<>(arrSize);
+            try {
+                String SQLquery = "SELECT Prénom, Nom, Spécialité FROM ? WHERE ? = ? ";
+                if (connection == null) {
+                    PreparedStatement pstmt = connection.prepareStatement(SQLquery);
+                    System.out.println("con is null");
                 } else {
-                    System.out.println("erreur : champ null");
+                    System.out.println("con is not null");
                 }
-                // affiche le contenu de liste dans la console
-                for (int j = 0; j < liste.size(); j++) {
-                    System.out.println(liste.get(j));
-                }
-            }
-        }
-        return liste;
-    }
-    */
-
-
-    /*
-    public ArrayList listePersonnel(ResultSet resultat) throws SQLException {
-
-        ArrayList<ArrayList<String>> mainList = new ArrayList<>();
-        ArrayList<String> list = new ArrayList<>();
-
-        while (resultat.next()) {
-            for (int i = 1; i < list.size(); i++) {
-                if (resultat.getObject(i) != null) {
-                    list.add(resultat.getObject(i).toString());
-                    for (int j = 1; j < list.size(); j++) {
-                        mainList.add(list);
+                pstmt.setString(1, "'personnel");
+                pstmt.setString(2, "Prénom");
+                pstmt.setString(3, pers.getPrenom());
+                ResultSet rs = pstmt.executeQuery();
+                while (rs.next()) {
+                    for (int i = 1; i < arrSize; i++) {
+                        listResultat.add(rs.getString(i));
                     }
-                } else {
-                    System.out.println("erreur : champ null");
                 }
-
+            } catch (SQLException e) {
             }
+            /*finally { try { res.close();
+                    pstmt.close();
+                } catch (SQLException e) {e.printStackTrace();}}return listResultat;} 
+        
+       
+        // Renvoie un objet Personnel() avec Prénom/Nom/Statut à partir d'une recherche prénom
+        public Personnel infoPersonnel(String prenomPers) throws SQLException {
+            DbConnection con = new DbConnection();
+            Personnel pers = new Personnel();
+            Statut statut = pers.getStatut();
+            ArrayList<ArrayList<String>> info = con.requetePstmt();
+            pers.setPrenom(info.get(1).get(1));
+            pers.setNom(info.get(2).get(1));
+            pers.setStatut(statut.valueOf(info.get(3).get(1)));
+            return pers;
         }
-        return mainList;
-    }
-    */
-
+    
+    
+   
+        // Stocke le contenu d'un ResultSet dans une Arraylist
+        public ArrayList listePersonnel(ResultSet resultat) throws SQLException {
+            ArrayList liste = new ArrayList();
+            while (resultat.next()) {
+                for (int i = 1; i < liste.size(); i++) {
+                    if (resultat.getObject(i) != null) {
+                        liste.add(resultat.getObject(i).toString());
+                    } else {
+                        System.out.println("erreur : champ null");
+                    }
+                    // affiche le contenu de liste dans la console
+                    for (int j = 0; j < liste.size(); j++) {
+                        System.out.println(liste.get(j));
+                    }
+                }
+            }
+            return liste;
+        }
+     
+     */
 }
