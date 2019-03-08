@@ -9,18 +9,18 @@ import FC.*;
  *
  * @author menar
  */
-public class RecherchePatient extends javax.swing.JFrame {
+public class RechercherPersonnel extends javax.swing.JFrame {
     SIR sir;
     AccueilSecretaire accueil;
     /**
-     * Creates new form RecherchePatient
+     * Creates new form RechercherPersonnel
      */
-    public RecherchePatient(SIR sir,AccueilSecretaire accueil) {
+    public RechercherPersonnel(SIR sir,AccueilSecretaire accueil) {
         this.sir=sir;
         this.accueil=accueil;
         initComponents();
     }
-    public RecherchePatient(){
+    public RechercherPersonnel (){
         initComponents();
     }
 
@@ -66,20 +66,20 @@ public class RecherchePatient extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RecherchePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RechercherPersonnel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RecherchePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RechercherPersonnel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RecherchePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RechercherPersonnel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RecherchePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(RechercherPersonnel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RecherchePatient().setVisible(true);
+                new RechercherPersonnel().setVisible(true);
             }
         });
     }

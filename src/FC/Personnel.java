@@ -15,19 +15,22 @@ public class Personnel {
     private String id;
     private MDP mdp;
     private Statut statut;
+    private Metier metier;
     
-    public Personnel(String nom, String prenom, String id, MDP mdp, Statut statut) { //constructeur
+    public Personnel(String nom, String prenom, String id, MDP mdp, Statut statut,Metier metier) { //constructeur
         this.nom = nom;
         this.prenom = prenom;
         this.id = id;
         this.mdp = mdp;
         this.statut=statut;
+        this.metier=metier;
     }
-    public Personnel(String nom, String prenom, String identifiant, MDP mdp) {
+    public Personnel(String nom, String prenom, String identifiant, MDP mdp, Metier metier) {
         this.nom = nom;
         this.prenom = prenom;
         this.id = identifiant;
         this.mdp = mdp;
+        this.metier=metier;
     }
     public Personnel(String nom, String prenom) {
         this.nom = nom;
