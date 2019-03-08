@@ -9,18 +9,21 @@ import FC.*;
  *
  * @author menar
  */
-public class RecherchePatient extends javax.swing.JFrame {
+public class AjouterPatient extends javax.swing.JFrame {
+
+    AccueilSecretaire accueilSecretaire;
     SIR sir;
-    AccueilSecretaire accueil;
-    /**
-     * Creates new form RecherchePatient
-     */
-    public RecherchePatient(SIR sir,AccueilSecretaire accueil) {
+   
+        
+             
+          
+    public AjouterPatient(SIR sir,AccueilSecretaire accueil) {
         this.sir=sir;
-        this.accueil=accueil;
+        this.accueilSecretaire=accueil;
+    
         initComponents();
     }
-    public RecherchePatient(){
+    public AjouterPatient (){
         initComponents();
     }
 
@@ -66,20 +69,20 @@ public class RecherchePatient extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(RecherchePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjouterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(RecherchePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjouterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(RecherchePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjouterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(RecherchePatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AjouterPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new RecherchePatient().setVisible(true);
+                new AjouterPatient().setVisible(true);
             }
         });
     }
