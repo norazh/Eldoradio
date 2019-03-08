@@ -7,6 +7,8 @@ package UI;
 
 import javax.swing.JOptionPane;
 import FC.*;
+import static java.lang.Integer.parseInt;
+import java.util.ArrayList;
 /**
  *
  * @author menar
@@ -75,6 +77,10 @@ public class RechercheEamenDMR extends javax.swing.JPanel {
         jLabel13 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jLabel14 = new javax.swing.JLabel();
+        jLabel15 = new javax.swing.JLabel();
+        jTextField8 = new javax.swing.JTextField();
+        jTextField9 = new javax.swing.JTextField();
 
         jLabel1.setText("                                  RECHERCHE");
 
@@ -135,7 +141,7 @@ public class RechercheEamenDMR extends javax.swing.JPanel {
 
         jCheckBox9.setText("date :");
 
-        jTextField7.setText("JJ/MM/AAAA");
+        jTextField7.setText("JJ");
 
         jLabel12.setText("ou");
 
@@ -153,6 +159,14 @@ public class RechercheEamenDMR extends javax.swing.JPanel {
         });
 
         jButton2.setText("ANNULER");
+
+        jLabel14.setText("/");
+
+        jLabel15.setText("/");
+
+        jTextField8.setText("MM");
+
+        jTextField9.setText("AAAA");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -205,7 +219,16 @@ public class RechercheEamenDMR extends javax.swing.JPanel {
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 4, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jLabel15)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(35, 35, 35)
@@ -293,7 +316,11 @@ public class RechercheEamenDMR extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCheckBox9)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14)
+                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel15))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -318,13 +345,90 @@ public class RechercheEamenDMR extends javax.swing.JPanel {
         // TODO add your handling code here:
         if ((jCheckBox1.isSelected() && !jCheckBox2.isSelected()) ){
             if(jCheckBox3.isSelected() && !jCheckBox4.isSelected() && !jCheckBox5.isSelected()){
+                if(jTextField1.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le champs idDMR par l'identifiant du DMR recherché "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+                }
+                else{
                 String id= jTextField1.getText();
                 DMR dmrTrouve=sir.RechercheDMRParidDMR(id);
-                
+                //affichage du DMR trouvé dans le tableau d'Accueil
+                }
             }
+            else if(!jCheckBox3.isSelected() && jCheckBox4.isSelected() && !jCheckBox5.isSelected()){
+                 if(jTextField2.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le champs nomp Patient par le nom du patient recherché "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+                }
+                 else{
+                String nomPatient=jTextField2.getText();
+                DMR dmrTrouve=sir.RechercheDMRParNomPatient(nomPatient);
+                //affichage du DMR trouvé dans le tableau d'Accueil
+                 }
+            }
+            else if(!jCheckBox3.isSelected() && !jCheckBox4.isSelected() && jCheckBox5.isSelected()){
+                 if(jTextField3.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le champs idSIR par l'identifiant SIR du patient recherché "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+                }
+                 else{
+                String idSIR=jTextField3.getText();
+                DMR dmrTrouve=sir.RechercheDMRParIdSIR(idSIR);
+                //affichage du DMR trouvé dans le tableau d'Accueil
+                 }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Veuillez sélectionner et renseigner un champs de recherche de DMR à savoir soit idDMR, soit nom du patient, soit idSIR."+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+            }
+            
         }
         else if(!jCheckBox1.isSelected() && jCheckBox2.isSelected()){
+            if(jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
+                if(jTextField4.getText().isEmpty() || jTextField5.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Veuillez renseigner les champs idDMR par l'identifiant du DMR recherché  ainsi que l'identifiant de l'examen recherché"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+                }
+                else{
+                String id= jTextField4.getText();
+                DMR dmrTrouve=sir.RechercheDMRParidDMR(id);
+                String idexam=jTextField5.getText();
+                Examen exam= dmrTrouve.getExamenParIdExamen(idexam);
+                //affichage du DMR trouvé dans le tableau d'Accueil
+                }
+            }
+            else if(!jCheckBox6.isSelected() && jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
+                 if(jComboBox1.getSelectedIndex() == -1){
+                    JOptionPane.showMessageDialog(null, "Veuillez sélectionner un type d'examen parmis la liste "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+                }
+                 else{
+                TypeExamen typeExamen=TypeExamen.valueOf(jComboBox1.getSelectedItem().toString());
+                ArrayList<Examen>  listeExamen=sir.RechercheExamenParTypeExamen(typeExamen);
+                //affichage du DMR trouvé dans le tableau d'Accueil
+                 }
+            }
             
+            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
+                if(jTextField6.getText().isEmpty() ){
+                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le nom du médecin de l'examen recherché"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+                }
+                else{
+                String nommed= jTextField6.getText();
+                ArrayList<Examen> listeExam = sir.RechercheExamenParNomMedecin(nommed);
+                //affichage du DMR trouvé dans le tableau d'Accueil
+                }
+            }
+            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
+                if(jTextField6.getText().isEmpty() || jTextField7.getText().isEmpty() || jTextField8.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Veuillez renseigner la date de l'examen recherché"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+                }
+                else{
+                int jour= parseInt(jTextField6.getText());
+                int mois= parseInt(jTextField7.getText());
+                int annee= parseInt(jTextField8.getText());
+                Date date = new Date(jour,mois,annee);
+                ArrayList<Examen> listeExamen= sir.RechercheExamenParDate(date);
+                //affichage du DMR trouvé dans le tableau d'Accueil
+                }
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "Veuillez sélectionner et renseigner un champs de recherche d'Examen à savoir soit idDMR et idExamen, soit type d'examen, soit par nom du médecin, soit par date , soit avec ou sans compte rendu."+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+            }
         }
         else if(!jCheckBox1.isSelected() && !jCheckBox2.isSelected()){
             JOptionPane.showMessageDialog(null, "Veuillez selectionner une des recherches. Soit par DMR soit par Examen"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
@@ -355,6 +459,8 @@ public class RechercheEamenDMR extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -371,5 +477,7 @@ public class RechercheEamenDMR extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
+    private javax.swing.JTextField jTextField8;
+    private javax.swing.JTextField jTextField9;
     // End of variables declaration//GEN-END:variables
 }
