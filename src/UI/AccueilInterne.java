@@ -43,8 +43,8 @@ public class AccueilInterne extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        RechercheExamenDMR = new javax.swing.JButton();
-        ReinitialiseListeDMR = new javax.swing.JButton();
+        RechercheExamen = new javax.swing.JButton();
+        ReinitialiseListeExamen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -163,27 +163,35 @@ public class AccueilInterne extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Id DMR", "Nom Patient", "Date dernier examen", "Nombre d'examen"
+                "Type Examen", "Nom Medecin", "Date", "Salle"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Object.class, java.lang.String.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
-        RechercheExamenDMR.setBackground(new java.awt.Color(255, 153, 0));
-        RechercheExamenDMR.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        RechercheExamenDMR.setText("Rechercher");
-        RechercheExamenDMR.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        RechercheExamenDMR.setBorderPainted(false);
-        RechercheExamenDMR.addActionListener(new java.awt.event.ActionListener() {
+        RechercheExamen.setBackground(new java.awt.Color(255, 153, 0));
+        RechercheExamen.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        RechercheExamen.setText("Rechercher Examen");
+        RechercheExamen.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        RechercheExamen.setBorderPainted(false);
+        RechercheExamen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                RechercheExamenDMRActionPerformed(evt);
+                RechercheExamenActionPerformed(evt);
             }
         });
 
-        ReinitialiseListeDMR.setBackground(new java.awt.Color(255, 153, 0));
-        ReinitialiseListeDMR.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        ReinitialiseListeDMR.setText("Réinitialiser");
-        ReinitialiseListeDMR.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 153, 0), 2, true));
-        ReinitialiseListeDMR.setBorderPainted(false);
+        ReinitialiseListeExamen.setBackground(new java.awt.Color(255, 153, 0));
+        ReinitialiseListeExamen.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        ReinitialiseListeExamen.setText("Réinitialiser");
+        ReinitialiseListeExamen.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 153, 0), 2, true));
+        ReinitialiseListeExamen.setBorderPainted(false);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -191,28 +199,28 @@ public class AccueilInterne extends javax.swing.JFrame {
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 993, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(RechercheExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(ReinitialiseListeExamen, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(RechercheExamenDMR, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(66, 66, 66)
-                .addComponent(ReinitialiseListeDMR, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
+                .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(RechercheExamenDMR, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
-                    .addComponent(ReinitialiseListeDMR, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
+                    .addComponent(RechercheExamen, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
+                    .addComponent(ReinitialiseListeExamen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(29, 29, 29)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
         );
 
-        jTabbedPane1.addTab("Liste DMR", jPanel3);
+        jTabbedPane1.addTab("Liste Examen", jPanel3);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -252,10 +260,10 @@ public class AccueilInterne extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void RechercheExamenDMRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RechercheExamenDMRActionPerformed
+    private void RechercheExamenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RechercheExamenActionPerformed
         // TODO add your handling code here:
-        //new RechercheExamenDMR(this.sir,this).setVisible(true);
-    }//GEN-LAST:event_RechercheExamenDMRActionPerformed
+        new RechercheExamenv2(this.sir,this).setVisible(true);
+    }//GEN-LAST:event_RechercheExamenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -293,8 +301,8 @@ public class AccueilInterne extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton RechercheExamenDMR;
-    private javax.swing.JButton ReinitialiseListeDMR;
+    private javax.swing.JButton RechercheExamen;
+    private javax.swing.JButton ReinitialiseListeExamen;
     private FC.DbConnection dbConnection1;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;

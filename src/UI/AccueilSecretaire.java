@@ -208,10 +208,11 @@ public class AccueilSecretaire extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RecherchePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(AjoutPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ReinitialisePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ReinitialisePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(RecherchePatient, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(AjoutPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(80, 80, 80))
@@ -254,6 +255,11 @@ public class AccueilSecretaire extends javax.swing.JFrame {
         });
 
         AjoutPersonnel.setText("Ajouter Personnel");
+        AjoutPersonnel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AjoutPersonnelActionPerformed(evt);
+            }
+        });
 
         ReinitialisePersonnel.setText("Réinitialiser");
 
@@ -372,8 +378,14 @@ public class AccueilSecretaire extends javax.swing.JFrame {
 
     private void RecherchePersonnelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecherchePersonnelActionPerformed
         // TODO add your handling code here:
+        new RechercherPersonnel(this.sir, this).setVisible(true);
         
     }//GEN-LAST:event_RecherchePersonnelActionPerformed
+
+    private void AjoutPersonnelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjoutPersonnelActionPerformed
+        // TODO add your handling code here:
+        new AjouterPersonnel (this.sir, this).setVisible(true);
+    }//GEN-LAST:event_AjoutPersonnelActionPerformed
 
     /**
      * @param args the command line arguments
