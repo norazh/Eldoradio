@@ -171,6 +171,14 @@ public class SIR {
         }
         return listeDMR.get(i);
     }
+    public DMR RechercheDMRParIdSIR(String id) {
+        String p1 = id.toLowerCase();
+        int i = 0;
+        while (i < listeDMR.size() && !listeDMR.get(i).getPatient().getidSIR().toLowerCase().equals(p1)) {
+            i++;
+        }
+        return listeDMR.get(i);
+    }
 
     public DMR RechercheDMRParPrenomPatient(String prenom) {
         String p1 = prenom.toLowerCase();
@@ -230,7 +238,7 @@ public class SIR {
           if(getStatut()==Statut.valueOf("MEDECIN")){
             DMR d= this.RechercheDMRParidDMR(idDMR);
             int i=0;
-            while (i<d.getListeExamen().size() && d.getListeExamen().get(i).getidExamen()!=idExam){
+            while (i<d.getListeExamen().size() && !d.getListeExamen().get(i).getidExamen().equals(idExam)){
                 i++;
             }
             if (i < d.getListeExamen().size()) {//il existe l'examen dans lequel on veut rajouter le compte rendu
@@ -306,6 +314,17 @@ public class SIR {
         for (int i = 0; i < listeDMR.size(); i++) {//parcour des DMR
             for (int j = 0; j < listeDMR.get(i).getListeExamen().size(); j++) {//parcour des listes d'examen pour chaque DMR
                 if (listeDMR.get(i).getListeExamen().get(j).getMedecin().getPrenom().toLowerCase().equals(n)) {
+                    list.add(listeDMR.get(i).getListeExamen().get(j));
+                }
+            }
+        }
+        return list;
+    }
+     public ArrayList<Examen> RechercheExamenParDate(Date date) {
+        ArrayList<Examen> list = new ArrayList<>();
+        for (int i = 0; i < listeDMR.size(); i++) {//parcour des DMR
+            for (int j = 0; j < listeDMR.get(i).getListeExamen().size(); j++) {//parcour des listes d'examen pour chaque DMR
+                if (listeDMR.get(i).getListeExamen().get(j).getDate().equals(date)) {
                     list.add(listeDMR.get(i).getListeExamen().get(j));
                 }
             }

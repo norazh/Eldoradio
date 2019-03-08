@@ -48,9 +48,9 @@ public class DMR {
         this.patient=p;
     }
     public void ajouterExamen (Examen exam){
-        int id=exam.getidExamen();
+        String id=exam.getidExamen();
         int i=0;
-        while(i<listeExamen.size() && listeExamen.get(i).getidExamen()!=id){
+        while(i<listeExamen.size() && !listeExamen.get(i).getidExamen().equals(id)){
             i++;
         }
         if(i<listeExamen.size()){
@@ -61,7 +61,7 @@ public class DMR {
             listeExamen.add(exam);
         }
     }
-    public int getidDernierExamen(){
+    public String getidDernierExamen(){
         int taille=this.getListeExamen().size();
         return this.getListeExamen().get(taille-1).getidExamen();
     }
@@ -73,7 +73,15 @@ public class DMR {
     public int NombreExamen (){
         return this.listeExamen.size()-1;
     }
-    
+     public Examen getExamenParIdExamen (String id){
+         int i=0;
+         while(i<listeExamen.size() && !listeExamen.get(i).getidExamen().equals(id)){
+             i++;
+         }
+         
+             return listeExamen.get(i);
+         
+     }
     
            
 }
