@@ -368,7 +368,7 @@ public class AccueilSecretaire extends javax.swing.JFrame {
 
     private void RecherchePatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecherchePatientActionPerformed
         
-        new RecherchePatient(this.sir,this).setVisible(true);
+        new RechercherPatient(this.sir,this).setVisible(true);
     }//GEN-LAST:event_RecherchePatientActionPerformed
 
     private void AjoutPatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AjoutPatientActionPerformed
@@ -378,7 +378,7 @@ public class AccueilSecretaire extends javax.swing.JFrame {
 
     private void RecherchePersonnelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecherchePersonnelActionPerformed
         // TODO add your handling code here:
-        new RechercherPersonnel(this.sir, this).setVisible(true);
+        new RechercherPatient(this.sir, this).setVisible(true);
         
     }//GEN-LAST:event_RecherchePersonnelActionPerformed
 
