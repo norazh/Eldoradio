@@ -163,6 +163,14 @@ public class Date implements Comparable {
         else
             return false;// si l'objet n'est pas une date, on retourne false
         }
+     public boolean equalsBasique(Object o) {// méthode qui permet de vérifier si deux dates sont identiques , retourne true si les 2 dates correspondent, false sinon   
+        if (o instanceof Date) { // si l'objet o est une instance de Date
+            Date d = (Date)o;// crée une variable d égale à l'objet
+            return (annee == d.annee) && (mois == d.mois) && (jour == d.jour);// retourne true si c'est la même date, false si c'est pas la même date
+            }
+        else
+            return false;// si l'objet n'est pas une date, on retourne false
+        }
     
     public boolean sup(Object o) {
         if (o instanceof Date) {
