@@ -1,0 +1,941 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="0f4fc9be-70ca-4610-9f3a-0ab693396351" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources/6101112f-4a4f-4675-85a3-786f6d165e3d.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/sqldialects.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/Donnees/13238237-laisser-refroidir-le-fond-bleu-rayons-élégant-fond-bleu-foncé-avec-glowing-rayons-de-lumière-autre-horizon.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/Donnees/52158504_577857816067012_2454202221978451968_n (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/Donnees/City_Centre_Princeton_802.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/Donnees/Monsters-University-Character-Young-Mike-Icons_icon-icons.com_55701.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/Donnees/Users2_37173.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/Donnees/logoELDOrogne (1).png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/Donnees/preferencesdesktopuserpassword_94510.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/Salle.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilManip3$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilManip3$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilManip3$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilManip3$4.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilManip3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AjouterExamen$4.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/Connexion$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/Connexion$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/Connexion$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/Connexion$4.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/Connexion$5.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/Connexion$6.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/Connexion$7.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/Connexion.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/ConsulterPatient$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/ConsulterPatient$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/ConsulterPatient$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/InterfaceTraitementImage$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/InterfaceTraitementImage$2.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/InterfaceTraitementImage$3.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/InterfaceTraitementImage$4.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/InterfaceTraitementImage$5.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/InterfaceTraitementImage$6.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/InterfaceTraitementImage$7.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/InterfaceTraitementImage$8.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/InterfaceTraitementImage$9.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/InterfaceTraitementImage.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/Main$1.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/Main.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/RotatedIcon$Rotate.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/RotatedIcon.class" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/UI/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/Donnees/Cartman_Hitler_zoomed_icon_30688.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/FC/DMR.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/DMR.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/FC/Date.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/Date.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/FC/DbConnection.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/FC/Examen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/Examen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/FC/OperationBD.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/FC/Personnel.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/Personnel.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/FC/SIR.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/SIR.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/FC/Statut.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/Statut.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/FC/TestBD.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/FC/TestBD.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilManip$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilManip$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilManip.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilSecretaire$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilSecretaire$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilSecretaire$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilSecretaire$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilSecretaire$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilSecretaire$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilSecretaire.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AccueilSecretaire.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AjouterExamen$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AjouterExamen$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AjouterExamen$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AjouterExamen$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AjouterExamen$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AjouterExamen$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/AjouterExamen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/AjouterExamen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/ConsulterExamen$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/ConsulterExamen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/ConsulterPatient.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/ConsulterPatient.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/ErreurLogin$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/ErreurLogin.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/Identification$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/Identification$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/Identification.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/RechercherExamen$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/RechercherExamen$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Eldoradio/UI/RechercherExamen.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Eldoradio/UI/RechercherExamen.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FC/DbConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FC/DbConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FC/OperationBD.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FC/Personnel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FC/Personnel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FC/Statut.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FC/Statut.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/FC/TestBD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/FC/TestBD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/AjouterExamen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/AjouterExamen.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/ConsulterExamen.form" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/ConsulterExamen.form" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/ConsulterExamen.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/ConsulterExamen.java" afterDir="false" />
+    </list>
+    <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/.idea/shelf/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="ldancelme_eldoradio" type="feb32156:DbDataSourceImpl" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="ldancelme_eldoradio" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="ldancelme_eldoradio" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ldancelme_eldoradio: schema" type="c314c289:MysqlImplModel$Schema" />
+      </path>
+      <path>
+        <item name="Database" type="3277223f:DatabaseStructure$DbRootGroup" />
+        <item name="ldancelme_eldoradio" type="feb32156:DbDataSourceImpl" />
+        <item name="schemas" type="d4e8921:DatabaseStructure$FamilyGroup" />
+        <item name="ldancelme_eldoradio: schema" type="c314c289:MysqlImplModel$Schema" />
+        <item name="personnel: table" type="98d5ac3d:MysqlImplModel$Table" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="DbConnection.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/FC/DbConnection.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1547">
+              <caret line="139" column="13" lean-forward="true" selection-start-line="139" selection-start-column="13" selection-end-line="139" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3660#3679#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Personnel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FC/Personnel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="120">
+              <caret line="12" column="16" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1039#1040#0" expanded="true" />
+                <element signature="e#1075#1076#0" expanded="true" />
+                <element signature="e#1402#1403#0" expanded="true" />
+                <element signature="e#1421#1422#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Patient.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FC/Patient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="465">
+              <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AjouterExamen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/UI/AjouterExamen.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="485">
+              <caret line="389" column="12" selection-start-line="389" selection-start-column="12" selection-end-line="389" selection-end-column="12" />
+              <folding>
+                <element signature="e#1210#1299#0" expanded="true" />
+                <element signature="e#7056#7057#0" expanded="true" />
+                <element signature="e#7128#7129#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TestBD.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/FC/TestBD.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="180">
+              <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>con</find>
+    </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/FC/TypeExamen.java" />
+        <option value="$PROJECT_DIR$/src/FC/Patient.java" />
+        <option value="$PROJECT_DIR$/src/FC/ConnexionBD.java" />
+        <option value="$PROJECT_DIR$/src/FC/LinkDB.java" />
+        <option value="$PROJECT_DIR$/src/FC/SIR.java" />
+        <option value="$PROJECT_DIR$/src/FC/Imprimer.java" />
+        <option value="$PROJECT_DIR$/src/FC/DBTest/DBCon_Test.java" />
+        <option value="$PROJECT_DIR$/src/FC/DBTest/DBCon.java" />
+        <option value="$PROJECT_DIR$/src/FC/Connexion2.java" />
+        <option value="$PROJECT_DIR$/src/FC/Connexion.java" />
+        <option value="$PROJECT_DIR$/.gitignore" />
+        <option value="$PROJECT_DIR$/src/UI/AccueilInterne.java" />
+        <option value="$PROJECT_DIR$/src/UI/TestUI.java" />
+        <option value="$PROJECT_DIR$/src/UI/Identification.java" />
+        <option value="$PROJECT_DIR$/src/UI/MainUI.java" />
+        <option value="$PROJECT_DIR$/src/UI/RechercherPatient.java" />
+        <option value="$PROJECT_DIR$/src/UI/CodePourConnexion.java" />
+        <option value="$PROJECT_DIR$/src/UI/ConsulterExamen.java" />
+        <option value="$PROJECT_DIR$/src/UI/Main.java" />
+        <option value="$PROJECT_DIR$/src/FC/Statut.java" />
+        <option value="$PROJECT_DIR$/src/FC/Personnel.java" />
+        <option value="$PROJECT_DIR$/src/FC/OperationBD.java" />
+        <option value="$PROJECT_DIR$/src/UI/AjouterExamen.java" />
+        <option value="$PROJECT_DIR$/src/FC/DbOperation.java" />
+        <option value="$PROJECT_DIR$/src/FC/TestBD.java" />
+        <option value="$PROJECT_DIR$/src/FC/DbConnection.java" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="290" />
+    <option name="width" value="1150" />
+    <option name="height" value="900" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="AndroidView" />
+      <pane id="PackagesPane" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="Eldoradio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eldoradio" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eldoradio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eldoradio" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eldoradio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Eldoradio" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="FC" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Eldoradio" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.database.dataSource.DataSourceTemplate" value="MySQL" />
+    <property name="database.console.LAST_STATE" value="false" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="reference.settings.ide.settings.webservices" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Application.TestBD">
+    <configuration name="AccueilManip3" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UI.AccueilManip3" />
+      <module name="Eldoradio" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="UI.Main" />
+      <module name="Eldoradio" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="UI.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration name="TestBD" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="FC.TestBD" />
+      <module name="Eldoradio" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="FC.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <patterns />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="%MODULE_WORKING_DIR%" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <properties />
+      <listeners />
+    </configuration>
+    <list>
+      <item itemvalue="Application.TestBD" />
+      <item itemvalue="Application.Main" />
+      <item itemvalue="Application.AccueilManip3" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TestBD" />
+        <item itemvalue="Application.Main" />
+        <item itemvalue="Application.AccueilManip3" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="0f4fc9be-70ca-4610-9f3a-0ab693396351" name="Default" comment="" />
+      <created>1548716316237</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1548716316237</updated>
+      <workItem from="1548716319762" duration="9947000" />
+      <workItem from="1550137212649" duration="11562000" />
+      <workItem from="1550220306846" duration="3200000" />
+      <workItem from="1550655215863" duration="29411000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="72379000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="290" y="0" width="1150" height="900" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info anchor="right" id="Palette" order="3" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.45534408" weight="0.23163138" />
+      <window_info anchor="right" id="Palette&#9;" order="8" />
+      <window_info id="Image Layers" order="2" />
+      <window_info anchor="right" id="Capture Analysis" order="4" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.44363105" side_tool="true" weight="0.2793296" />
+      <window_info anchor="right" id="Maven Projects" order="7" />
+      <window_info anchor="bottom" id="Database Changes" order="7" weight="0.32935324" />
+      <window_info anchor="bottom" id="Version Control" order="10" sideWeight="0.49783924" weight="0.30922693" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.55636895" visible="true" weight="0.30884185" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32935324" />
+      <window_info id="Capture Tool" order="6" />
+      <window_info id="Designer" order="3" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1768953" />
+      <window_info anchor="right" id="Database" order="6" weight="0.11989574" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49611062" weight="0.32853025" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.32580364" />
+      <window_info id="UI Designer" order="4" />
+      <window_info anchor="right" id="Theme Preview" order="5" />
+      <window_info id="Favorites" order="5" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4917891" weight="0.2901619" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info active="true" anchor="bottom" id="Inspection Results" order="12" sideWeight="0.573898" visible="true" weight="0.32917705" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Database Console" weight="0.32960895" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="lib &gt; mysql-connector-java-8.0.15.jar&#10;.jar nécessaire pour l'utilisation de la BDD" />
+    <option name="LAST_COMMIT_MESSAGE" value="lib &gt; mysql-connector-java-8.0.15.jar&#10;.jar nécessaire pour l'utilisation de la BDD" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="15" />
+    </breakpoint-manager>
+    <watches-manager>
+      <configuration name="Application">
+        <watch expression="this.connection" language="JAVA" />
+        <watch expression="con.connection" />
+      </configuration>
+    </watches-manager>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/FC/Accueil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.sql/java/sql/Connection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8368">
+          <caret line="84" column="17" selection-start-line="84" selection-start-column="17" selection-end-line="84" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/DMR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="161">
+          <caret line="13" column="13" selection-start-line="13" selection-start-column="13" selection-end-line="13" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/DBTest/DBCon_Test.java" />
+    <entry file="file://$PROJECT_DIR$/src/FC/DBTest/DBCon.java" />
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/jdk/internal/reflect/DelegatingMethodAccessorImpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/ComparaisonPatientNom.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="6" selection-start-line="11" selection-start-column="6" selection-end-line="11" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/SIR.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="600">
+          <caret line="52" column="21" selection-start-line="52" selection-start-column="21" selection-end-line="52" selection-end-column="21" />
+          <folding>
+            <element signature="e#932#933#0" expanded="true" />
+            <element signature="e#963#964#0" expanded="true" />
+            <element signature="e#996#997#0" expanded="true" />
+            <element signature="e#1034#1035#0" expanded="true" />
+            <element signature="e#1089#1090#0" expanded="true" />
+            <element signature="e#1126#1127#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/Imprimer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2194">
+          <caret line="195" column="24" selection-start-line="195" selection-start-column="24" selection-end-line="195" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/Connexion.java" />
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" selection-start-line="2" selection-end-line="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/LinkDB.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/newForm.java" />
+    <entry file="file://$PROJECT_DIR$/src/UI/newForm.jfd" />
+    <entry file="file://$PROJECT_DIR$/src/UI/ErreurLogin.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/ErreurLogin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/Identification.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/TestUI.java" />
+    <entry file="file://$PROJECT_DIR$/src/UI/Identification.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="555">
+          <caret line="138" column="54" selection-start-line="138" selection-start-column="54" selection-end-line="138" selection-end-column="54" />
+          <folding>
+            <element signature="e#655#744#0" expanded="true" />
+            <element signature="e#1668#1669#0" expanded="true" />
+            <element signature="e#1731#1732#0" expanded="true" />
+            <element signature="e#2084#2085#0" expanded="true" />
+            <element signature="e#2147#2148#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/MainUI.java" />
+    <entry file="file://$PROJECT_DIR$/src/UI/AccueilManip.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/AccueilPH.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/PACS.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="13" selection-start-line="13" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/ComparaisonPatient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="11" column="17" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/RechercherPatient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="101">
+          <caret line="27" column="4" lean-forward="true" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+          <folding>
+            <element signature="e#684#773#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/Numériser.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/RotatedIcon.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="177">
+          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/AccueilInterne.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Runnable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="496">
+          <caret line="67" column="25" selection-start-line="67" selection-start-column="25" selection-end-line="67" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/ConsulterExamen.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/ConsulterExamen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2543">
+          <caret line="217" column="41" lean-forward="true" selection-start-line="217" selection-start-column="41" selection-end-line="217" selection-end-column="41" />
+          <folding>
+            <element signature="e#9440#9614#0" expanded="true" />
+            <element signature="e#9613#9614#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/Connexion.form">
+      <provider selected="true" editor-type-id="ui-designer" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#172#173#0" expanded="true" />
+            <element signature="e#222#223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/AccueilInterne.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="26" column="4" lean-forward="true" selection-start-line="26" selection-start-column="4" selection-end-line="26" selection-end-column="4" />
+          <folding>
+            <element signature="e#620#650#0" expanded="true" />
+            <element signature="e#657#746#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/AccueilManip3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="209">
+          <caret line="293" column="8" lean-forward="true" selection-start-line="293" selection-start-column="8" selection-end-line="293" selection-end-column="8" />
+          <folding>
+            <element signature="e#15552#15639#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/Connexion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="930">
+          <caret line="68" column="10" selection-start-line="68" selection-start-column="10" selection-end-line="68" selection-end-column="10" />
+          <folding>
+            <element signature="e#2089#2119#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/CodePourConnexion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="20" column="8" selection-start-line="20" selection-start-column="8" selection-end-line="20" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/reflect/Method.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="378">
+          <caret line="565" selection-start-line="565" selection-end-line="565" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/mysql-connector-java-8.0.15.jar!/com/mysql/cj/jdbc/exceptions/SQLError.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="139">
+          <caret line="73" selection-start-line="73" selection-end-line="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="das://6101112f-4a4f-4675-85a3-786f6d165e3d/schema/information_schema/view/user_variables">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/6101112f-4a4f-4675-85a3-786f6d165e3d/console.sql">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="das://6101112f-4a4f-4675-85a3-786f6d165e3d/schema/ldancelme_eldoradio/table/personnel">
+      <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
+        <state>
+          <filtering enabled="true" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk-11.0.2.jdk/Contents/Home/lib/src.zip!/java.base/java/lang/Object.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="183">
+          <caret line="351" column="29" selection-start-line="351" selection-start-column="29" selection-end-line="351" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/OperationBD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/Statut.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="2" lean-forward="true" selection-start-column="2" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/DbOperation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="4" lean-forward="true" selection-start-line="12" selection-start-column="4" selection-end-line="39" selection-end-column="5" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/Personnel.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="120">
+          <caret line="12" column="16" selection-start-line="12" selection-start-column="11" selection-end-line="12" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1039#1040#0" expanded="true" />
+            <element signature="e#1075#1076#0" expanded="true" />
+            <element signature="e#1402#1403#0" expanded="true" />
+            <element signature="e#1421#1422#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/Patient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="43" column="25" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/AjouterExamen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="485">
+          <caret line="389" column="12" selection-start-line="389" selection-start-column="12" selection-end-line="389" selection-end-column="12" />
+          <folding>
+            <element signature="e#1210#1299#0" expanded="true" />
+            <element signature="e#7056#7057#0" expanded="true" />
+            <element signature="e#7128#7129#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/TestBD.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="180">
+          <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/FC/DbConnection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1547">
+          <caret line="139" column="13" lean-forward="true" selection-start-line="139" selection-start-column="13" selection-end-line="139" selection-end-column="13" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3660#3679#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>java</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.8</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Eldoradio</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <last-edited>mysql-connector-java-8.0.15</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>

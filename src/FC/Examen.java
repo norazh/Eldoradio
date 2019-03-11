@@ -10,7 +10,7 @@ package FC;
  * @author menar
  */
 public class Examen {
-    private int idExamen;
+    private String idExamen;
     private Date date;
     private Medecin medecin;
     private TypeExamen type;
@@ -19,7 +19,7 @@ public class Examen {
     private boolean DMRpapier;
     private Salle salle;
     
-    public Examen (int idExamen,Date date, Medecin medecin, TypeExamen type, String CR, PACS pacs, boolean dmrpapier, Salle salle){
+    public Examen (String idExamen,Date date, Medecin medecin, TypeExamen type, String CR, PACS pacs, boolean dmrpapier, Salle salle){
         this.idExamen=idExamen;
         this.date=date;
         this.medecin=medecin;
@@ -29,7 +29,7 @@ public class Examen {
         this.DMRpapier=dmrpapier;
         this.salle=salle;
     }
-     public Examen (int idExamen, Date date, Medecin medecin, TypeExamen type, PACS pacs,boolean dmrpapier,  Salle salle){
+     public Examen (String idExamen, Date date, Medecin medecin, TypeExamen type, PACS pacs,boolean dmrpapier,  Salle salle){
        this.idExamen=idExamen;
        this.medecin=medecin;
        this.date=date;
@@ -38,7 +38,7 @@ public class Examen {
        this.DMRpapier=dmrpapier;
        this.salle=salle;
     }
-        public Examen (int idExamen, Date date, Medecin medecin, TypeExamen type,boolean dmrpapier,  Salle salle){
+        public Examen (String idExamen, Date date, Medecin medecin, TypeExamen type,boolean dmrpapier,  Salle salle){
        this.idExamen=idExamen;
        this.medecin=medecin;
        this.date=date;
@@ -46,7 +46,7 @@ public class Examen {
        this.DMRpapier=dmrpapier;
        this.salle=salle;
     }
-        public Examen (int idExamen, Date date, Medecin medecin, TypeExamen type,String cr,boolean dmrpapier,  Salle salle){
+        public Examen (String idExamen, Date date, Medecin medecin, TypeExamen type,String cr,boolean dmrpapier,  Salle salle){
        this.idExamen=idExamen;
        this.medecin=medecin;
        this.date=date;
@@ -55,7 +55,7 @@ public class Examen {
        this.DMRpapier=dmrpapier;
        this.salle=salle;
     }
-    public int getidExamen(){
+    public String getidExamen(){
         return idExamen;
     }
     

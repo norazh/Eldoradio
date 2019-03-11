@@ -5,6 +5,15 @@
  */
 package UI;
 
+import java.awt.event.ActionEvent;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFileChooser;
+import FC.PanDessin;
+import FC.PGMReader;
+
 /**
  *
  * @author Imane
@@ -16,6 +25,7 @@ public class Numériserv2 extends javax.swing.JPanel {
      */
     public Numériserv2() {
         initComponents();
+       
         jButton1.setToolTipText("Rotation 90° horaire");
         jButton2.setToolTipText("Symétrie horizontale");
         jButton3.setToolTipText("Rotation 90° anti-horaire");
@@ -102,6 +112,11 @@ public class Numériserv2 extends javax.swing.JPanel {
         });
 
         jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Donnees/zoom out.png"))); // NOI18N
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -237,9 +252,10 @@ public class Numériserv2 extends javax.swing.JPanel {
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    private final PanDessin panneau = new PanDessin();
+ 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        panneau.rotationDroite();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
@@ -247,15 +263,23 @@ public class Numériserv2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        panneau.rotationGauche();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
+        panneau.inversionNiveauGris();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
+       JFileChooser fileEnregistrerImage = new JFileChooser();
+            if (fileEnregistrerImage.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+                File fichierEnregistrement = new File(fileEnregistrerImage.getSelectedFile().getAbsolutePath() + ".jpg");
+                try {
+                    panneau.enregistrerImage(fichierEnregistrement);
+                } catch (FileNotFoundException ex) {
+                    Logger.getLogger(Numériserv2.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
@@ -263,12 +287,22 @@ public class Numériserv2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        panneau.agrandirImage();
     }//GEN-LAST:event_jButton9ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileOuvrirImage = new JFileChooser();
+            if (fileOuvrirImage.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+                panneau.ajouterImage(new File(fileOuvrirImage.getSelectedFile()
+                        .getAbsolutePath()));
+            }
+
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        panneau.reduireImage();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -291,4 +325,18 @@ public class Numériserv2 extends javax.swing.JPanel {
     private javax.swing.JSlider jSlider2;
     private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
+
+public static void main(String args[]){
+        
+        try {
+            Numériserv2 frame = new Numériserv2();
+            frame.setVisible(true);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+
 }
