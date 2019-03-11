@@ -32,6 +32,14 @@ public class Personnel {
         this.mdp = mdp;
         this.metier=metier;
     }
+        
+     public Personnel(String nom, String prenom, String identifiant, MDP mdp) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.id = identifiant;
+        this.mdp = mdp;
+    }
+     
     public Personnel(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;

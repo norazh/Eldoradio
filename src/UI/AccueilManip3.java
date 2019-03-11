@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 package UI;
+
 import FC.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
+
 /**
  *
  * @author noraz
@@ -18,8 +20,9 @@ public class AccueilManip3 extends javax.swing.JFrame {
      * Creates new form AccueilManip3
      */
     SIR sir;
+
     public AccueilManip3() {
-        
+
         initComponents();
     }
 
@@ -68,21 +71,17 @@ public class AccueilManip3 extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 153, 0), 2));
-        jPanel2.setForeground(new java.awt.Color(0, 0, 0));
 
         jLabel1.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Nom :");
 
         jLabel2.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Prénom :");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Donnees/Monsters-University-Character-Young-Mike-Icons_icon-icons.com_55701.png"))); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(255, 153, 0));
         jButton1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
         jButton1.setText("Se déconnecter");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -93,11 +92,9 @@ public class AccueilManip3 extends javax.swing.JFrame {
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Donnees/52158504_577857816067012_2454202221978451968_n (1).png"))); // NOI18N
 
         jLabel8.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("Bob");
 
         jLabel9.setFont(new java.awt.Font("sansserif", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Razowski");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -188,7 +185,6 @@ public class AccueilManip3 extends javax.swing.JFrame {
 
         jButton2.setBackground(new java.awt.Color(255, 153, 0));
         jButton2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(0, 0, 0));
         jButton2.setText("Rechercher");
         jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jButton2.setBorderPainted(false);
@@ -200,7 +196,6 @@ public class AccueilManip3 extends javax.swing.JFrame {
 
         jButton3.setBackground(new java.awt.Color(255, 153, 0));
         jButton3.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(0, 0, 0));
         jButton3.setText("Réinitialiser");
         jButton3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(255, 153, 0), 2, true));
         jButton3.setBorderPainted(false);
@@ -270,7 +265,7 @@ public class AccueilManip3 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        new RechercheExamenDMR(this.sir,this).setVisible(true);
+        new RechercheExamenDMR(this.sir, this).setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -303,6 +298,7 @@ public class AccueilManip3 extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AccueilManip3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -334,17 +330,18 @@ public class AccueilManip3 extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
- private void remplirTableauFiche() {
+
+    private void remplirTableauFiche() {
         DefaultTableModel dtm = new DefaultTableModel(0, 4);
         for (int i = 0; i < sir.getListeDMR().size(); i++) {
-            
-                Object[] data = new Object[4];
-                data[0] = sir.getListeDMR().get(i).getidDMR();
-                data[1] = sir.getListeDMR().get(i).getPatient().getNom();
-                data[2] = sir.getListeDMR().get(i).getDateDernierExamen().toStringBasique();
-                data[3] = sir.getListeDMR().get(i).NombreExamen();
-                dtm.addRow(data);
-            
+
+            Object[] data = new Object[4];
+            data[0] = sir.getListeDMR().get(i).getidDMR();
+            data[1] = sir.getListeDMR().get(i).getPatient().getNom();
+            data[2] = sir.getListeDMR().get(i).getDateDernierExamen().toStringBasique();
+            data[3] = sir.getListeDMR().get(i).NombreExamen();
+            dtm.addRow(data);
+
         }
         jTable1.setModel(dtm);
         for (int i = 0; i < jTable1.getColumnCount(); i++) {
@@ -354,12 +351,10 @@ public class AccueilManip3 extends javax.swing.JFrame {
         jTable1.getColumnModel().getColumn(0).setHeaderValue("idDMR");
         jTable1.getColumnModel().getColumn(1).setHeaderValue("Nom Patient");
         jTable1.getColumnModel().getColumn(2).setHeaderValue("Date du dernier examen");
-        jTable1.getColumnModel().getColumn(3).setHeaderValue("Nombre d'examen");
-        
+        jTable1.getColumnModel().getColumn(3).setHeaderValue("Nombre d'examens");
+
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(dtm);
         jTable1.setRowSorter(sorter);
     }
-
-
 
 }
