@@ -78,7 +78,6 @@ public class DMR {
          while(i<listeExamen.size() && !listeExamen.get(i).getidExamen().equals(id)){
              i++;
          }
-         
              return listeExamen.get(i);
          
      }

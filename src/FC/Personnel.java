@@ -32,14 +32,20 @@ public class Personnel {
         this.mdp = mdp;
         this.metier=metier;
     }
+<<<<<<< Updated upstream
         
+=======
+>>>>>>> Stashed changes
      public Personnel(String nom, String prenom, String identifiant, MDP mdp) {
         this.nom = nom;
         this.prenom = prenom;
         this.id = identifiant;
         this.mdp = mdp;
     }
+<<<<<<< Updated upstream
      
+=======
+>>>>>>> Stashed changes
     public Personnel(String nom, String prenom) {
         this.nom = nom;
         this.prenom = prenom;
