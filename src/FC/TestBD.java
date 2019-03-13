@@ -1,20 +1,50 @@
 package FC;
 
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import static javafx.beans.binding.Bindings.select;
 
 public class TestBD {
 
     public static void main(String[] args) throws Exception {
         DbConnection c = new DbConnection();
         c.connexionP();
+
+//        ArrayList<ArrayList<String>> listeExam = c.listeExam("1");
+//        afficher(listeExam);
+//
+//        String  query = "SELECT * FROM personnel";
+//        ResultSet res = c.select(query);
+//        
         
-        ArrayList<ArrayList<String>> listeExam = c.listeExam("1");
-        afficher(listeExam);
-        String  query = "SELECT * FROM personnel";
-        ResultSet res = c.select(query);
-        c.info(res);
+        
+        /* SELECT pid, cid, pname, name1, name2 
+        FROM customer1 c1, product p 
+        WHERE p.cid=c1.cid 
+        UNION SELECT pid, cid, pname, name1, name2 
+        FROM customer2 c2, product p 
+        WHERE p.cid=c2.cid; */
+        
+        try {String field = "idExamen, TypeExamen, DateExamen, DMRPapier, Nom, Prenom";
+        String  query2 = "SELECT " + field + " FROM examen e, patients p WHERE p.IDDMR = e.IDDMR ";
+        ArrayList<String> sepField = c.separate(field);
+        ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>(sepField.size());
+            ResultSet rs = c.select(query2);
+            for (int i = 0; i < sepField.size(); i++) {
+                arr2D.add(new ArrayList<String>());
+            }
+            while (rs.next()) {
+                for (int i = 0; i < sepField.size(); i++) {
+                    arr2D.get(i).add(rs.getString(sepField.get(i)));
+                }
+            }
+            afficher(arr2D);}catch (SQLException ex) {
+            }        
+        
+        
         
 //        
 //        
@@ -33,6 +63,30 @@ public class TestBD {
 //        
 //
 //          --------------------------------------- Test BDD ---------------------------------------
+        
+//        String password = "yooo";
+//        Cryptage cr = new Cryptage();
+////        String enc = cr.encryptPassword(password);
+//        System.out.println(enc);
+//        String dec = cr.decryptPassword(password);
+//        System.out.println(dec);
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+//        //  --------------------------------------- Test BDD ---------------------------------------
+
 //        System.out.print("\n--------------------------------------------------------");
 //        System.out.print("\n====================== TEST BDD ======================");
 //        System.out.println("\n----------------------- SELECT -------------------------\n");
@@ -77,8 +131,10 @@ public class TestBD {
 //        System.out.println("Votre mot décrypté : " + dec);
 //        
 //        System.out.println("\n\n--------------------------------------------------------\n");
+        
+        
 //
-//         ------------------------------------ Cryptage des MDP ------------------------------------
+//        ------------------------------------ Cryptage des MDP ------------------------------------
 //        enc = Cryptage.encryptMDP("Bonoj", "12345");
 //        System.out.print("Cryptage de id:Bonoj, mdp:12345 : ");
 //        System.out.println(enc);

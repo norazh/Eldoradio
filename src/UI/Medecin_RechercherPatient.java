@@ -5,7 +5,8 @@
  */
 package UI;
 
-import FC.Sexe;
+import FC.DbConnection;
+import java.util.ArrayList;
 
 /**
  *
@@ -19,8 +20,8 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
     public Medecin_RechercherPatient() {
         initComponents();
         jLabel2.setText("Jean Bono");
-        
-        
+        DbConnection c = new DbConnection();
+        c.connexionP();        
     }
 
     /**
@@ -343,8 +344,6 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField1_rechercheNomPatient;
     // End of variables declaration//GEN-END:variables
-
-
 
 
 }

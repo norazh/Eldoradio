@@ -342,108 +342,108 @@ public class RechercheExamenDMR extends javax.swing.JPanel {
     }//GEN-LAST:event_jCheckBox6ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        if ((jCheckBox1.isSelected() && !jCheckBox2.isSelected()) ){
-            if(jCheckBox3.isSelected() && !jCheckBox4.isSelected() && !jCheckBox5.isSelected()){
-                if(jTextField1.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le champs idDMR par l'identifiant du DMR recherché "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
-                }
-                else{
-                String id= jTextField1.getText();
-                DMR dmrTrouve=sir.RechercheDMRParidDMR(id);
-                //affichage du DMR trouvé dans le tableau d'Accueil
-                }
-            }
-            else if(!jCheckBox3.isSelected() && jCheckBox4.isSelected() && !jCheckBox5.isSelected()){
-                 if(jTextField2.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le champs nomp Patient par le nom du patient recherché "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
-                }
-                 else{
-                String nomPatient=jTextField2.getText();
-                DMR dmrTrouve=sir.RechercheDMRParNomPatient(nomPatient);
-                //affichage du DMR trouvé dans le tableau d'Accueil
-                 }
-            }
-            else if(!jCheckBox3.isSelected() && !jCheckBox4.isSelected() && jCheckBox5.isSelected()){
-                 if(jTextField3.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le champs idSIR par l'identifiant SIR du patient recherché "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
-                }
-                 else{
-                String idSIR=jTextField3.getText();
-                DMR dmrTrouve=sir.RechercheDMRParIdSIR(idSIR);
-                //affichage du DMR trouvé dans le tableau d'Accueil
-                 }
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Veuillez sélectionner et renseigner un champs de recherche de DMR à savoir soit idDMR, soit nom du patient, soit idSIR."+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
-            }
-            
-        }
-        else if(!jCheckBox1.isSelected() && jCheckBox2.isSelected()){
-            if(jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
-                if(jTextField4.getText().isEmpty() || jTextField5.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Veuillez renseigner les champs idDMR par l'identifiant du DMR recherché  ainsi que l'identifiant de l'examen recherché"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
-                }
-                else{
-                String id= jTextField4.getText();
-                DMR dmrTrouve=sir.RechercheDMRParidDMR(id);
-                String idexam=jTextField5.getText();
-                Examen exam= dmrTrouve.getExamenParIdExamen(idexam);
-                //affichage du DMR trouvé dans le tableau d'Accueil
-                }
-            }
-            else if(!jCheckBox6.isSelected() && jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
-                 if(jComboBox1.getSelectedIndex() == -1){
-                    JOptionPane.showMessageDialog(null, "Veuillez sélectionner un type d'examen parmis la liste "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
-                }
-                 else{
-                TypeExamen typeExamen=TypeExamen.valueOf(jComboBox1.getSelectedItem().toString());
-                ArrayList<Examen>  listeExamen=sir.RechercheExamenParTypeExamen(typeExamen);
-                //affichage du DMR trouvé dans le tableau d'Accueil
-                 }
-            }
-            
-            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
-                if(jTextField6.getText().isEmpty() ){
-                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le nom du médecin de l'examen recherché"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
-                }
-                else{
-                String nommed= jTextField6.getText();
-                ArrayList<Examen> listeExam = sir.RechercheExamenParNomMedecin(nommed);
-                //affichage du DMR trouvé dans le tableau d'Accueil
-                }
-            }
-            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
-                if(jTextField6.getText().isEmpty() || jTextField7.getText().isEmpty() || jTextField8.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Veuillez renseigner la date de l'examen recherché"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
-                }
-                else{
-                int jour= parseInt(jTextField6.getText());
-                int mois= parseInt(jTextField7.getText());
-                int annee= parseInt(jTextField8.getText());
-                Date date = new Date(jour,mois,annee);
-                ArrayList<Examen> listeExamen= sir.RechercheExamenParDate(date);
-                //affichage du DMR trouvé dans le tableau d'Accueil
-                }
-            }
-            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
-                ArrayList<Examen> listeExamen= sir.RechercherExamenAvecCR();
-                //affichage du DMR trouvé dans le tableau d'Accueil
-            }
-            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& jCheckBox11.isSelected()){
-                ArrayList<Examen> listeExamen= sir.RechercherExamenSansCR();
-                //affichage du DMR trouvé dans le tableau d'Accueil
-            }
-            else{
-                JOptionPane.showMessageDialog(null, "Veuillez sélectionner et renseigner UN champs de recherche d'Examen à savoir soit idDMR et idExamen, soit type d'examen, soit par nom du médecin, soit par date , soit avec ou sans compte rendu."+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
-            }
-        }
-        else if(!jCheckBox1.isSelected() && !jCheckBox2.isSelected()){
-            JOptionPane.showMessageDialog(null, "Veuillez selectionner une des recherches. Soit par DMR soit par Examen"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
-        }
-        else{
-            JOptionPane.showMessageDialog(null, "Veuillez selectionner un seul type de recherche. Vous pouvez rechercher des DMR OU des examen");
-        }
+//        // TODO add your handling code here:
+//        if ((jCheckBox1.isSelected() && !jCheckBox2.isSelected()) ){
+//            if(jCheckBox3.isSelected() && !jCheckBox4.isSelected() && !jCheckBox5.isSelected()){
+//                if(jTextField1.getText().isEmpty()){
+//                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le champs idDMR par l'identifiant du DMR recherché "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+//                }
+//                else{
+//                String id= jTextField1.getText();
+//                DMR dmrTrouve=sir.RechercheDMRParidDMR(id);
+//                //affichage du DMR trouvé dans le tableau d'Accueil
+//                }
+//            }
+//            else if(!jCheckBox3.isSelected() && jCheckBox4.isSelected() && !jCheckBox5.isSelected()){
+//                 if(jTextField2.getText().isEmpty()){
+//                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le champs nomp Patient par le nom du patient recherché "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+//                }
+//                 else{
+//                String nomPatient=jTextField2.getText();
+//                DMR dmrTrouve=sir.RechercheDMRParNomPatient(nomPatient);
+//                //affichage du DMR trouvé dans le tableau d'Accueil
+//                 }
+//            }
+//            else if(!jCheckBox3.isSelected() && !jCheckBox4.isSelected() && jCheckBox5.isSelected()){
+//                 if(jTextField3.getText().isEmpty()){
+//                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le champs idSIR par l'identifiant SIR du patient recherché "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+//                }
+//                 else{
+//                String IPP=jTextField3.getText();
+//                DMR dmrTrouve=sir.RechercheDMRParIdSIR(IPP);
+//                //affichage du DMR trouvé dans le tableau d'Accueil
+//                 }
+//            }
+//            else{
+//                JOptionPane.showMessageDialog(null, "Veuillez sélectionner et renseigner un champs de recherche de DMR à savoir soit idDMR, soit nom du patient, soit idSIR."+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+//            }
+//            
+//        }
+//        else if(!jCheckBox1.isSelected() && jCheckBox2.isSelected()){
+//            if(jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
+//                if(jTextField4.getText().isEmpty() || jTextField5.getText().isEmpty()){
+//                    JOptionPane.showMessageDialog(null, "Veuillez renseigner les champs idDMR par l'identifiant du DMR recherché  ainsi que l'identifiant de l'examen recherché"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+//                }
+//                else{
+//                String id= jTextField4.getText();
+//                DMR dmrTrouve=sir.RechercheDMRParidDMR(id);
+//                String idexam=jTextField5.getText();
+//                Examen exam= dmrTrouve.getExamenParIdExamen(idexam);
+//                //affichage du DMR trouvé dans le tableau d'Accueil
+//                }
+//            }
+//            else if(!jCheckBox6.isSelected() && jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
+//                 if(jComboBox1.getSelectedIndex() == -1){
+//                    JOptionPane.showMessageDialog(null, "Veuillez sélectionner un type d'examen parmis la liste "+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+//                }
+//                 else{
+//                TypeExamen typeExamen=TypeExamen.valueOf(jComboBox1.getSelectedItem().toString());
+//                ArrayList<Examen>  listeExamen=sir.RechercheExamenParTypeExamen(typeExamen);
+//                //affichage du DMR trouvé dans le tableau d'Accueil
+//                 }
+//            }
+//            
+//            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
+//                if(jTextField6.getText().isEmpty() ){
+//                    JOptionPane.showMessageDialog(null, "Veuillez renseigner le nom du médecin de l'examen recherché"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+//                }
+//                else{
+//                String nommed= jTextField6.getText();
+//                ArrayList<Examen> listeExam = sir.RechercheExamenParNomMedecin(nommed);
+//                //affichage du DMR trouvé dans le tableau d'Accueil
+//                }
+//            }
+//            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
+//                if(jTextField6.getText().isEmpty() || jTextField7.getText().isEmpty() || jTextField8.getText().isEmpty()){
+//                    JOptionPane.showMessageDialog(null, "Veuillez renseigner la date de l'examen recherché"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+//                }
+//                else{
+//                int jour= parseInt(jTextField6.getText());
+//                int mois= parseInt(jTextField7.getText());
+//                int annee= parseInt(jTextField8.getText());
+//                Date date = new Date(jour,mois,annee);
+//                ArrayList<Examen> listeExamen= sir.RechercheExamenParDate(date);
+//                //affichage du DMR trouvé dans le tableau d'Accueil
+//                }
+//            }
+//            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && jCheckBox10.isSelected()&& !jCheckBox11.isSelected()){
+//                ArrayList<Examen> listeExamen= sir.RechercherExamenAvecCR();
+//                //affichage du DMR trouvé dans le tableau d'Accueil
+//            }
+//            if(!jCheckBox6.isSelected() && !jCheckBox7.isSelected() && !jCheckBox8.isSelected()&& !jCheckBox9.isSelected() && !jCheckBox10.isSelected()&& jCheckBox11.isSelected()){
+//                ArrayList<Examen> listeExamen= sir.RechercherExamenSansCR();
+//                //affichage du DMR trouvé dans le tableau d'Accueil
+//            }
+//            else{
+//                JOptionPane.showMessageDialog(null, "Veuillez sélectionner et renseigner UN champs de recherche d'Examen à savoir soit idDMR et idExamen, soit type d'examen, soit par nom du médecin, soit par date , soit avec ou sans compte rendu."+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+//            }
+//        }
+//        else if(!jCheckBox1.isSelected() && !jCheckBox2.isSelected()){
+//            JOptionPane.showMessageDialog(null, "Veuillez selectionner une des recherches. Soit par DMR soit par Examen"+"\n"+"Si vous ne souhaitez plus faire cette recherche, cliquez sur 'annuler'.");
+//        }
+//        else{
+//            JOptionPane.showMessageDialog(null, "Veuillez selectionner un seul type de recherche. Vous pouvez rechercher des DMR OU des examen");
+//        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
 

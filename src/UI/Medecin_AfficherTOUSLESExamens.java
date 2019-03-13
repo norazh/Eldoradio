@@ -5,6 +5,15 @@
  */
 package UI;
 
+import FC.DbConnection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author Imane
@@ -17,6 +26,8 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
     public Medecin_AfficherTOUSLESExamens() {
         initComponents();
         jLabel2.setText("Jean Bono");
+        TabInit();
+
     }
 
     /**
@@ -33,19 +44,19 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        table = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        NomPatient_jTF = new javax.swing.JTextField();
+        Prenom_jTF = new javax.swing.JTextField();
+        ComboBox = new javax.swing.JComboBox<>(TypeExamen.values());
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        nomBt = new javax.swing.JButton();
+        prenomBt = new javax.swing.JButton();
+        Reinit_Bt = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -86,7 +97,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null},
@@ -105,7 +116,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(table);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2), "Critères de recherche", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -116,13 +127,30 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
 
         jLabel11.setText("Type d'examen : ");
 
-        jTextField1.setText("jTextField1");
+        NomPatient_jTF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NomPatient_jTFActionPerformed(evt);
+            }
+        });
 
-        jTextField2.setText("jTextField2");
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Radiologie", "IRM", "Scanner", "Echographie", "Angiographie", "Echoendographie","Mammographie", "Radiothérapie", "PET" }));
+        ComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ComboBoxActionPerformed(evt);
+            }
+        });
 
         jCheckBox1.setText("Sans compte-rendu");
+        jCheckBox1.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                jCheckBox1StateChanged(evt);
+            }
+        });
+        jCheckBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCheckBox1ActionPerformed(evt);
+            }
+        });
 
         jCheckBox2.setText("Trier par nom du patient");
         jCheckBox2.addActionListener(new java.awt.event.ActionListener() {
@@ -131,16 +159,26 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("OK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        nomBt.setText("OK");
+        nomBt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                nomBtActionPerformed(evt);
             }
         });
 
-        jButton2.setText("OK");
+        prenomBt.setText("OK");
+        prenomBt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                prenomBtActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Réinitialiser");
+        Reinit_Bt.setText("Réinitialiser");
+        Reinit_Bt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Reinit_BtActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -152,26 +190,23 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
                     .addComponent(jLabel5)
                     .addComponent(jLabel4))
                 .addGap(30, 30, 30)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Prenom_jTF)
+                    .addComponent(NomPatient_jTF, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton1)
-                        .addGap(123, 123, 123)
-                        .addComponent(jLabel11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jCheckBox1)
-                            .addComponent(jCheckBox2))
-                        .addGap(168, 168, 168))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nomBt, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(prenomBt, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox1)
+                    .addComponent(jCheckBox2))
+                .addGap(168, 168, 168)
+                .addComponent(Reinit_Bt, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -179,22 +214,22 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Reinit_Bt, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel4)
                             .addComponent(jLabel11)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(NomPatient_jTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jCheckBox1)
-                            .addComponent(jButton1))
+                            .addComponent(nomBt))
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                     .addComponent(jLabel5)
-                                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jButton2)))
+                                    .addComponent(Prenom_jTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(prenomBt)))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(26, 26, 26)
                                 .addComponent(jCheckBox2)))))
@@ -282,9 +317,64 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCheckBox2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void nomBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nomBtActionPerformed
+        try {
+            DbConnection c = new DbConnection();
+            c.connexionP();
+            String query = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom, DMRPapier FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND (p2.Nom = '" + NomPatient_jTF.getText() + "') ";
+            ResultSet rs = c.select(query);
+            setTable(rs);
+            c.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_nomBtActionPerformed
+
+    private void prenomBtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_prenomBtActionPerformed
+        try {
+            DbConnection c = new DbConnection();
+            c.connexionP();
+            String query = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom, DMRPapier FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND (p2.Prenom = '" + Prenom_jTF.getText() + "') ";
+            ResultSet rs = c.select(query);
+            setTable(rs);
+            c.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_prenomBtActionPerformed
+
+    private void NomPatient_jTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NomPatient_jTFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_NomPatient_jTFActionPerformed
+
+    private void Reinit_BtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Reinit_BtActionPerformed
+        TabInit();
+    }//GEN-LAST:event_Reinit_BtActionPerformed
+
+    private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
+        if (jCheckBox1.isSelected()) {
+            try {
+                DbConnection c = new DbConnection();
+                c.connexionP();
+                String query = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom, DMRPapier FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND ((LENGTH(e.CompteRendu) = 0) OR (LENGTH(e.CompteRendu) = NULL))";
+                ResultSet rs = c.select(query);
+                setTable(rs);
+                c.close();
+            } catch (SQLException ex) {
+                Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            TabInit();
+        }
+    }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void jCheckBox1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jCheckBox1StateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCheckBox1StateChanged
+
+    private void ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ComboBoxActionPerformed
 
     /**
      * @param args the command line arguments
@@ -353,13 +443,13 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> ComboBox;
+    private javax.swing.JTextField NomPatient_jTF;
+    private javax.swing.JTextField Prenom_jTF;
+    private javax.swing.JButton Reinit_Bt;
     private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -371,9 +461,42 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JButton nomBt;
+    private javax.swing.JButton prenomBt;
+    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
-}
 
+    public void setTable(ResultSet rs) throws SQLException {
+        try {
+            while (table.getRowCount() > 0) {
+                ((DefaultTableModel) table.getModel()).removeRow(0);
+            }
+            int columns = rs.getMetaData().getColumnCount();
+            while (rs.next()) {
+                Object[] row = new Object[columns];
+                for (int i = 1; i <= columns; i++) {
+                    row[i - 1] = rs.getObject(i);
+                }
+                ((DefaultTableModel) table.getModel()).insertRow(rs.getRow() - 1, row);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public void TabInit() {
+        try {
+            DbConnection c = new DbConnection();
+            c.connexionP();
+            String query = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom, DMRPapier FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND (p1.IDPERS = e.IDPERS)";
+            ResultSet rs = c.select(query);
+            //To remove previously added rows
+            setTable(rs);
+            c.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+}

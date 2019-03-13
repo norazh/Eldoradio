@@ -70,7 +70,7 @@ public class Patient {
     }
 
     public String toString() {
-        return "FICHE PATIENT" + "\n" + "Prénom: " + getPrenom() + "\n " + "Nom : " + getNom() + " \n " + "Adresse: " + getAdresse() + "\n" + "Ville : " + getVille() + "\n" + "Code Postal: " + getCodePostal() + "\n" + "idSIR: " + getidSIR() + "\n" + "idSIH: " + getidSIH() + "\n" + "idDMR: " + getidDMR() + "\n" + "Date de naissance: " + getDateDeNaissance().toString() + " \n " + "Sexe : " + getSexe() + " \n ";
+        return "FICHE PATIENT" + "\n" + "Prénom: " + getPrenom() + "\n " + "Nom : " + getNom() + " \n " + "Adresse: " + getAdresse() + "\n" + "Ville : " + getVille() + "\n" + "Code Postal: " + getCodePostal() + "\n" + "IPP: " + getIPP() + "\n" + "idDMR: " + getidDMR() + "\n" + "Date de naissance: " + getDateDeNaissance().toString() + " \n " + "Sexe : " + getSexe() + " \n ";
     }
 
     public String toStringNom() {

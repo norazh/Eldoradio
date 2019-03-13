@@ -40,11 +40,18 @@ public class Personnel {
         this.mdp = mdp;
     }
 
+
     public Personnel(String nom, String prenom, Statut statut, Metier metier) {
         this.nom = nom;
         this.prenom = prenom;
         this.metier=metier;
         this.statut=statut;
+        
+    }
+
+    public Personnel(String nom, String prenom) {
+        this.nom = nom;
+        this.prenom = prenom;
     }
     public String toStringNomPrenom(){
         return getNom()+" "+ getPrenom();

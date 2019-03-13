@@ -5,9 +5,13 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 public class DbConnection {
 
@@ -266,7 +270,7 @@ public class DbConnection {
         return listResultat;
     }
 
-    // Retourne une image depuis la BD depuis un numéro d'archivage
+    // Retourne une image depuis la BD depuis un numéro d'archivage ——— Ne fonctionne pas !! : SQLException: Column index out of range.
     public ImageIcon importPic(String numArchivage) throws SQLException {
         String query = "SELECT Fichier FROM pacs WHERE numArchivage = " + numArchivage;
         this.res = select(query);
@@ -287,16 +291,27 @@ public class DbConnection {
         return listeExam;
     }
     
-    public Object[] convertArrtoVec(ArrayList<ArrayList<String>> arr) {
-        for (int i = 0 ; i < arr.size() ; i++){
-        
+    
+    public ArrayList<ArrayList<String>> infosPatient(String idPers) throws SQLException{
+        ArrayList<ArrayList<String>> listeIDSIR = select("*", "examen", "(IDPERS = '" + idPers + "')"); // liste des IDSIR d'`examen` par IDPERS
+        Set set = new HashSet(); set.addAll(listeIDSIR);
+        ArrayList distinctList = new ArrayList(set);
+
+        ArrayList<ArrayList<String>> Patients;
+        for (int i = 0 ; i < listeIDSIR.size() ; i++){
+            String IDSIR = listeIDSIR.get(1).get(i);
+            ArrayList<ArrayList<String>> infoPatient = select("*","dmr","(IDSIR = '" + IDSIR + "')");
+            
         }
-        
-    return null;
-}
+        return null;
+    }
+    
+    
     
     
 }
+    
+
 
 // -------------------------------------- Historique des Méthodes  --------------------------------------
 /*   
@@ -327,5 +342,7 @@ public class DbConnection {
                     pstmt.close();
                 } catch (SQLException e) {e.printStackTrace();}}return listResultat;} 
         
-     
+    
  */
+
+

@@ -19,14 +19,14 @@ public class DMR {
     public DMR(String idDMR, Patient patient, ArrayList<Examen> liste){
      
         this.idDMR=idDMR;
-        if(patient.getidDMR()==null){
-            this.patient=patient;
-            this.patient.setidDMR(idDMR);
-        }
-        else{
-            System.out.println("Ce patient a déjà un DMR");
-        }
-        this.listeExamen=liste;
+//        if(patient.getidDMR() == null){
+//            this.patient=patient;
+//            this.patient.setidDMR(idDMR);
+//        }
+//        else{
+//            System.out.println("Ce patient a déjà un DMR");
+//        }
+//        this.listeExamen=liste;
     }
     public String getidDMR(){
         return idDMR;

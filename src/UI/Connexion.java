@@ -182,7 +182,7 @@ public class Connexion extends javax.swing.JFrame {
         DbConnection c = new DbConnection();
         boolean b = c.connexionP();
         if (b) {
-            try {
+//            try {
                 try {
                     String infoConBD = Cryptage.encryptMDP(idEntered, mdpEntered);
                     ArrayList<ArrayList<String>> mdpList = c.select("InfoConnexion,Spécialité", "personnel", "InfoConnexion = '" + infoConBD + "'");
@@ -224,19 +224,19 @@ public class Connexion extends javax.swing.JFrame {
                 } finally {
                     c.close();
                 }
-            } catch (NoSuchAlgorithmException ex) {
-                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (NoSuchPaddingException ex) {
-                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (InvalidKeyException ex) {
-                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IOException ex) {
-                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (IllegalBlockSizeException ex) {
-                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (BadPaddingException ex) {
-                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            } catch (NoSuchAlgorithmException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (NoSuchPaddingException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (InvalidKeyException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IOException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IllegalBlockSizeException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (BadPaddingException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         }
     }//GEN-LAST:event_ConnectionButtonActionPerformed
 

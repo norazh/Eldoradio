@@ -171,14 +171,14 @@ public class SIR {
         }
         return listeDMR.get(i);
     }
-    public DMR RechercheDMRParIdSIR(String id) {
-        String p1 = id.toLowerCase();
-        int i = 0;
-        while (i < listeDMR.size() && !listeDMR.get(i).getPatient().getidSIR().toLowerCase().equals(p1)) {
-            i++;
-        }
-        return listeDMR.get(i);
-    }
+//    public DMR RechercheDMRParIdSIR(int id) {
+//        int p1 = id;
+//        int i = 0;
+//        while (i < listeDMR.size() && !listeDMR.get(i).getPatient().getIPP() == p1) {
+//            i++;
+//        }
+//        return listeDMR.get(i);
+//    }
 
     public DMR RechercheDMRParPrenomPatient(String prenom) {
         String p1 = prenom.toLowerCase();
