@@ -283,7 +283,7 @@ public class DbConnection {
         
         
     public ArrayList<ArrayList<String>> listeExam(String idMed) throws SQLException {
-        ArrayList<ArrayList<String>> listeExam = select("*", "examen", "(IDMed = '" + idMed + "')");
+        ArrayList<ArrayList<String>> listeExam = select("*", "examen", "(IDPERS = '" + idMed + "')");
         return listeExam;
     }
     

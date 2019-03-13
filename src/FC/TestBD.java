@@ -16,35 +16,35 @@ public class TestBD {
         ResultSet res = c.select(query);
         c.info(res);
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-
-//        //  --------------------------------------- Test BDD ---------------------------------------
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//        
+//
+//          --------------------------------------- Test BDD ---------------------------------------
 //        System.out.print("\n--------------------------------------------------------");
 //        System.out.print("\n====================== TEST BDD ======================");
 //        System.out.println("\n----------------------- SELECT -------------------------\n");
 //
-//        // Test 1 Requête de type  : "SELECT * FROM table"
+//         Test 1 Requête de type  : "SELECT * FROM table"
 //        System.out.println("Requête : SELECT * FROM personnel");
 //        System.out.print("Résultat : ");
 //        ArrayList<ArrayList<String>> arrRes = c.select("*", "personnel");
 //        afficher(arrRes);
 //        System.out.println("\nTaille de la table personnel : " + c.resultSetSize("personnel"));
 //
-//        // Test 2 : Requête de type "SELECT * FROM table WHERE condition"
+//         Test 2 : Requête de type "SELECT * FROM table WHERE condition"
 //        System.out.println("\n\nRequête : SELECT Nom,Prénom,Spécialité FROM personnel WHERE IDPers >1");
 //        System.out.print("Résultat : ");
 //        ArrayList<ArrayList<String>> arrRes1 = c.select("Nom,Prénom,Spécialité", "personnel", "IDPers > 1");
@@ -59,7 +59,7 @@ public class TestBD {
 //
 //        System.out.println("\n\n----------------------- UPDATE -------------------------\n");
 //
-//        //  ----------------------------- Test Chiffrement des données -----------------------------
+//          ----------------------------- Test Chiffrement des données -----------------------------
 //        System.out.print("\n\n--------------------------------------------------------");
 //        System.out.print("\n==================== TEST CRYPTAGE ====================");
 //        System.out.print("\n--------------------------------------------------------\n\n");
@@ -78,7 +78,7 @@ public class TestBD {
 //        
 //        System.out.println("\n\n--------------------------------------------------------\n");
 //
-//        // ------------------------------------ Cryptage des MDP ------------------------------------
+//         ------------------------------------ Cryptage des MDP ------------------------------------
 //        enc = Cryptage.encryptMDP("Bonoj", "12345");
 //        System.out.print("Cryptage de id:Bonoj, mdp:12345 : ");
 //        System.out.println(enc);
@@ -93,9 +93,9 @@ public class TestBD {
 //
 //        System.out.println("\n\n--------------------------------------------------------\n");
 //        
-////        ArrayList<ArrayList<String>> mdpList = c.select("InfoConnexion,Spécialité", "personnel", "InfoConnexion = '" + infoConBD + "'");
-////        afficher(mdpList);
-////        
+//        ArrayList<ArrayList<String>> mdpList = c.select("InfoConnexion,Spécialité", "personnel", "InfoConnexion = '" + infoConBD + "'");
+//        afficher(mdpList);
+        
         
     }
     
