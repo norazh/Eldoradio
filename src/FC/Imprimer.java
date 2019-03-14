@@ -22,7 +22,7 @@ import javax.swing.JTextArea;
 
 /**
  *
- * @author toyenn
+ * @author norazh
  */
 public class Imprimer implements Printable {
 
