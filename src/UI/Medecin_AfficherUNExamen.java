@@ -5,18 +5,31 @@
  */
 package UI;
 
+import FC.DbConnection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import UI.Medecin_AfficherTOUSLESExamens;
+
 /**
  *
  * @author Imane
  */
 public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form AccueilSecretaire2
      */
-    public Medecin_AfficherUNExamen() {
+    public Medecin_AfficherUNExamen() throws SQLException {
         initComponents();
-        jLabel2.setText("Jean Bono");
+//        DbConnection c = new DbConnection();
+//        c.connexionP();
+//        
+//        String query = "SELECT IPP, pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pers.Nom, pers.Prenom, TypeExamen, DateExamen, DMRPapier, CompteRendu FROM `examen` e,`patients` pat,`personnel` pers WHERE (idExamen = '" + idExam + "') AND (pat.IDDMR = e.IDDMR) AND (pers.IDPERS=e.IDPERS)";
+//        ResultSet rs = c.select(query);
+//        label_ipp.setText(rs.getString("IPP"));
+//        c.close();
     }
 
     /**
@@ -36,39 +49,37 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        label_nomPatient = new javax.swing.JLabel();
+        label_prenomPatient = new javax.swing.JLabel();
+        label_datenaissance = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        label_sexe = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
+        label_ipp = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        label_adresse = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
-        jLabel21 = new javax.swing.JLabel();
+        label_dateExam = new javax.swing.JLabel();
+        label_typeExam = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
         jLabel23 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
+        label_prenomMedecin = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
+        label_nomMedecin = new javax.swing.JLabel();
+        label_idExam = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        cr = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Accueil : Secrétaire médicale");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -113,23 +124,23 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
 
         jLabel7.setText("Date de naissance :");
 
-        jLabel8.setText("jLabel8");
+        label_nomPatient.setText("jLabel8");
 
-        jLabel9.setText("jLabel9");
+        label_prenomPatient.setText("jLabel9");
 
-        jLabel10.setText("jLabel10");
+        label_datenaissance.setText("jLabel10");
 
         jLabel11.setText("Sexe :");
 
-        jLabel12.setText("jLabel12");
+        label_sexe.setText("jLabel12");
 
         jLabel6.setText("idPatient : ");
 
-        jLabel15.setText("jLabel15");
+        label_ipp.setText("jLabel15");
 
         jLabel18.setText("Adresse :");
 
-        jLabel19.setText("jLabel19");
+        label_adresse.setText("jLabel19");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -141,18 +152,18 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel10)
+                        .addComponent(label_datenaissance)
                         .addContainerGap())
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel8))
+                                .addComponent(label_nomPatient))
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel9)))
+                                .addComponent(label_prenomPatient)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel11)
@@ -160,38 +171,39 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel19)
+                                .addComponent(label_adresse)
                                 .addGap(567, 567, 567))
                             .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jLabel12)
+                                .addComponent(label_sexe)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel15)
+                                .addComponent(label_ipp)
                                 .addGap(224, 224, 224))))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel8)
-                    .addComponent(jLabel11)
-                    .addComponent(jLabel12)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel6)
-                        .addComponent(jLabel15)))
+                        .addComponent(label_ipp))
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4)
+                        .addComponent(label_nomPatient)
+                        .addComponent(jLabel11)
+                        .addComponent(label_sexe)))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jLabel9)
+                    .addComponent(label_prenomPatient)
                     .addComponent(jLabel18)
-                    .addComponent(jLabel19))
+                    .addComponent(label_adresse))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(jLabel10))
+                    .addComponent(label_datenaissance))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -205,25 +217,21 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
 
         jLabel14.setText("Date : ");
 
-        jLabel16.setText("Heure : ");
+        label_dateExam.setText("jLabel17");
 
-        jLabel17.setText("jLabel17");
-
-        jLabel20.setText("jLabel20");
-
-        jLabel21.setText("jLabel21");
+        label_typeExam.setText("jLabel20");
 
         jLabel22.setText("Prénom du praticien en charge :");
 
         jLabel23.setText("idExamen :");
 
-        jLabel24.setText("jLabel24");
+        label_prenomMedecin.setText("jLabel24");
 
         jLabel25.setText("Nom du praticien en charge :");
 
-        jLabel26.setText("jLabel26");
+        label_nomMedecin.setText("jLabel26");
 
-        jLabel27.setText("jLabel27");
+        label_idExam.setText("jLabel27");
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -233,31 +241,26 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel16)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel21))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel14)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel17))
+                        .addComponent(label_dateExam))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
-                        .addComponent(jLabel20)))
-                .addGap(176, 176, 176)
+                        .addComponent(label_typeExam)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel25)
                     .addComponent(jLabel22))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel24)
-                        .addGap(234, 234, 234)
-                        .addComponent(jLabel23)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel27))
-                    .addComponent(jLabel26))
-                .addContainerGap(235, Short.MAX_VALUE))
+                    .addComponent(label_nomMedecin)
+                    .addComponent(label_prenomMedecin))
+                .addGap(204, 204, 204)
+                .addComponent(jLabel23)
+                .addGap(18, 18, 18)
+                .addComponent(label_idExam)
+                .addGap(217, 217, 217))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,30 +268,26 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel20)
+                    .addComponent(label_typeExam)
                     .addComponent(jLabel22)
                     .addComponent(jLabel23)
-                    .addComponent(jLabel24)
-                    .addComponent(jLabel27))
+                    .addComponent(label_prenomMedecin)
+                    .addComponent(label_idExam))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jLabel17)
+                    .addComponent(label_dateExam)
                     .addComponent(jLabel25)
-                    .addComponent(jLabel26))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(jLabel21))
-                .addContainerGap())
+                    .addComponent(label_nomMedecin))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jPanel6.setBackground(new java.awt.Color(255, 255, 255));
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2), "Compte-rendu", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane1.setViewportView(jTextArea1);
+        cr.setColumns(20);
+        cr.setRows(5);
+        jScrollPane1.setViewportView(cr);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -410,7 +409,7 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -418,7 +417,9 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        
         UI.Medecin_AjouterCR acr = new UI.Medecin_AjouterCR();
+        acr.jLabel2.setText(label_idExam.getText());
         acr.setVisible(true);
     }//GEN-LAST:event_jButton3ActionPerformed
 
@@ -487,43 +488,35 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Medecin_AfficherUNExamen().setVisible(true);
+                try {
+                    new Medecin_AfficherUNExamen().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Medecin_AfficherUNExamen.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JTextArea cr;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -531,7 +524,27 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    public javax.swing.JLabel label_adresse;
+    public javax.swing.JLabel label_dateExam;
+    public javax.swing.JLabel label_datenaissance;
+    public javax.swing.JLabel label_idExam;
+    public javax.swing.JLabel label_ipp;
+    public javax.swing.JLabel label_nomMedecin;
+    public javax.swing.JLabel label_nomPatient;
+    public javax.swing.JLabel label_prenomMedecin;
+    public javax.swing.JLabel label_prenomPatient;
+    public javax.swing.JLabel label_sexe;
+    public javax.swing.JLabel label_typeExam;
     // End of variables declaration//GEN-END:variables
-}
 
+//    public void FenetreInit() throws SQLException {
+//        DbConnection c = new DbConnection();
+//        c.connexionP();
+//        String query = "SELECT IPP, pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pers.Nom, pers.Prenom, TypeExamen, DateExamen, DMRPapier, CompteRendu FROM `examen` e,`patients` pat,`personnel` pers WHERE (idExamen = '" + label_idExam.getText() + "') AND (pat.IDDMR = e.IDDMR) AND (pers.IDPERS=e.IDPERS)";
+//        ResultSet rs = c.select(query);
+//        label_ipp.setText(rs.getString("IPP"));
+//        c.close();
+//    }
+
+    
+}

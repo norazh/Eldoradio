@@ -22,6 +22,8 @@ import javax.swing.table.DefaultTableModel;
  */
 public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
 
+    public String idExam = "";
+
     /**
      * Creates new form AccueilSecretaire2
      */
@@ -29,7 +31,6 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         initComponents();
         jLabel2.setText("Jean Bono");
         TabInit();
-
     }
 
     /**
@@ -116,6 +117,12 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+        });
+        table.setRowSelectionAllowed(true);
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tableMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(table);
@@ -378,6 +385,47 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ComboBoxActionPerformed
 
+    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
+
+        // TODO add your handling code here:
+        idExam = getIdExam();
+        UI.Medecin_AfficherUNExamen aue;
+        try {
+            aue = new UI.Medecin_AfficherUNExamen();
+            aue.setVisible(true);
+            DbConnection c = new DbConnection();
+            c.connexionP();
+            String query = "SELECT IPP, pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pers.Nom, pers.Prenom, TypeExamen, DateExamen, DMRPapier, CompteRendu FROM `examen` e,`patients` pat,`personnel` pers WHERE (idExamen = '" + idExam + "') AND (pat.IDDMR = e.IDDMR) AND (pers.IDPERS=e.IDPERS)";
+            ResultSet rs = c.select(query);
+            while (rs.next()) {
+                aue.label_adresse.setText(rs.getString("Adresse") + "   " + rs.getString("CodePostal") + "    " + rs.getString("Ville"));
+                aue.label_prenomPatient.setText(rs.getString("pat.Prenom"));
+                aue.label_nomPatient.setText(rs.getString("pat.Nom"));
+                aue.label_datenaissance.setText(rs.getString("DateNaissance").toString());
+                aue.label_ipp.setText(rs.getString("IPP"));
+                aue.label_idExam.setText(idExam);
+                aue.label_nomMedecin.setText(rs.getString("pers.Nom"));
+                aue.label_prenomMedecin.setText(rs.getString("pers.Prenom"));
+                aue.label_typeExam.setText(rs.getString("TypeExamen"));
+                aue.label_sexe.setText(rs.getString("Sexe"));
+                aue.label_dateExam.setText(rs.getString("DateExamen"));
+                aue.cr.setText(rs.getString("CompteRendu"));
+                
+                
+                
+            }
+
+//            String rs2 = rs.toString();
+//            System.out.println(rs2);
+            //String sexe = rs.getString("Sexe");
+//aue.label_sexe.setText("sexe");
+        } catch (SQLException ex) {
+            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_tableMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -465,7 +513,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton nomBt;
     private javax.swing.JButton prenomBt;
-    private javax.swing.JTable table;
+    public javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
 
     public void setTable(ResultSet rs) throws SQLException {
@@ -473,12 +521,16 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
             while (table.getRowCount() > 0) {
                 ((DefaultTableModel) table.getModel()).removeRow(0);
             }
+            /* On créer un int columns avec le nombre de colonne de notre rs.getMetaData qui prend l'entête*/
             int columns = rs.getMetaData().getColumnCount();
             while (rs.next()) {
+                /* On crée un tableau d'objet qui est initialisé avec un nombre de colonne = à columns */
                 Object[] row = new Object[columns];
                 for (int i = 1; i <= columns; i++) {
+                    /* Dans chaque ligne de notre table, on get l'object (donc une ligne de patient) de notre resulset*/
                     row[i - 1] = rs.getObject(i);
                 }
+
                 ((DefaultTableModel) table.getModel()).insertRow(rs.getRow() - 1, row);
             }
         } catch (SQLException ex) {
@@ -499,6 +551,11 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public String getIdExam() {
+        String idExamenSelectedRow = (String) table.getValueAt(table.getSelectedRow(), 0);
+        return idExamenSelectedRow;
     }
 
 }
