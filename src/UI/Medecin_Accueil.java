@@ -5,6 +5,11 @@
  */
 package UI;
 
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author Imane
@@ -172,7 +177,14 @@ public class Medecin_Accueil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-UI.Medecin_RechercherPatient rp = new UI.Medecin_RechercherPatient();
+UI.Medecin_RechercherPatient rp = null;
+        try {
+            rp = new UI.Medecin_RechercherPatient();
+        } catch (SQLException ex) {
+            Logger.getLogger(Medecin_Accueil.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(Medecin_Accueil.class.getName()).log(Level.SEVERE, null, ex);
+        }
 rp.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed

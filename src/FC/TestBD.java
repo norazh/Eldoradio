@@ -45,8 +45,7 @@ public class TestBD {
             }        
         
         
-<<<<<<< Updated upstream
-=======
+
         ArrayList<ArrayList<String>> listeExam = c.listeExam("1");
         afficher(listeExam);
         String  query = "SELECT * FROM patients";
@@ -55,8 +54,6 @@ public class TestBD {
             String nom = res.getString("Nom");
         }
         c.info(res);
->>>>>>> Stashed changes
-        
 //        
 //        
 //        
