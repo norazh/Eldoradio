@@ -50,7 +50,7 @@ public class Patient {
 //        this.sexe = sexe;
 //
 //    }
-    public Patient(String nom, String prenom, String adresse, String ville, int codePostal, Date date, Sexe sexe) {
+    public Patient(int ipp, int iddmr, String nom, String prenom, String adresse, String ville, int codePostal, Date date, Sexe sexe) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -59,18 +59,16 @@ public class Patient {
         this.idDMR = idDMR;
         this.dateNaissance = date;
         this.sexe = sexe;
-        
-        Random r1 = new Random();
-        int valeur_ipp = 0 + r1.nextInt(10000000 - 0);
-        this.IPP = valeur_ipp;
-        
-        Random r2 = new Random();
-        int valeur_idDMR = 0 + r2.nextInt(1000000 - 0);
-        this.idDMR = valeur_idDMR;
+        this.IPP = ipp;
+        this.idDMR = iddmr;
     }
 
     public String toString() {
+<<<<<<< Updated upstream
         return "FICHE PATIENT" + "\n" + "Prénom: " + getPrenom() + "\n " + "Nom : " + getNom() + " \n " + "Adresse: " + getAdresse() + "\n" + "Ville : " + getVille() + "\n" + "Code Postal: " + getCodePostal() + "\n" + "IPP: " + getIPP() + "\n" + "idDMR: " + getidDMR() + "\n" + "Date de naissance: " + getDateDeNaissance().toString() + " \n " + "Sexe : " + getSexe() + " \n ";
+=======
+        return "FICHE PATIENT" + "\n" + "Prénom: " + getPrenom() + "\n " + "Nom : " + getNom() + " \n " + "Adresse: " + getAdresse() + "\n" + "Ville : " + getVille() + "\n" + "Code Postal: " + getCodePostal() + "\n" + "IPP: " + getIPP() + "\n" + "\n" + "idDMR: " + getidDMR() + "\n" + "Date de naissance: " + getDateDeNaissance().toString() + " \n " + "Sexe : " + getSexe() + " \n ";
+>>>>>>> Stashed changes
     }
 
     public String toStringNom() {
@@ -117,7 +115,6 @@ public class Patient {
 //    public String getidSIH() {
 //        return idSIH;
 //    }
-
     public int getidDMR() {
         return idDMR;
     }
@@ -157,7 +154,6 @@ public class Patient {
 //    public void setidSIH(int id) {
 //        this.idSIH = id;
 //    }
-
     public void setidDMR(int id) {
         this.idDMR = id;
     }

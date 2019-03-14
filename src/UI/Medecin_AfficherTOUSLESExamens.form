@@ -343,16 +343,12 @@
                 <Component class="javax.swing.JTextField" name="Prenom_jTF">
                 </Component>
                 <Component class="javax.swing.JComboBox" name="ComboBox">
-                  <Properties>
-                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-                      <Connection code="new javax.swing.DefaultComboBoxModel&lt;&gt;(new String[] { &quot;Radiologie&quot;, &quot;IRM&quot;, &quot;Scanner&quot;, &quot;Echographie&quot;, &quot;Angiographie&quot;, &quot;Echoendographie&quot;,&quot;Mammographie&quot;, &quot;Radioth&#xe9;rapie&quot;, &quot;PET&quot; })" type="code"/>
-                    </Property>
-                  </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ComboBoxActionPerformed"/>
                   </Events>
                   <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;(TypeExamen.values())"/>
+                    <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JComboBox&lt;&gt;()"/>
+                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="ComboBox.setModel(new DefaultComboBoxModel(TypeExamen.values()));"/>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
                 </Component>

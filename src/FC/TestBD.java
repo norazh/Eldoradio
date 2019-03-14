@@ -45,6 +45,17 @@ public class TestBD {
             }        
         
         
+<<<<<<< Updated upstream
+=======
+        ArrayList<ArrayList<String>> listeExam = c.listeExam("1");
+        afficher(listeExam);
+        String  query = "SELECT * FROM patients";
+        ResultSet res = c.select(query);
+        while(res.next()){
+            String nom = res.getString("Nom");
+        }
+        c.info(res);
+>>>>>>> Stashed changes
         
 //        
 //        

@@ -7,6 +7,26 @@ package UI;
 
 import FC.DbConnection;
 import java.util.ArrayList;
+import FC.ConnexionBD;
+import FC.Sexe;
+import FC.Examen;
+import FC.Fonctions;
+import FC.Medecin;
+import FC.Patient;
+import FC.TypeExamen;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.ParseException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+
+
 
 /**
  *
@@ -14,14 +34,40 @@ import java.util.ArrayList;
  */
 public class Medecin_RechercherPatient extends javax.swing.JFrame {
 
+    private ArrayList<Patient> lp = new ArrayList<Patient>();
+    private Fonctions f = new Fonctions();
+
     /**
      * Creates new form AccueilSecretaire2
      */
-    public Medecin_RechercherPatient() {
+    public Medecin_RechercherPatient() throws SQLException, ParseException {
         initComponents();
         jLabel2.setText("Jean Bono");
+
         DbConnection c = new DbConnection();
-        c.connexionP();        
+        c.connexionP();
+
+        //on initialise le liste de patients totale à afficher dans le tableau
+        ConnexionBD c1 = new ConnexionBD();
+        c1.connexion();
+        this.lp = c1.recupListeP();
+        DefaultTableModel model = new DefaultTableModel();
+        Object[] title = {"IPP", "IDDMR", "Prenom", "Nom", "DateNaissance", "Sexe"};
+        model.setColumnIdentifiers(title);
+        for (int i = 0; i < lp.size(); i++) {
+            Object[] unPatient = new Object[6];
+            unPatient[0] = lp.get(i).getIPP();
+            unPatient[1] = lp.get(i).getidDMR();
+            unPatient[2] = lp.get(i).getPrenom();
+            unPatient[3] = lp.get(i).getNom();
+            unPatient[4] = lp.get(i).getDateDeNaissance();
+            unPatient[5] = lp.get(i).getSexe();
+
+            model.addRow(unPatient);
+        }
+        tablepatients.setModel(model);
+        tablepatients.revalidate();
+
     }
 
     /**
@@ -38,7 +84,7 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablepatients = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jTextField1_rechercheNomPatient = new javax.swing.JTextField();
@@ -89,7 +135,7 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablepatients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -108,7 +154,7 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablepatients);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Critères de recherche"));
 
@@ -318,7 +364,13 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Medecin_RechercherPatient().setVisible(true);
+                try {
+                    new Medecin_RechercherPatient().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Medecin_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ParseException ex) {
+                    Logger.getLogger(Medecin_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
@@ -340,11 +392,88 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField1_rechercheNomPatient;
+    private javax.swing.JTable tablepatients;
     // End of variables declaration//GEN-END:variables
 
+    public static Sexe stringToSexe(String s) {
+        Sexe se = null;
+        switch (s) {
+            case "Homme":
+                se = Sexe.Homme;
+                break;
+            case "Femme":
+                se = Sexe.Femme;
+                break;
 
+            default:
+                break;
+
+        }
+        return se;
+    }
+
+    public static TypeExamen stringToTypeExamen(String s) {
+        TypeExamen tp = null;
+        switch (s) {
+            case "SCANNER":
+                tp = TypeExamen.SCANNER;
+                break;
+            case "PET":
+                tp = TypeExamen.PET;
+                break;
+            case "ANGIOGRAPHIE":
+                tp = TypeExamen.ANGIOGRAPHIE;
+                break;
+            case "IRM":
+                tp = TypeExamen.IRM;
+                break;
+            case "RADIOLOGIE":
+                tp = TypeExamen.RADIOLOGIE;
+                break;
+            case "ECHOENDOGRAPHIE":
+                tp = TypeExamen.ECHOENDOGRAPHIE;
+                break;
+            case "RADIOTHRAPIE":
+                tp = TypeExamen.RADIOTHERAPIE;
+                break;
+            case "MAMMOGRAPHIE":
+                tp = TypeExamen.MAMMOGRAPHIE;
+                break;
+            case "ECHOGRAPHIE":
+                tp = TypeExamen.ECHOGRAPHIE;
+                break;
+            default:
+                break;
+
+        }
+        return tp;
+    }
+
+    public void afficher(String requete) throws ParseException {
+        //this.clearall();
+        ConnexionBD c = new ConnexionBD();
+        c.connexion();
+        ResultSet r = c.exec(requete);
+        ArrayList<Patient> e = new ArrayList<Patient>();
+
+        try {
+            this.lp = f.recupListeP(r);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Medecin_RechercherPatient.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+
+        c.close();
+    }
+
+//    public void clearall() {
+//        for (int i = 0; i < lp.getRowCount(); i++) {
+//            for (int j = 0; j < lp.getColumnCount(); j++) {
+//                lp.setValueAt("", i, j);
+//            }
+//        }
+//    }
 }
-

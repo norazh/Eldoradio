@@ -6,11 +6,13 @@
 package UI;
 
 import FC.DbConnection;
+import FC.TypeExamen;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -51,7 +53,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         NomPatient_jTF = new javax.swing.JTextField();
         Prenom_jTF = new javax.swing.JTextField();
-        ComboBox = new javax.swing.JComboBox<>(TypeExamen.values());
+        ComboBox = new javax.swing.JComboBox<>();
         jCheckBox1 = new javax.swing.JCheckBox();
         jCheckBox2 = new javax.swing.JCheckBox();
         nomBt = new javax.swing.JButton();
@@ -133,7 +135,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
             }
         });
 
-        ComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Radiologie", "IRM", "Scanner", "Echographie", "Angiographie", "Echoendographie","Mammographie", "Radiothérapie", "PET" }));
+        ComboBox.setModel(new DefaultComboBoxModel(TypeExamen.values()));
         ComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ComboBoxActionPerformed(evt);
