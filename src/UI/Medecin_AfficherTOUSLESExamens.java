@@ -23,6 +23,11 @@ import javax.swing.table.DefaultTableModel;
 public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
 
     public String idExam = "";
+     private String query = "";
+    private static String init = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom, DMRPapier FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND (p1.IDPERS = e.IDPERS)";
+    private static String nomButton = "";
+    private static String checkboxIf = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom, DMRPapier FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND ((LENGTH(e.CompteRendu) = 0) OR (LENGTH(e.CompteRendu) = NULL))";
+
 
     /**
      * Creates new form AccueilSecretaire2
@@ -33,6 +38,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         TabInit();
     }
 
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -383,6 +389,56 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
 
     private void ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxActionPerformed
         // TODO add your handling code here:
+         Object obj = evt.getSource();
+        if (obj == ComboBox) {
+
+            try {
+//            int index = ComboBox.getSelectedIndex();
+                ArrayList<String> queries = new ArrayList(TypeExamen.values().length);
+               
+                for (TypeExamen te : TypeExamen.values()) {
+                    String query = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom, DMRPapier FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND (p1.IDPERS = e.IDPERS) AND (TypeExamen = '" + te.name() + "')";
+                    queries.add(query);
+                }
+                        /*for (int i = 0; i < queries.size(); i++) {
+                    System.out.println(queries.get(i));
+                }*/
+                        
+                String s = ComboBox.getSelectedItem().toString();
+                switch (s) {
+                    case "RADIOLOGIE":
+                        setTable(queries.get(0));
+                        break;
+                    case "IRM":
+                        setTable(queries.get(1));
+                        break;
+                    case "SCANNER":
+                        setTable(queries.get(2));
+                        break;
+                    case "ECHOGRAPHIE":
+                        setTable(queries.get(3));
+                        break;
+                    case "ANGIOGRAPHIE":
+                        setTable(queries.get(4));
+                        break;
+                    case "ECHOENDOGRAPHIE":
+                        setTable(queries.get(5));
+                        break;
+                    case "MAMMOGRAPHIE":
+                        setTable(queries.get(6));
+                        break;
+                    case "RADIOTHERAPIE":
+                        setTable(queries.get(7));
+                        break;
+                    case "PET":
+                        setTable(queries.get(8));
+                        break;
+                }
+
+            } catch (SQLException ex) {
+                Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
     }//GEN-LAST:event_ComboBoxActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
@@ -558,4 +614,28 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         return idExamenSelectedRow;
     }
 
+
+    // Médecin 
+    public void setTable(String query) throws SQLException {
+        try {
+            DbConnection c = new DbConnection();
+            c.connexionP();
+            ResultSet rs = c.select(query);
+            while (table.getRowCount() > 0) {
+                ((DefaultTableModel) table.getModel()).removeRow(0);
+            }
+            int columns = rs.getMetaData().getColumnCount();
+            while (rs.next()) {
+                Object[] row = new Object[columns];
+                for (int i = 1; i <= columns; i++) {
+                    row[i - 1] = rs.getObject(i);
+                }
+                ((DefaultTableModel) table.getModel()).insertRow(rs.getRow() - 1, row);
+            }
+            c.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
 }
