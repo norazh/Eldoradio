@@ -11,13 +11,16 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import UI.Medecin_AfficherTOUSLESExamens;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Imane
  */
 public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
-    
+
     /**
      * Creates new form AccueilSecretaire2
      */
@@ -209,6 +212,11 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
 
         jButton2.setText("Voir les images de l'examen");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 3));
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 21), 2), "Informations de l'examen", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -417,7 +425,7 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        
+
         UI.Medecin_AjouterCR acr = new UI.Medecin_AjouterCR();
         acr.jLabel2.setText(label_idExam.getText());
         acr.setVisible(true);
@@ -426,6 +434,34 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        DbConnection c = new DbConnection();
+        c.connexionP();
+        ArrayList<ImageIcon> liste_images = new ArrayList<ImageIcon>();
+        String requete = "SELECT * FROM pacs WHERE idExam = '" + label_idExam.getText() + "'";
+        ResultSet rs = c.select(requete);
+
+        try {
+            if (!rs.next()) {
+                JOptionPane.showMessageDialog(this, "Cet examen ne contient pas d'images.", "Aucun résultat", JOptionPane.INFORMATION_MESSAGE);
+
+            } else {
+                rs.beforeFirst(); //On remet le curseur sur la ligne avant la première ligne des résultats
+                while (rs.next()) {
+                    byte[] img = rs.getBytes("Fichier");
+                    ImageIcon image = new ImageIcon(img);
+//            liste_images.add(image);
+                    UI.Medecin_AfficherImagesExam aie = new UI.Medecin_AfficherImagesExam();
+                    aie.label.setIcon(image);
+                    aie.setVisible(true);
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Medecin_AfficherUNExamen.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -545,6 +581,4 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
 //        label_ipp.setText(rs.getString("IPP"));
 //        c.close();
 //    }
-
-    
 }
