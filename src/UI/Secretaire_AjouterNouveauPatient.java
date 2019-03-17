@@ -5,6 +5,13 @@
  */
 package UI;
 
+import FC.DbConnection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Imane
@@ -31,26 +38,23 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
+        field_nom = new javax.swing.JTextField();
+        field_prenom = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
-        jComboBox3 = new javax.swing.JComboBox<>();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        field_adresse = new javax.swing.JTextField();
+        field_cp = new javax.swing.JTextField();
+        field_ville = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
+        bouton_ajouterpatient = new javax.swing.JButton();
+        bouton_homme = new javax.swing.JRadioButton();
+        bouton_femme = new javax.swing.JRadioButton();
         jLabel12 = new javax.swing.JLabel();
+        field_date = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -83,26 +87,17 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2));
 
-        jTextField1.setToolTipText("");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-
-        jLabel8.setText("IdSIR :");
-
         jLabel9.setText("Nom :");
 
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        field_nom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                field_nomActionPerformed(evt);
             }
         });
 
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        field_prenom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                field_prenomActionPerformed(evt);
             }
         });
 
@@ -110,21 +105,15 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
 
         jLabel13.setText("Date de Naissance :");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31" }));
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
-
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "1999", "1998", "1997", "1996", "1995", "1994", "1993", "1992", "1991", "1990", "1989", "1988", "1987", "1986", "1985", "1984", "1983", "1982", "1981", "1980", "1979", "1978", "1977", "1976", "1975", "1974", "1973", "1972", "1971", "1970", "1969", "1968", "1967", "1966", "1965", "1964", "1963", "1962", "1961", "1960", "1959", "1958", "1957", "1956", "1955", "1954", "1953", "1952", "1951", "1950", "1949", "1948", "1947", "1946", "1945", "1944", "1943", "1942", "1941", "1940", "1939", "1938", "1937", "1936", "1935", "1934", "1933", "1932", "1931", "1930", "1929", "1928", "1927", "1926", "1925", "1924", "1923", "1922", "1921", "1920", "1919", "1918", "1917", "1916", "1915", "1914", "1913", "1912", "1911", "1910", "1909", "1908", "1907", "1906", "1905", "1904", "1903", "1902", "1901", "1900" }));
-
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        field_cp.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                field_cpActionPerformed(evt);
             }
         });
 
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
+        field_ville.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
+                field_villeActionPerformed(evt);
             }
         });
 
@@ -134,30 +123,37 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
 
         jLabel14.setText("Adresse :");
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        jButton2.setText("Ajouter le patient");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 3));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        bouton_ajouterpatient.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        bouton_ajouterpatient.setText("Ajouter le patient");
+        bouton_ajouterpatient.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 3));
+        bouton_ajouterpatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                bouton_ajouterpatientActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setText("Masculin");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        bouton_homme.setText("Homme");
+        bouton_homme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                bouton_hommeActionPerformed(evt);
             }
         });
 
-        jRadioButton1.setText("Féminin");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        bouton_femme.setText("Femme");
+        bouton_femme.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                bouton_femmeActionPerformed(evt);
             }
         });
 
         jLabel12.setText("Sexe :");
+
+        field_date.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        field_date.setForeground(new java.awt.Color(153, 153, 153));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(153, 153, 153));
+        jLabel2.setText("La date de naissance doit être au format AAAA-MM-JJ   ");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -170,83 +166,71 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
                     .addComponent(jLabel14)
                     .addComponent(jLabel13)
                     .addComponent(jLabel11)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel8)
-                        .addComponent(jLabel9)))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel9)
+                        .addGap(6, 6, 6)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(field_nom, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(109, 109, 109)
+                        .addComponent(jLabel12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(bouton_femme)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(bouton_homme)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(109, 109, 109)
-                                .addComponent(jLabel12)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jRadioButton1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton2))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(bouton_ajouterpatient, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addGroup(jPanel3Layout.createSequentialGroup()
-                                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(field_cp, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addGap(37, 37, 37)
                                     .addComponent(jLabel5)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jTextField6))
-                                .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 418, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48))
+                                    .addComponent(field_ville))
+                                .addComponent(field_adresse, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel3Layout.createSequentialGroup()
+                                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(field_date)
+                                        .addComponent(field_prenom, javax.swing.GroupLayout.DEFAULT_SIZE, 161, Short.MAX_VALUE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jLabel2))))
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(75, 75, 75)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(113, 113, 113)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(jLabel12)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(field_nom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bouton_femme)
+                    .addComponent(bouton_homme))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(field_prenom, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(field_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel14)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(field_adresse, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(field_cp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59))
+                    .addComponent(field_ville, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(54, 54, 54)
+                .addComponent(bouton_ajouterpatient, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -284,67 +268,122 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void field_nomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_nomActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_field_nomActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void field_prenomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_prenomActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_field_prenomActionPerformed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void field_cpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_cpActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_field_cpActionPerformed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void field_villeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_villeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_field_villeActionPerformed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+    private void bouton_ajouterpatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_ajouterpatientActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+        boolean reponse = true;
+        int IPP = 0;
+        int IDDMR = 0;
+        DbConnection c = new DbConnection();
+        c.connexionP();
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        dispose();
-    }//GEN-LAST:event_jButton2ActionPerformed
+        //Vérification que tous les champs sont remplis
+        if (field_date.getText().equals("") | field_nom.getText().equals("") | field_prenom.getText().equals("") | field_adresse.getText().equals("") | field_cp.getText().equals("")
+                | field_ville.getText().equals("") | (bouton_femme.isSelected() == false && bouton_homme.isSelected() == false)) {
+            JOptionPane.showMessageDialog(null, "Des informations sont manquantes, veuillez vérifier que tous les champs ont bien été renseignés.", "Attention", JOptionPane.ERROR_MESSAGE);
+        } else {
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        boolean correct = true;
+            //Vérification du format de la date
+            if (field_date.getText().matches("[0-9]{4}-(0[1-9]|1[012])-(0[1-9]|1[0-9]|2[0-9]|3[01])")) {
 
-        String IdSIR=jTextField1.getText();
-        if(IdSIR.equals("")){
-            correct=false;
+                //Vérification que le patient n'existe pas déjà
+                String requete_test = "SELECT * FROM patients WHERE Nom = '" + field_nom.getText() + "' AND Prenom = '" + field_prenom.getText() + "'";
+                ResultSet verif_patient_existe = c.select(requete_test);
+
+                try {
+                    if (verif_patient_existe.next()) {
+
+                        int i = JOptionPane.showConfirmDialog(this, "Il existe déjà un patient avec ce nom et prénom (" + field_prenom.getText() + "  " + field_nom.getText() + ")\n Souhaitez-vous toujours admettre ce patient ? ",
+                                "Information", JOptionPane.YES_NO_OPTION);
+
+                        if (i == JOptionPane.YES_OPTION) {
+                            reponse = true;
+                        } else {
+                            reponse = false;
+                        }
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+                if (reponse) {
+                    String max_ipp = "SELECT * from patients where IPP = (SELECT MAX(IPP) from patients)";
+                    String max_dmr = "SELECT * from patients where IDDMR = (SELECT MAX(IDDMR) from patients)";
+                    ResultSet bd_max_ipp = c.select(max_ipp);
+                    try {
+                        while (bd_max_ipp.next()) {
+                            IPP = Integer.parseInt(bd_max_ipp.getString("IPP")) + 1; //Transforme le champ IPP (varchar) en Int et ajoute 1
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    
+                    ResultSet bd_max_iddmr = c.select(max_dmr);
+                    try {
+                        while (bd_max_iddmr.next()) {
+                            IDDMR = Integer.parseInt(bd_max_iddmr.getString("IDDMR")) + 1; //Transforme le champ IDDMR (varchar) en Int et ajoute 1
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                    //Si le patient est un homme
+                    if (bouton_homme.isSelected()) {
+                        String s = "INSERT INTO patients (`IPP`,`Nom`, `Prenom`, `Sexe`, `DateNaissance`,`Adresse`,`CodePostal`,`Ville`,`IDDMR`) VALUES ('" + IPP + "','" + field_nom.getText() + "','" + field_prenom.getText() + "','" + "Homme"
+                                + "','" + field_date.getText() + "','" + field_adresse.getText() + "', '" + field_cp.getText() + "','" + field_ville.getText() + "', '" + IDDMR + "')";
+                        try {
+                            c.modifierBD(s);
+                        } catch (SQLException ex) {
+                            Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    } else {
+                        //Si le patient est une femme
+                        if (bouton_femme.isSelected()) {
+                            String p = "INSERT INTO patients (`IPP`,`Nom`, `Prenom`, `Sexe`, `DateNaissance`,`Adresse`,`CodePostal`,`Ville`,`IDDMR`) VALUES ('" + IPP + "','" + field_nom.getText() + "','" + field_prenom.getText() + "','" + "Femme"
+                                    + "','" + field_date.getText() + "','" + field_adresse.getText() + "', '" + field_cp.getText() + "','" + field_ville.getText() + "', '" + IDDMR + "' )";
+                            try {
+                                c.modifierBD(p);
+                            } catch (SQLException ex) {
+                                Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                        }
+
+                    }
+                    JOptionPane.showMessageDialog(null, "Le patient a bien été ajouté à la base de données.", "Information", JOptionPane.INFORMATION_MESSAGE);
+
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(null, "Le format de la date est erroné, veuillez la renseigner à nouveau.", "Attention", JOptionPane.ERROR_MESSAGE);
+
+            }
+
+            dispose();
         }
-        String nom=jTextField2.getText();
-        if(nom.equals("")){
-            correct=false;
-        }
+    }//GEN-LAST:event_bouton_ajouterpatientActionPerformed
 
-        String prenom=jTextField3.getText();
-        if(prenom.equals("")){
-            correct=false;
-        }
+    private void bouton_hommeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_hommeActionPerformed
 
-        String adresse=jTextField4.getText();
-        if(adresse.equals("")){
-            correct=false;
-        }
+    }//GEN-LAST:event_bouton_hommeActionPerformed
 
-        String codePostal=jTextField5.getText();
-        if(codePostal.equals("")){
-            correct=false;
-        }
+    private void bouton_femmeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_femmeActionPerformed
 
-        String ville=jTextField6.getText();
-        if(ville.equals("")){
-            correct=false;
-        }
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
-
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_bouton_femmeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -360,16 +399,24 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Secretaire_AjouterNouveauPatient.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Secretaire_AjouterNouveauPatient.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Secretaire_AjouterNouveauPatient.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Secretaire_AjouterNouveauPatient.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -383,29 +430,26 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JComboBox<String> jComboBox3;
+    private javax.swing.JButton bouton_ajouterpatient;
+    private javax.swing.JRadioButton bouton_femme;
+    private javax.swing.JRadioButton bouton_homme;
+    private javax.swing.JTextField field_adresse;
+    private javax.swing.JTextField field_cp;
+    private javax.swing.JTextField field_date;
+    private javax.swing.JTextField field_nom;
+    private javax.swing.JTextField field_prenom;
+    private javax.swing.JTextField field_ville;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

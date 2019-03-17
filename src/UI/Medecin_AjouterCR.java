@@ -184,7 +184,7 @@ public class Medecin_AjouterCR extends javax.swing.JFrame {
 
         System.out.println("ajouté !");
 
-        JOptionPane.showMessageDialog(null, "A basic JOptionPane message dialog", "TEST", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Le compte-rendu a bien été mis à jour", "Information", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
