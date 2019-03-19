@@ -187,15 +187,28 @@
                 <Component class="javax.swing.JTable" name="tablepatients">
                   <Properties>
                     <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+<<<<<<< HEAD
                       <Table columnCount="5" rowCount="10">
                         <Column editable="false" title="idPatient" type="java.lang.String"/>
                         <Column editable="false" title="idDMR" type="java.lang.Object"/>
                         <Column editable="false" title="Pr&#xe9;nom du patient" type="java.lang.String"/>
                         <Column editable="false" title="Nom du patient" type="java.lang.String"/>
                         <Column editable="false" title="Date de naissance" type="java.lang.String"/>
+=======
+                      <Table columnCount="6" rowCount="4">
+                        <Column editable="true" title="idPatient" type="java.lang.String"/>
+                        <Column editable="true" title="idDMR" type="java.lang.Object"/>
+                        <Column editable="true" title="Pr&#xe9;nom du patient" type="java.lang.String"/>
+                        <Column editable="true" title="Nom du patient" type="java.lang.String"/>
+                        <Column editable="true" title="Sexe" type="java.lang.String"/>
+                        <Column editable="true" title="Date de naissance" type="java.lang.String"/>
+>>>>>>> Interface
                       </Table>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablepatientsMouseClicked"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -220,14 +233,14 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
-                                  <Component id="jTextField1_rechercheNomPatient" min="-2" pref="139" max="-2" attributes="0"/>
+                                  <Component id="field_nompatient" min="-2" pref="139" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="OK_nompatient" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <Component id="jTextField1" min="-2" pref="139" max="-2" attributes="0"/>
+                                  <Component id="field_prenompatient" min="-2" pref="139" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jButton2" max="32767" attributes="0"/>
+                                  <Component id="OK_prenompatient" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="32767" attributes="0"/>
@@ -247,8 +260,8 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField1_rechercheNomPatient" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="field_nompatient" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="OK_nompatient" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -258,8 +271,8 @@
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="field_prenompatient" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="OK_prenompatient" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace pref="18" max="32767" attributes="0"/>
                       </Group>
@@ -272,30 +285,33 @@
                     <Property name="text" type="java.lang.String" value="Nom du patient : "/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField1_rechercheNomPatient">
+                <Component class="javax.swing.JTextField" name="field_nompatient">
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel5">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Pr&#xe9;nom du patient :"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField1">
+                <Component class="javax.swing.JTextField" name="field_prenompatient">
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="field_prenompatientActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton1">
+                <Component class="javax.swing.JButton" name="OK_nompatient">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="OK"/>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OK_nompatientActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JButton" name="jButton2">
+                <Component class="javax.swing.JButton" name="OK_prenompatient">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="OK"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="OK_prenompatientActionPerformed"/>
+                  </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>

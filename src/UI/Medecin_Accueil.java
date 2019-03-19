@@ -177,15 +177,26 @@ public class Medecin_Accueil extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+<<<<<<< HEAD
 UI.Medecin_RechercherPatient rp = null;
         try {
             rp = new UI.Medecin_RechercherPatient();
+=======
+UI.Medecin_RechercherPatient rp;
+        try {
+            rp = new UI.Medecin_RechercherPatient();
+            rp.setVisible(true);
+
+>>>>>>> Interface
         } catch (SQLException ex) {
             Logger.getLogger(Medecin_Accueil.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ParseException ex) {
             Logger.getLogger(Medecin_Accueil.class.getName()).log(Level.SEVERE, null, ex);
         }
+<<<<<<< HEAD
 rp.setVisible(true);
+=======
+>>>>>>> Interface
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 

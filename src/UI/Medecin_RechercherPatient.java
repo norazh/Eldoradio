@@ -25,17 +25,15 @@ import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
-
-
-
 /**
  *
  * @author Imane
  */
 public class Medecin_RechercherPatient extends javax.swing.JFrame {
 
-    private ArrayList<Patient> lp = new ArrayList<Patient>();
-    private Fonctions f = new Fonctions();
+//    private ArrayList<Patient> lp = new ArrayList<Patient>();
+//    private Fonctions f = new Fonctions();
+    String IDPatient = "";
 
     /**
      * Creates new form AccueilSecretaire2
@@ -43,31 +41,31 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
     public Medecin_RechercherPatient() throws SQLException, ParseException {
         initComponents();
         jLabel2.setText("Jean Bono");
+        TabInit();
 
-        DbConnection c = new DbConnection();
-        c.connexionP();
-
-        //on initialise le liste de patients totale à afficher dans le tableau
-        ConnexionBD c1 = new ConnexionBD();
-        c1.connexion();
-        this.lp = c1.recupListeP();
-        DefaultTableModel model = new DefaultTableModel();
-        Object[] title = {"IPP", "IDDMR", "Prenom", "Nom", "DateNaissance", "Sexe"};
-        model.setColumnIdentifiers(title);
-        for (int i = 0; i < lp.size(); i++) {
-            Object[] unPatient = new Object[6];
-            unPatient[0] = lp.get(i).getIPP();
-            unPatient[1] = lp.get(i).getidDMR();
-            unPatient[2] = lp.get(i).getPrenom();
-            unPatient[3] = lp.get(i).getNom();
-            unPatient[4] = lp.get(i).getDateDeNaissance();
-            unPatient[5] = lp.get(i).getSexe();
-
-            model.addRow(unPatient);
-        }
-        tablepatients.setModel(model);
-        tablepatients.revalidate();
-
+//        DbConnection c = new DbConnection();
+//        c.connexionP();
+//
+//        //on initialise le liste de patients totale à afficher dans le tableau
+//        ConnexionBD c1 = new ConnexionBD();
+//        c1.connexion();
+//        this.lp = c1.recupListeP();
+//        DefaultTableModel model = new DefaultTableModel();
+//        Object[] title = {"IPP", "IDDMR", "Prenom", "Nom", "DateNaissance", "Sexe"};
+//        model.setColumnIdentifiers(title);
+//        for (int i = 0; i < lp.size(); i++) {
+//            Object[] unPatient = new Object[6];
+//            unPatient[0] = lp.get(i).getIPP();
+//            unPatient[1] = lp.get(i).getidDMR();
+//            unPatient[2] = lp.get(i).getPrenom();
+//            unPatient[3] = lp.get(i).getNom();
+//            unPatient[4] = lp.get(i).getDateDeNaissance();
+//            unPatient[5] = lp.get(i).getSexe();
+//
+//            model.addRow(unPatient);
+//        }
+//        tablepatients.setModel(model);
+//        tablepatients.revalidate();
     }
 
     /**
@@ -87,11 +85,11 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
         tablepatients = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        jTextField1_rechercheNomPatient = new javax.swing.JTextField();
+        field_nompatient = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        field_prenompatient = new javax.swing.JTextField();
+        OK_nompatient = new javax.swing.JButton();
+        OK_prenompatient = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jCheckBox1 = new javax.swing.JCheckBox();
         jLabel1 = new javax.swing.JLabel();
@@ -137,6 +135,7 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
 
         tablepatients.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+<<<<<<< HEAD
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -147,13 +146,19 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
+=======
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
+>>>>>>> Interface
             },
             new String [] {
-                "idPatient", "idDMR", "Prénom du patient", "Nom du patient", "Date de naissance"
+                "idPatient", "idDMR", "Prénom du patient", "Nom du patient", "Sexe", "Date de naissance"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
                 false, false, false, false, false
@@ -167,6 +172,11 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        tablepatients.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablepatientsMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tablepatients);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Critères de recherche"));
@@ -175,20 +185,25 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
 
         jLabel5.setText("Prénom du patient :");
 
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        field_prenompatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                field_prenompatientActionPerformed(evt);
             }
         });
 
-        jButton1.setText("OK");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        OK_nompatient.setText("OK");
+        OK_nompatient.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                OK_nompatientActionPerformed(evt);
             }
         });
 
-        jButton2.setText("OK");
+        OK_prenompatient.setText("OK");
+        OK_prenompatient.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OK_prenompatientActionPerformed(evt);
+            }
+        });
 
         jLabel6.setText("Trier par : ");
 
@@ -206,13 +221,13 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField1_rechercheNomPatient, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(field_nompatient, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(OK_nompatient))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(field_prenompatient, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(OK_prenompatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -227,8 +242,8 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextField1_rechercheNomPatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1))
+                    .addComponent(field_nompatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(OK_nompatient))
                 .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
@@ -236,8 +251,8 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
                 .addGap(2, 2, 2)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2))
+                    .addComponent(field_prenompatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(OK_prenompatient))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -328,17 +343,74 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void field_prenompatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_field_prenompatientActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_field_prenompatientActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void OK_nompatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OK_nompatientActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        try {
+            DbConnection c = new DbConnection();
+            c.connexionP();
+            String nom = field_nompatient.getText();
+            String query = "SELECT IPP, IDDMR, Prenom, Nom, Sexe, DateNaissance FROM patients WHERE Nom='" + nom + "'";
+            ResultSet rs = c.select(query);
+            setTable(rs);
+            c.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_OK_nompatientActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void OK_prenompatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OK_prenompatientActionPerformed
+        // TODO add your handling code here:
+        try {
+            DbConnection c = new DbConnection();
+            c.connexionP();
+            String prenom = field_prenompatient.getText();
+            String query = "SELECT IPP, IDDMR, Prenom, Nom, Sexe, DateNaissance FROM patients WHERE Nom='" + prenom + "'";
+            ResultSet rs = c.select(query);
+            setTable(rs);
+            c.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_OK_prenompatientActionPerformed
+
+    private void tablepatientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepatientsMouseClicked
+        // TODO add your handling code here:
+
+        IDPatient = getIDPatient();
+        UI.Medecin_AfficherDMR admr;
+        try {
+            admr = new UI.Medecin_AfficherDMR();
+            admr.setVisible(true);
+            DbConnection c = new DbConnection();
+            c.connexionP();
+            String query = "SELECT IPP , pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pat.IDDMR, DMRPapier FROM `examen` e,`patients` pat WHERE (IPP = '" + IDPatient + "') AND (pat.IDDMR = e.IDDMR)";
+            ResultSet rs = c.select(query);
+            while (rs.next()) {
+                admr.label_adresse.setText(rs.getString("Adresse") + "   " + rs.getString("CodePostal") + "    " + rs.getString("Ville"));
+                admr.label_prenomPatient.setText(rs.getString("pat.Prenom"));
+                admr.label_nomPatient.setText(rs.getString("pat.Nom"));
+                admr.label_datenaissance.setText(rs.getString("DateNaissance").toString());
+                admr.label_ipp.setText(rs.getString("IPP"));
+                admr.label_sexe.setText(rs.getString("Sexe"));
+                admr.label_iddmr.setText(rs.getString("IDDMR"));
+                if (rs.getString("DMRPapier").equals("Oui")) {
+                    admr.label_dmrpapier.setText("Oui");
+                }
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_tablepatientsMouseClicked
 
     /**
      * @param args the command line arguments
@@ -389,8 +461,10 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton OK_nompatient;
+    private javax.swing.JButton OK_prenompatient;
+    private javax.swing.JTextField field_nompatient;
+    private javax.swing.JTextField field_prenompatient;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JCheckBox jCheckBox1;
@@ -405,8 +479,6 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField1_rechercheNomPatient;
     private javax.swing.JTable tablepatients;
     // End of variables declaration//GEN-END:variables
 
@@ -464,23 +536,23 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
         return tp;
     }
 
-    public void afficher(String requete) throws ParseException {
-        //this.clearall();
-        ConnexionBD c = new ConnexionBD();
-        c.connexion();
-        ResultSet r = c.exec(requete);
-        ArrayList<Patient> e = new ArrayList<Patient>();
-
-        try {
-            this.lp = f.recupListeP(r);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Medecin_RechercherPatient.class
-                    .getName()).log(Level.SEVERE, null, ex);
-        }
-
-        c.close();
-    }
+//    public void afficher(String requete) throws ParseException {
+//        //this.clearall();
+//        ConnexionBD c = new ConnexionBD();
+//        c.connexion();
+//        ResultSet r = c.exec(requete);
+//        ArrayList<Patient> e = new ArrayList<Patient>();
+//
+//        try {
+//            this.lp = f.recupListeP(r);
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(Medecin_RechercherPatient.class
+//                    .getName()).log(Level.SEVERE, null, ex);
+//        }
+//
+//        c.close();
+//    }
 
 //    public void clearall() {
 //        for (int i = 0; i < lp.getRowCount(); i++) {
@@ -489,4 +561,41 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
 //            }
 //        }
 //    }
+    public void TabInit() throws SQLException {
+        DbConnection c = new DbConnection();
+        c.connexionP();
+        String query = "SELECT IPP, IDDMR, Prenom, Nom, Sexe, DateNaissance FROM patients";
+        ResultSet rs = c.select(query);
+        setTable(rs);
+        c.close();
+    }
+
+    public void setTable(ResultSet rs) throws SQLException {
+        try {
+            while (tablepatients.getRowCount() > 0) {
+                ((DefaultTableModel) tablepatients.getModel()).removeRow(0);
+            }
+            /* On créer un int columns avec le nombre de colonne de notre rs.getMetaData qui prend l'entête*/
+            int columns = rs.getMetaData().getColumnCount();
+            while (rs.next()) {
+                /* On crée un tableau d'objet qui est initialisé avec un nombre de colonne = à columns */
+                Object[] row = new Object[columns];
+                for (int i = 1; i <= columns; i++) {
+                    /* Dans chaque ligne de notre table, on get l'object (donc une ligne de patient) de notre resulset*/
+                    row[i - 1] = rs.getObject(i);
+                }
+
+                ((DefaultTableModel) tablepatients.getModel()).insertRow(rs.getRow() - 1, row);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public String getIDPatient() {
+        String idExamenSelectedRow = tablepatients.getValueAt(tablepatients.getSelectedRow(), 0).toString();
+        return idExamenSelectedRow;
+    }
+
 }

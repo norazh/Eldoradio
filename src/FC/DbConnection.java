@@ -247,7 +247,13 @@ public class DbConnection {
             close();
         }
     }
-    
+
+   public void modifierBD(String s) throws SQLException{
+            pstmt = con.prepareStatement(s);
+            pstmt.execute();
+   }
+   
+   
     // retourne le nom des colonnes d'un ResultSet
     public ArrayList<ArrayList<String>> info(ResultSet res) throws SQLException {
         resMeta = res.getMetaData();
@@ -284,34 +290,28 @@ public class DbConnection {
             return null;
         }
     }
-        
-        
+
     public ArrayList<ArrayList<String>> listeExam(String idMed) throws SQLException {
         ArrayList<ArrayList<String>> listeExam = select("*", "examen", "(IDPERS = '" + idMed + "')");
         return listeExam;
     }
-    
-    
-    public ArrayList<ArrayList<String>> infosPatient(String idPers) throws SQLException{
+
+    public ArrayList<ArrayList<String>> infosPatient(String idPers) throws SQLException {
         ArrayList<ArrayList<String>> listeIDSIR = select("*", "examen", "(IDPERS = '" + idPers + "')"); // liste des IDSIR d'`examen` par IDPERS
-        Set set = new HashSet(); set.addAll(listeIDSIR);
+        Set set = new HashSet();
+        set.addAll(listeIDSIR);
         ArrayList distinctList = new ArrayList(set);
 
         ArrayList<ArrayList<String>> Patients;
-        for (int i = 0 ; i < listeIDSIR.size() ; i++){
+        for (int i = 0; i < listeIDSIR.size(); i++) {
             String IDSIR = listeIDSIR.get(1).get(i);
-            ArrayList<ArrayList<String>> infoPatient = select("*","dmr","(IDSIR = '" + IDSIR + "')");
-            
+            ArrayList<ArrayList<String>> infoPatient = select("*", "dmr", "(IDSIR = '" + IDSIR + "')");
+
         }
         return null;
     }
-    
-    
-    
-    
-}
-    
 
+}
 
 // -------------------------------------- Historique des Méthodes  --------------------------------------
 /*   
@@ -344,5 +344,3 @@ public class DbConnection {
         
     
  */
-
-
