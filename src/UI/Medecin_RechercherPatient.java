@@ -6,15 +6,24 @@
 package UI;
 
 import FC.DbConnection;
+import java.util.ArrayList;
+import FC.ConnexionBD;
 import FC.Sexe;
+import FC.Examen;
+import FC.Fonctions;
+import FC.Medecin;
 import FC.Patient;
 import FC.TypeExamen;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -25,7 +34,6 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
 //    private ArrayList<Patient> lp = new ArrayList<Patient>();
 //    private Fonctions f = new Fonctions();
     String IDPatient = "";
-    private static Patient p;
 
     /**
      * Creates new form AccueilSecretaire2
@@ -356,45 +364,28 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
     private void tablepatientsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablepatientsMouseClicked
         // TODO add your handling code here:
 
-        //On récupère l'ID du patient, correspondant à la première valeur de la ligne sélectionnée dans le tableau
         IDPatient = getIDPatient();
-
+        UI.Medecin_AfficherDMR admr;
         try {
-
+            admr = new UI.Medecin_AfficherDMR();
+            admr.setVisible(true);
             DbConnection c = new DbConnection();
             c.connexionP();
             String query = "SELECT IPP , pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pat.IDDMR, DMRPapier FROM `examen` e,`patients` pat WHERE (IPP = '" + IDPatient + "') AND (pat.IDDMR = e.IDDMR)";
             ResultSet rs = c.select(query);
-
-         
             while (rs.next()) {
-                
-                //Initialisation du patient avec les données extraites de la BD.
-                
-                p = new Patient(Integer.parseInt(rs.getString("IPP")), Integer.parseInt(rs.getString("IDDMR")), rs.getString("pat.Nom"), rs.getString("pat.Prenom"), rs.getString("Adresse"),
-                        rs.getString("Ville"), Integer.parseInt(rs.getString("CodePostal")), rs.getDate("DateNaissance"), stringToSexe(rs.getString("Sexe")));
+                admr.label_adresse.setText(rs.getString("Adresse") + "   " + rs.getString("CodePostal") + "    " + rs.getString("Ville"));
+                admr.label_prenomPatient.setText(rs.getString("pat.Prenom"));
+                admr.label_nomPatient.setText(rs.getString("pat.Nom"));
+                admr.label_datenaissance.setText(rs.getString("DateNaissance").toString());
+                admr.label_ipp.setText(rs.getString("IPP"));
+                admr.label_sexe.setText(rs.getString("Sexe"));
+                admr.label_iddmr.setText(rs.getString("IDDMR"));
+                if (rs.getString("DMRPapier").equals("Oui")) {
+                    admr.label_dmrpapier.setText("Oui");
+                }
             }
 
-//            System.out.println(p.getIPP());
-//            System.out.println(p.getIPP() + p.getidDMR() + p.getNom() + p.getPrenom() + p.getAdresse() + p.getVille() + p.getCodePostal() + p.getDateDeNaissance().toString() + p.getSexe());
-
-            //On affiche la nouvelle fenêtre destinée à afficher le DMR du patient sélectionné.
-            UI.Medecin_AfficherDMR admr;
-            admr = new UI.Medecin_AfficherDMR();
-            admr.setVisible(true);
-
-//            while (rs.next()) {
-//                admr.label_adresse.setText(rs.getString("Adresse") + "   " + rs.getString("CodePostal") + "    " + rs.getString("Ville"));
-//                admr.label_prenomPatient.setText(rs.getString("pat.Prenom"));
-//                admr.label_nomPatient.setText(rs.getString("pat.Nom"));
-//                admr.label_datenaissance.setText(rs.getString("DateNaissance").toString());
-//                admr.label_ipp.setText(rs.getString("IPP"));
-//                admr.label_sexe.setText(rs.getString("Sexe"));
-//                admr.label_iddmr.setText(rs.getString("IDDMR"));
-//                if (rs.getString("DMRPapier").equals("Oui")) {
-//                    admr.label_dmrpapier.setText("Oui");
-//                }
-//            }
         } catch (SQLException ex) {
             Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -542,6 +533,7 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
 //
 //        c.close();
 //    }
+
 //    public void clearall() {
 //        for (int i = 0; i < lp.getRowCount(); i++) {
 //            for (int j = 0; j < lp.getColumnCount(); j++) {
@@ -586,7 +578,4 @@ public class Medecin_RechercherPatient extends javax.swing.JFrame {
         return idExamenSelectedRow;
     }
 
-    public static Patient getPatient() {
-        return p;
-    }
 }

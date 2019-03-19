@@ -5,11 +5,6 @@
  */
 package UI;
 
-import java.sql.SQLException;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Imane
@@ -197,16 +192,8 @@ public class Secretaire_Accueil extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-UI.Secretaire_RechercherPatient rp;
-        try {
-            rp = new UI.Secretaire_RechercherPatient();
-            rp.setVisible(true);
-        } catch (SQLException ex) {
-            Logger.getLogger(Secretaire_Accueil.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ParseException ex) {
-            Logger.getLogger(Secretaire_Accueil.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
+UI.Secretaire_RechercherPatient rp = new UI.Secretaire_RechercherPatient();
+rp.setVisible(true);
 // TODO add your handling code here:
     }//GEN-LAST:event_jButton3ActionPerformed
 

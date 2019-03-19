@@ -5,61 +5,18 @@
  */
 package UI;
 
-import FC.DbConnection;
-import FC.Examen;
-import FC.Patient;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author Imane
  */
 public class Medecin_AfficherDMR extends javax.swing.JFrame {
 
-    private Patient patient;
-    private static Examen examen;
-
     /**
      * Creates new form AccueilSecretaire2
      */
-    public Medecin_AfficherDMR() throws SQLException {
-
+    public Medecin_AfficherDMR() {
         initComponents();
-
-        //On récupère les données de la personne connectée pour initialiser le label indiquant qui est connecté
         jLabel2.setText("Jean Bono");
-
-        //On récupère l'instance de Patient créée dans UI.Medecin_RechercherPatient
-        patient = UI.Medecin_RechercherPatient.getPatient();
-
-        //Initialisation des labels concernant le patient en fonction des données du patient
-        label_adresse.setText(patient.getAdresse() + "    " + patient.getCodePostal() + "    " + patient.getVille());
-        label_datenaissance.setText(patient.getDateDeNaissance().toString());
-        label_iddmr.setText(String.valueOf(patient.getidDMR()));
-        label_ipp.setText(String.valueOf(patient.getIPP()));
-        label_nomPatient.setText(patient.getNom());
-        label_prenomPatient.setText(patient.getPrenom());
-        label_sexe.setText(patient.getSexe().toString());
-
-        //Initialisation des labels concernant les examens. Nécessité de faire une requête.
-        DbConnection c = new DbConnection();
-        c.connexionP();
-        String query = "SELECT IPP , pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pat.IDDMR, DMRPapier FROM `examen` e,`patients` pat WHERE (IPP = '" + String.valueOf(patient.getIPP()) + "') AND (pat.IDDMR = e.IDDMR)";
-        ResultSet rs = c.select(query);
-        while (rs.next()) {
-            label_iddmr.setText(rs.getString("IDDMR"));
-            if (rs.getString("DMRPapier").equals("Oui")) {
-                label_dmrpapier.setText("Oui");
-            }
-        }
-        c.close();
-
-        //Initialisation du tableau
-        TabInit();
     }
 
     /**
@@ -76,7 +33,7 @@ public class Medecin_AfficherDMR extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table = new javax.swing.JTable();
+        jTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -136,7 +93,7 @@ public class Medecin_AfficherDMR extends javax.swing.JFrame {
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
         jPanel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2));
 
-        table.setModel(new javax.swing.table.DefaultTableModel(
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -155,12 +112,7 @@ public class Medecin_AfficherDMR extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        table.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tableMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(table);
+        jScrollPane1.setViewportView(jTable1);
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2), "Informations du patient", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
@@ -378,32 +330,6 @@ public class Medecin_AfficherDMR extends javax.swing.JFrame {
         ae.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-
-        //On récupère l'ID du patient, correspondant à la première valeur de la ligne sélectionnée dans le tableau
-        String IDExam = getIDExam();
-
-        DbConnection c = new DbConnection();
-        c.connexionP();
-        String query = "SELECT * from examen WHERE (idExamen = '" + IDExam + "') ";
-        ResultSet rs = c.select(query);
-
-        try {
-            //Initialisation de Examen examen avec les données de la BD
-            while (rs.next()) {
-                examen = new Examen(rs.getString("idExamen"));
-            }
-
-            UI.Medecin_AfficherUNExamenAPartirDuDMR aueapdm = new UI.Medecin_AfficherUNExamenAPartirDuDMR();
-            aueapdm.setVisible(true);
-
-        } catch (SQLException ex) {
-            Logger.getLogger(Medecin_AfficherDMR.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
-
-    }//GEN-LAST:event_tableMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -441,11 +367,7 @@ public class Medecin_AfficherDMR extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new Medecin_AfficherDMR().setVisible(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(Medecin_AfficherDMR.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                new Medecin_AfficherDMR().setVisible(true);
             }
         });
     }
@@ -470,6 +392,7 @@ public class Medecin_AfficherDMR extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     public javax.swing.JLabel label_adresse;
     public javax.swing.JLabel label_datenaissance;
     public javax.swing.JLabel label_dmrpapier;
@@ -478,52 +401,6 @@ public class Medecin_AfficherDMR extends javax.swing.JFrame {
     public javax.swing.JLabel label_nomPatient;
     public javax.swing.JLabel label_prenomPatient;
     public javax.swing.JLabel label_sexe;
-    private javax.swing.JTable table;
     // End of variables declaration//GEN-END:variables
-
-    public void setTable(ResultSet rs) throws SQLException {
-        try {
-            while (table.getRowCount() > 0) {
-                ((DefaultTableModel) table.getModel()).removeRow(0);
-            }
-            /* On créer un int columns avec le nombre de colonne de notre rs.getMetaData qui prend l'entête*/
-            int columns = rs.getMetaData().getColumnCount();
-            while (rs.next()) {
-                /* On crée un tableau d'objet qui est initialisé avec un nombre de colonne = à columns */
-                Object[] row = new Object[columns];
-                for (int i = 1; i <= columns; i++) {
-                    /* Dans chaque ligne de notre table, on get l'object (donc une ligne de patient) de notre resulset*/
-                    row[i - 1] = rs.getObject(i);
-                }
-
-                ((DefaultTableModel) table.getModel()).insertRow(rs.getRow() - 1, row);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
-    public void TabInit() {
-        try {
-            DbConnection c = new DbConnection();
-            c.connexionP();
-            String query = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND IPP='" + String.valueOf(patient.getIPP()) + "'";
-            ResultSet rs = c.select(query);
-            setTable(rs);
-            c.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public static Examen getExam() {
-        return examen;
-    }
-
-    //Get l'ID de l'examen à la ligne sélectionnée de la JTable 
-    public String getIDExam() {
-        String idExamenSelectedRow = table.getValueAt(table.getSelectedRow(), 0).toString();
-        return idExamenSelectedRow;
-    }
 }
+

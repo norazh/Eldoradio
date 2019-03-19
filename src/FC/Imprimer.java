@@ -29,7 +29,6 @@ public class Imprimer implements Printable {
     public Imprimer(JTextArea panel) {
 
         documentTitle = "";
-        System.out.println("blabla");
         this.panel = panel;
         initPrintablePanel();
     }

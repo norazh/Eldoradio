@@ -6,7 +6,6 @@
 package UI;
 
 import FC.DbConnection;
-import FC.Examen;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -15,54 +14,25 @@ import UI.Medecin_AfficherTOUSLESExamens;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import FC.Imprimer;
-import FC.Patient;
 
 /**
  *
  * @author Imane
  */
 public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
-    
-    private Patient patient;
-    private Examen examen;
 
     /**
      * Creates new form AccueilSecretaire2
      */
     public Medecin_AfficherUNExamen() throws SQLException {
         initComponents();
-
-        //On prend l'instance de Patient créée dans AfficherTousLesExamens
-        patient = UI.Medecin_AfficherTOUSLESExamens.getPatient();
-
-        //On prend l'instance de Examen créer dans AfficherTousLesExamens
-        examen = UI.Medecin_AfficherTOUSLESExamens.getExamen();
-
-        //Initialisation des labels concernant le patient
-        label_adresse.setText(patient.getAdresse() + "    " + patient.getCodePostal() + "    " + patient.getVille());
-        label_datenaissance.setText(patient.getDateDeNaissance().toString());
-        label_ipp.setText(String.valueOf(patient.getIPP()));
-        label_nomPatient.setText(patient.getNom());
-        label_prenomPatient.setText(patient.getPrenom());
-        label_sexe.setText(patient.getSexe().toString());
-
-        //Initialisation des labels concernant l'examen
-        DbConnection c = new DbConnection();
-        c.connexionP();
-        String query = "SELECT IPP, pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, idExamen, Ville, pers.Nom, pers.Prenom, TypeExamen, DateExamen, DMRPapier, CompteRendu FROM `examen` e,`patients` pat,`personnel` pers WHERE (idExamen = '" + examen.getidExamen() + "') AND (pat.IDDMR = e.IDDMR) AND (pers.IDPERS=e.IDPERS)";
-        ResultSet rs = c.select(query);
-        while (rs.next()) {
-            label_idExam.setText(examen.getidExamen());
-            label_nomMedecin.setText(rs.getString("pers.Nom"));
-            label_prenomMedecin.setText(rs.getString("pers.Prenom"));
-            label_typeExam.setText(rs.getString("TypeExamen"));
-            label_sexe.setText(rs.getString("Sexe"));
-            label_dateExam.setText(rs.getString("DateExamen"));
-            cr.setText(rs.getString("CompteRendu"));
-        }
-        c.close();
-        
+//        DbConnection c = new DbConnection();
+//        c.connexionP();
+//        
+//        String query = "SELECT IPP, pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pers.Nom, pers.Prenom, TypeExamen, DateExamen, DMRPapier, CompteRendu FROM `examen` e,`patients` pat,`personnel` pers WHERE (idExamen = '" + idExam + "') AND (pat.IDDMR = e.IDDMR) AND (pers.IDPERS=e.IDPERS)";
+//        ResultSet rs = c.select(query);
+//        label_ipp.setText(rs.getString("IPP"));
+//        c.close();
     }
 
     /**
@@ -107,7 +77,6 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         cr = new javax.swing.JTextArea();
         jButton3 = new javax.swing.JButton();
-        bouton_impression = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
@@ -134,7 +103,7 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(547, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(470, 470, 470))
         );
@@ -353,31 +322,24 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
             }
         });
 
-        bouton_impression.setText("Imprimer le compte-rendu");
-        bouton_impression.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2));
-        bouton_impression.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bouton_impressionActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(24, 24, 24)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(228, 228, 228)
                         .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(124, 124, 124)
-                        .addComponent(bouton_impression, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(138, 138, 138)
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -391,9 +353,8 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
                 .addGap(53, 53, 53)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bouton_impression, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(73, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -418,22 +379,18 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jLabel2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton1)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton4))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton4))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -447,9 +404,9 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(16, 16, 16))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -482,14 +439,14 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
         // TODO add your handling code here:
         DbConnection c = new DbConnection();
         c.connexionP();
-        //ArrayList<ImageIcon> liste_images = new ArrayList<ImageIcon>();
+        ArrayList<ImageIcon> liste_images = new ArrayList<ImageIcon>();
         String requete = "SELECT * FROM pacs WHERE idExam = '" + label_idExam.getText() + "'";
         ResultSet rs = c.select(requete);
-        
+
         try {
             if (!rs.next()) {
                 JOptionPane.showMessageDialog(this, "Cet examen ne contient pas d'images.", "Aucun résultat", JOptionPane.INFORMATION_MESSAGE);
-                
+
             } else {
                 rs.beforeFirst(); //On remet le curseur sur la ligne avant la première ligne des résultats
                 while (rs.next()) {
@@ -505,19 +462,6 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
             Logger.getLogger(Medecin_AfficherUNExamen.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void bouton_impressionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_impressionActionPerformed
-// Mise en page du compte-rendu à imprimer
-
-        String s = ("Nom du patient : " + patient.getNom() + "\n" + "Prenom du patient: " + patient.getPrenom() + "\n" + "Nom du médecin: " + this.label_nomMedecin.getText() + "\n" + "Date de l'examen : " + this.label_dateExam.getText() + "\n" + "COMPTE RENDU : " + "\n" + this.cr.getText());        
-        
-        UI.ApercuAvantImpression a = new UI.ApercuAvantImpression(s);
-        a.jTextArea1.setText(s);
-        a.setVisible(true);
-        
-        
-
-    }//GEN-LAST:event_bouton_impressionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -590,7 +534,6 @@ public class Medecin_AfficherUNExamen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bouton_impression;
     public javax.swing.JTextArea cr;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

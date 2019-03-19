@@ -171,6 +171,21 @@ public class SIR {
         }
         return listeDMR.get(i);
     }
+<<<<<<< Updated upstream
+//    public DMR RechercheDMRParIdSIR(int id) {
+//        int p1 = id;
+//        int i = 0;
+//        while (i < listeDMR.size() && !listeDMR.get(i).getPatient().getIPP() == p1) {
+=======
+//    public DMR RechercheDMRParIPP(String id) {
+//        String p1 = id.toLowerCase();
+//        int i = 0;
+//        while (i < listeDMR.size() && !listeDMR.get(i).getPatient().getIPP().equals(p1)) {
+>>>>>>> Stashed changes
+//            i++;
+//        }
+//        return listeDMR.get(i);
+//    }
 
     public DMR RechercheDMRParPrenomPatient(String prenom) {
         String p1 = prenom.toLowerCase();
