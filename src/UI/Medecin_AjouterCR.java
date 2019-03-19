@@ -6,6 +6,7 @@
 package UI;
 
 import FC.DbConnection;
+import FC.Examen;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -22,12 +23,17 @@ import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
  * @author Imane
  */
 public class Medecin_AjouterCR extends javax.swing.JFrame {
-
+private Examen examen;
     /**
      * Creates new form Secretaire_AjouterNouveauPersonnel
      */
     public Medecin_AjouterCR() {
+        
         initComponents();
+        
+        examen = UI.Medecin_AfficherUNExamenAPartirDuDMR.getExamen();
+        
+        
     }
 
     /**
@@ -92,10 +98,6 @@ public class Medecin_AjouterCR extends javax.swing.JFrame {
         label_ajouter_cr.setColumns(20);
         label_ajouter_cr.setRows(5);
         jScrollPane1.setViewportView(label_ajouter_cr);
-
-        jLabel2.setText("jLabel2");
-
-        jLabel3.setText("idExamen :");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -168,7 +170,7 @@ public class Medecin_AjouterCR extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         String cr = label_ajouter_cr.getText();
-        String idExam = jLabel2.getText();//        
+        String idExam = examen.getidExamen();
 
         DbConnection c = new DbConnection();
         c.connexionP();
@@ -184,7 +186,8 @@ public class Medecin_AjouterCR extends javax.swing.JFrame {
 
         System.out.println("ajouté !");
 
-        JOptionPane.showMessageDialog(null, "Le compte-rendu a bien été mis à jour", "Information", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Le compte-rendu a bien été mis à jour. Veuillez ouvrir l'examen à nouveau afin de visuliaser les modifications apportées", "Information", JOptionPane.INFORMATION_MESSAGE);
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**

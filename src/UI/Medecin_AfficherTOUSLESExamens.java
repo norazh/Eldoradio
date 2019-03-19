@@ -6,7 +6,10 @@
 package UI;
 
 import FC.DbConnection;
+import FC.Examen;
+import FC.Patient;
 import FC.TypeExamen;
+import static UI.Medecin_RechercherPatient.stringToSexe;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -23,11 +26,12 @@ import javax.swing.table.DefaultTableModel;
 public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
 
     public String idExam = "";
-     private String query = "";
+    private String query = "";
     private static String init = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom, DMRPapier FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND (p1.IDPERS = e.IDPERS)";
     private static String nomButton = "";
     private static String checkboxIf = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom, DMRPapier FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND ((LENGTH(e.CompteRendu) = 0) OR (LENGTH(e.CompteRendu) = NULL))";
-
+    private static Patient patient;
+    private static Examen examen;
 
     /**
      * Creates new form AccueilSecretaire2
@@ -38,7 +42,6 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         TabInit();
     }
 
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -389,21 +392,21 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
 
     private void ComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComboBoxActionPerformed
         // TODO add your handling code here:
-         Object obj = evt.getSource();
+        Object obj = evt.getSource();
         if (obj == ComboBox) {
 
             try {
 //            int index = ComboBox.getSelectedIndex();
                 ArrayList<String> queries = new ArrayList(TypeExamen.values().length);
-               
+
                 for (TypeExamen te : TypeExamen.values()) {
                     String query = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom, DMRPapier FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND (p1.IDPERS = e.IDPERS) AND (TypeExamen = '" + te.name() + "')";
                     queries.add(query);
                 }
-                        /*for (int i = 0; i < queries.size(); i++) {
+                /*for (int i = 0; i < queries.size(); i++) {
                     System.out.println(queries.get(i));
                 }*/
-                        
+
                 String s = ComboBox.getSelectedItem().toString();
                 switch (s) {
                     case "RADIOLOGIE":
@@ -446,35 +449,52 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         // TODO add your handling code here:
         idExam = getIdExam();
         UI.Medecin_AfficherUNExamen aue;
+
+//            aue = new UI.Medecin_AfficherUNExamen();
+//            aue.setVisible(true);
+//            DbConnection c = new DbConnection();
+//            c.connexionP();
+//            String query = "SELECT IPP, pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pers.Nom, pers.Prenom, TypeExamen, DateExamen, DMRPapier, CompteRendu FROM `examen` e,`patients` pat,`personnel` pers WHERE (idExamen = '" + idExam + "') AND (pat.IDDMR = e.IDDMR) AND (pers.IDPERS=e.IDPERS)";
+//            ResultSet rs = c.select(query);
+//            while(rs.next()){ 
+        DbConnection c = new DbConnection();
+        c.connexionP();
+        String query = "SELECT IPP , pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pat.IDDMR, DMRPapier, idExamen FROM `examen` e,`patients` pat WHERE (IPP = '" + idExam + "') AND (pat.IDDMR = e.IDDMR)";
+        ResultSet rs = c.select(query);
+
         try {
-            aue = new UI.Medecin_AfficherUNExamen();
-            aue.setVisible(true);
-            DbConnection c = new DbConnection();
-            c.connexionP();
-            String query = "SELECT IPP, pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pers.Nom, pers.Prenom, TypeExamen, DateExamen, DMRPapier, CompteRendu FROM `examen` e,`patients` pat,`personnel` pers WHERE (idExamen = '" + idExam + "') AND (pat.IDDMR = e.IDDMR) AND (pers.IDPERS=e.IDPERS)";
-            ResultSet rs = c.select(query);
             while (rs.next()) {
-                aue.label_adresse.setText(rs.getString("Adresse") + "   " + rs.getString("CodePostal") + "    " + rs.getString("Ville"));
-                aue.label_prenomPatient.setText(rs.getString("pat.Prenom"));
-                aue.label_nomPatient.setText(rs.getString("pat.Nom"));
-                aue.label_datenaissance.setText(rs.getString("DateNaissance").toString());
-                aue.label_ipp.setText(rs.getString("IPP"));
-                aue.label_idExam.setText(idExam);
-                aue.label_nomMedecin.setText(rs.getString("pers.Nom"));
-                aue.label_prenomMedecin.setText(rs.getString("pers.Prenom"));
-                aue.label_typeExam.setText(rs.getString("TypeExamen"));
-                aue.label_sexe.setText(rs.getString("Sexe"));
-                aue.label_dateExam.setText(rs.getString("DateExamen"));
-                aue.cr.setText(rs.getString("CompteRendu"));
+
+                //Initialisation du patient avec les données extraites de la BD.
+                patient = new Patient(Integer.parseInt(rs.getString("IPP")), Integer.parseInt(rs.getString("IDDMR")), rs.getString("pat.Nom"), rs.getString("pat.Prenom"), rs.getString("Adresse"),
+                        rs.getString("Ville"), Integer.parseInt(rs.getString("CodePostal")), rs.getDate("DateNaissance"), stringToSexe(rs.getString("Sexe")));
                 
-                
-                
+                //Initialisation de l'exament avec les données extraites de la BD.
+                examen = new Examen(rs.getString("idExamen"));
+
             }
+//            while (rs.next()) {
+//                aue.label_adresse.setText(rs.getString("Adresse") + "   " + rs.getString("CodePostal") + "    " + rs.getString("Ville"));
+//                aue.label_prenomPatient.setText(rs.getString("pat.Prenom"));
+//                aue.label_nomPatient.setText(rs.getString("pat.Nom"));
+//                aue.label_datenaissance.setText(rs.getString("DateNaissance").toString());
+//                aue.label_ipp.setText(rs.getString("IPP"));
+//                aue.label_idExam.setText(idExam);
+//                aue.label_nomMedecin.setText(rs.getString("pers.Nom"));
+//                aue.label_prenomMedecin.setText(rs.getString("pers.Prenom"));
+//                aue.label_typeExam.setText(rs.getString("TypeExamen"));
+//                aue.label_sexe.setText(rs.getString("Sexe"));
+//                aue.label_dateExam.setText(rs.getString("DateExamen"));
+//                aue.cr.setText(rs.getString("CompteRendu"));
+//
+//            }
 
 //            String rs2 = rs.toString();
 //            System.out.println(rs2);
-            //String sexe = rs.getString("Sexe");
+//String sexe = rs.getString("Sexe");
 //aue.label_sexe.setText("sexe");
+            UI.Medecin_AfficherUNExamen a = new UI.Medecin_AfficherUNExamen();
+            a.setVisible(true);
         } catch (SQLException ex) {
             Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -614,7 +634,6 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         return idExamenSelectedRow;
     }
 
-
     // Médecin 
     public void setTable(String query) throws SQLException {
         try {
@@ -636,6 +655,15 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+
+    }
+
+    public static Patient getPatient() {
+        return patient;
+    }
+
+    public static Examen getExamen() {
+        return examen;
 
     }
 }
