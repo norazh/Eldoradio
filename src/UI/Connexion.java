@@ -5,8 +5,21 @@
  */
 package UI;
 
+import FC.Cryptage;
+import FC.DbConnection;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.swing.JOptionPane;
 
 /**
@@ -22,42 +35,41 @@ public class Connexion extends javax.swing.JFrame {
         initComponents();
         this.setResizable(false);
         jPanel2.requestFocusInWindow();
-        
-    jTextField1.addFocusListener(new FocusListener(){
-        @Override
-         public void focusGained(FocusEvent e){
-            if (jTextField1.getText().equals("Identifiant")){
-                jTextField1.setText("");
-            }
-        }
-            
 
+        jTextField_identifiant.addFocusListener(new FocusListener() {
             @Override
-            public void focusLost(FocusEvent e) {
-                if (jTextField1.getText().equals("")){
-                   jTextField1.setText("Identifiant"); 
+            public void focusGained(FocusEvent e) {
+                if (jTextField_identifiant.getText().equals("Identifiant")) {
+                    jTextField_identifiant.setText("");
                 }
-                
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-            });
-            
-        
-    jPasswordField1.addFocusListener(new FocusListener(){
-        @Override
-         public void focusGained(FocusEvent e){
-            if (jPasswordField1.getText().equals("Mot de passe")){
-                jPasswordField1.setText("");
-            }
-        }
 
             @Override
             public void focusLost(FocusEvent e) {
-                 if (jPasswordField1.getText().equals("")){
-                   jPasswordField1.setText("Mot de passe"); }
+                if (jTextField_identifiant.getText().equals("")) {
+                    jTextField_identifiant.setText("Identifiant");
+                }
+
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
-    });
+        });
+
+        jPasswordField.addFocusListener(new FocusListener() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                if (jPasswordField.getText().equals("Mot de passe")) {
+                    jPasswordField.setText("");
+                }
+            }
+
+            @Override
+            public void focusLost(FocusEvent e) {
+                if (jPasswordField.getText().equals("")) {
+                    jPasswordField.setText("Mot de passe");
+                }
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
 
     /**
@@ -70,12 +82,12 @@ public class Connexion extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        jTextField_identifiant = new javax.swing.JTextField();
+        ConnectionButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        jPasswordField = new javax.swing.JPasswordField();
         jLabel5 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
@@ -83,37 +95,37 @@ public class Connexion extends javax.swing.JFrame {
 
         jPanel2.setLayout(null);
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Identifiant");
-        jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        jTextField_identifiant.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        jTextField_identifiant.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField_identifiant.setText("Identifiant");
+        jTextField_identifiant.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                jTextField1FocusGained(evt);
+                jTextField_identifiantFocusGained(evt);
             }
         });
-        jTextField1.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTextField_identifiant.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTextField1MouseClicked(evt);
+                jTextField_identifiantMouseClicked(evt);
             }
         });
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_identifiant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                jTextField_identifiantActionPerformed(evt);
             }
         });
-        jPanel2.add(jTextField1);
-        jTextField1.setBounds(360, 160, 300, 50);
+        jPanel2.add(jTextField_identifiant);
+        jTextField_identifiant.setBounds(360, 160, 300, 50);
 
-        jButton1.setBackground(new java.awt.Color(225, 182, 0));
-        jButton1.setForeground(new java.awt.Color(0, 0, 0));
-        jButton1.setText("Se connecter");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        ConnectionButton.setBackground(new java.awt.Color(225, 182, 0));
+        ConnectionButton.setForeground(new java.awt.Color(0, 0, 0));
+        ConnectionButton.setText("Se connecter");
+        ConnectionButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ConnectionButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1);
-        jButton1.setBounds(410, 310, 172, 44);
+        jPanel2.add(ConnectionButton);
+        ConnectionButton.setBounds(410, 310, 172, 44);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Donnees/52158504_577857816067012_2454202221978451968_n (1).png"))); // NOI18N
         jPanel2.add(jLabel3);
@@ -127,9 +139,9 @@ public class Connexion extends javax.swing.JFrame {
         jPanel2.add(jLabel4);
         jLabel4.setBounds(280, 220, 70, 80);
 
-        jPasswordField1.setText("Mot de passe");
-        jPanel2.add(jPasswordField1);
-        jPasswordField1.setBounds(360, 240, 300, 50);
+        jPasswordField.setText("Mot de passe");
+        jPanel2.add(jPasswordField);
+        jPasswordField.setBounds(360, 240, 300, 50);
 
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Donnees/logoELDOrogne (1).png"))); // NOI18N
         jPanel2.add(jLabel5);
@@ -163,23 +175,85 @@ public class Connexion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JOptionPane.showMessageDialog(this, "Votre identifiant et/ou votre mot de passe sont erronés \n                          Veuillez réessayer", "Erreur", JOptionPane.WARNING_MESSAGE);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void ConnectionButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConnectionButtonActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here
-    }//GEN-LAST:event_jTextField1ActionPerformed
+        String mdpEntered = jPasswordField.getText();
+        String idEntered = jTextField_identifiant.getText();
+        DbConnection c = new DbConnection();
+        boolean b = c.connexionP();
+        if (b) {
+//            try {
+                try {
+                    String infoConBD = Cryptage.encryptMDP(idEntered, mdpEntered);
+                    ArrayList<ArrayList<String>> mdpList = c.select("InfoConnexion,Spécialité", "personnel", "InfoConnexion = '" + infoConBD + "'");
+                    boolean idMDPVerif = mdpList.get(0).contains(infoConBD);
+                    if (idMDPVerif) {
+                        String spe = mdpList.get(1).get(0);
+                        JOptionPane.showMessageDialog(this, "Connexion établie ! Votre spécialité : " + spe);
+                        switch (spe) {
+                            case "MEDECIN":
+//                            --------------------------- Traitement : ouvrir une fenêtre Accueil personnalisée
+//                            AccueilManip3 accManip = new AccueilManip3();
+//                            accManip.setVisible(true);
+//                            ---------------------------------------------------------------------------------
+                                JOptionPane.showMessageDialog(this, "Connexion du Médecin OK");
+                                break;
+                            case "SECRET":
+                                JOptionPane.showMessageDialog(this, "Connexion du Secrétaire OK");
+                                break;
+                            case "INTERN":
+                                JOptionPane.showMessageDialog(this, "Connexion de l'interne OK");
+                                break;
+                            case "MANIP":
+                                JOptionPane.showMessageDialog(this, "Connexion du manipulateur radio OK");
+                                break;
+                            case "DECO":
+                                JOptionPane.showMessageDialog(this, "Vous êtes déconnecté");
+                            default:
+                                throw new AssertionError();
+                        }
+                    } else if (idMDPVerif == false) {
+                        JOptionPane.showMessageDialog(this, "Connexion impossible :\tCouple Identifiant / Mot de Passe non trouvé\n\t\tVeuillez réessayer");
+                    }
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                    ex.getSQLState();
+                    ex.getCause();
+                    ex.getErrorCode();
+                    JOptionPane.showMessageDialog(this, "Votre identifiant et/ou votre mot de passe sont erronés \n Veuillez réessayer", "Erreur", JOptionPane.WARNING_MESSAGE);
+                } finally {
+                    c.close();
+                }
+//            } catch (NoSuchAlgorithmException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (NoSuchPaddingException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (InvalidKeyException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IOException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (IllegalBlockSizeException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//            } catch (BadPaddingException ex) {
+//                Logger.getLogger(Connexion.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        }
+    }//GEN-LAST:event_ConnectionButtonActionPerformed
 
-    private void jTextField1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField1MouseClicked
+
+    private void jTextField_identifiantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_identifiantActionPerformed
+
+
+    }//GEN-LAST:event_jTextField_identifiantActionPerformed
+
+    private void jTextField_identifiantMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTextField_identifiantMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1MouseClicked
+    }//GEN-LAST:event_jTextField_identifiantMouseClicked
 
-    private void jTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusGained
-       // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1FocusGained
+    private void jTextField_identifiantFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField_identifiantFocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_identifiantFocusGained
 
-   
     /**
      * @param args the command line arguments
      */
@@ -194,16 +268,24 @@ public class Connexion extends javax.swing.JFrame {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
+
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Connexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Connexion.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Connexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Connexion.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Connexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Connexion.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
+
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Connexion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Connexion.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         //</editor-fold>
@@ -217,14 +299,14 @@ public class Connexion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton ConnectionButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JPasswordField jPasswordField;
+    private javax.swing.JTextField jTextField_identifiant;
     // End of variables declaration//GEN-END:variables
 }

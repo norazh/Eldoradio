@@ -1,13 +1,17 @@
 package FC;
 
+import java.awt.Image;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.Vector;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import javax.swing.ImageIcon;
+import javax.swing.table.DefaultTableModel;
 
 public class DbConnection {
 
@@ -123,6 +127,31 @@ public class DbConnection {
         return null;
     }
 
+    // Taille d'un ResultSet à partir du nom d'une table
+    public int resultSetSize(String table) throws SQLException {
+        String query = "SELECT COUNT(*) FROM " + table;
+//        try {
+        this.res = select(query);
+        res.next();
+        int size = res.getInt(1);
+        return size;
+//        } finally {
+//            res.close();
+//            stmt.close();
+    }
+//    }
+
+    // Taille d'un ResultSet
+    public int resultSetSize(ResultSet res) throws SQLException {
+        int size = 0;
+        if (res != null) {
+            res.beforeFirst();
+            res.last();
+            size = res.getRow();
+        }
+        return size;
+    }
+
     // ------------------------ Traitement générique des requête SQL ----------------------
     // Stocke les éléments d'un String dans un ArrayList<String>
     public ArrayList<String> separate(String StringtoSeparate) {
@@ -139,36 +168,32 @@ public class DbConnection {
     public ArrayList<ArrayList<String>> select(String field, String table) throws SQLException {
         String query = "SELECT " + field + " FROM " + table;
         ArrayList<String> sepField = separate(field);
-        try {
-            if (field == "*") {
-                ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>();
-                this.res = select(query);
-                this.resMeta = res.getMetaData();
-                int col = resMeta.getColumnCount();
-                for (int i = 0; i < col; i++) {
-                    arr2D.add(new ArrayList<String>());
-                }
-                while (res.next()) {
-                    for (int i = 1; i < col + 1; i++) {
-                        arr2D.get(i - 1).add(res.getString(i));
-                    }
-                }
-                return arr2D;
-            } else {
-                ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>(sepField.size());
-                this.res = select(query);
-                for (int i = 0; i < sepField.size(); i++) {
-                    arr2D.add(new ArrayList<String>());
-                }
-                while (res.next()) {
-                    for (int i = 0; i < sepField.size(); i++) {
-                        arr2D.get(i).add(res.getString(sepField.get(i)));
-                    }
-                }
-                return arr2D;
+        if (field == "*") {
+            ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>();
+            this.res = select(query);
+            this.resMeta = res.getMetaData();
+            int col = resMeta.getColumnCount();
+            for (int i = 0; i < col; i++) {
+                arr2D.add(new ArrayList<String>());
             }
-        } finally {
-            res.close();
+            while (res.next()) {
+                for (int i = 1; i < col + 1; i++) {
+                    arr2D.get(i - 1).add(res.getString(i));
+                }
+            }
+            return arr2D;
+        } else {
+            ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>(sepField.size());
+            this.res = select(query);
+            for (int i = 0; i < sepField.size(); i++) {
+                arr2D.add(new ArrayList<String>());
+            }
+            while (res.next()) {
+                for (int i = 0; i < sepField.size(); i++) {
+                    arr2D.get(i).add(res.getString(sepField.get(i)));
+                }
+            }
+            return arr2D;
         }
     }
 
@@ -176,42 +201,38 @@ public class DbConnection {
     public ArrayList<ArrayList<String>> select(String field, String table, String condition) throws SQLException {
         String query = "SELECT " + field + " FROM " + table + " WHERE " + condition;
         ArrayList<String> sepField = separate(field);
-        try {
-            if (field == "*") {
-                ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>();
-                this.res = select(query);
-                // System.out.println(query); // Test valeur de query (Erreur SQLSyntax)
-                this.resMeta = res.getMetaData();
-                int col = resMeta.getColumnCount();
-                for (int i = 0; i < col; i++) {
-                    arr2D.add(new ArrayList<String>());
-                }
-                while (res.next()) {
-                    for (int i = 1; i < col + 1; i++) {
-                        arr2D.get(i - 1).add(res.getString(i));
-                    }
-                }
-                return arr2D;
-            } else {
-                ArrayList<ArrayList<String>> arr2D = new ArrayList<>(sepField.size());
-                this.res = select(query);
-                for (int i = 0; i < sepField.size(); i++) {
-                    arr2D.add(new ArrayList<String>());
-                }
-                while (res.next()) {
-                    for (int i = 0; i < sepField.size(); i++) {
-                        arr2D.get(i).add(res.getString(sepField.get(i)));
-                    }
-                }
-                return arr2D;
+        if (field == "*") {
+            ArrayList<ArrayList<String>> arr2D = new ArrayList<ArrayList<String>>();
+            this.res = select(query);
+            // System.out.println(query); // Test valeur de query (Erreur SQLSyntax)
+            this.resMeta = res.getMetaData();
+            int col = resMeta.getColumnCount();
+            for (int i = 0; i < col; i++) {
+                arr2D.add(new ArrayList<String>());
             }
-        } finally {
-            res.close();
+            while (res.next()) {
+                for (int i = 1; i < col + 1; i++) {
+                    arr2D.get(i - 1).add(res.getString(i));
+                }
+            }
+            return arr2D;
+        } else {
+            ArrayList<ArrayList<String>> arr2D = new ArrayList<>(sepField.size());
+            this.res = select(query);
+            for (int i = 0; i < sepField.size(); i++) {
+                arr2D.add(new ArrayList<String>());
+            }
+            while (res.next()) {
+                for (int i = 0; i < sepField.size(); i++) {
+                    arr2D.get(i).add(res.getString(sepField.get(i)));
+                }
+            }
+            return arr2D;
         }
     }
 
     // Génére un PreparedStatement à modifier selon les valeurs à ajouter dans la BDD
-        public void insert(String table, String field) throws SQLException {
+    public void insert(String table, String field) throws SQLException {
         ArrayList<String> sepField = separate(field);
         int nbValues = sepField.size();
         String query = "INSERT INTO " + table + "(" + field + ") VALUES (";
@@ -227,6 +248,13 @@ public class DbConnection {
         }
     }
 
+   public void modifierBD(String s) throws SQLException{
+            pstmt = con.prepareStatement(s);
+            pstmt.execute();
+   }
+   
+   
+    // retourne le nom des colonnes d'un ResultSet
     public ArrayList<ArrayList<String>> info(ResultSet res) throws SQLException {
         resMeta = res.getMetaData();
         int arrSize = resMeta.getColumnCount();
@@ -247,11 +275,46 @@ public class DbConnection {
         }
         return listResultat;
     }
-    
-    
-    // -------------------------------------- Historique des Méthodes  --------------------------------------
-    
-    /*   
+
+    // Retourne une image depuis la BD depuis un numéro d'archivage ——— Ne fonctionne pas !! : SQLException: Column index out of range.
+    public ImageIcon importPic(String numArchivage) throws SQLException {
+        String query = "SELECT Fichier FROM pacs WHERE numArchivage = " + numArchivage;
+        this.res = select(query);
+        if (res.next()) {
+            byte[] img = res.getBytes("Fichier");
+            ImageIcon imgIcon = new ImageIcon(img);
+            Image im = imgIcon.getImage();
+            ImageIcon newImg = new ImageIcon(im);
+            return newImg;
+        } else {
+            return null;
+        }
+    }
+
+    public ArrayList<ArrayList<String>> listeExam(String idMed) throws SQLException {
+        ArrayList<ArrayList<String>> listeExam = select("*", "examen", "(IDPERS = '" + idMed + "')");
+        return listeExam;
+    }
+
+    public ArrayList<ArrayList<String>> infosPatient(String idPers) throws SQLException {
+        ArrayList<ArrayList<String>> listeIDSIR = select("*", "examen", "(IDPERS = '" + idPers + "')"); // liste des IDSIR d'`examen` par IDPERS
+        Set set = new HashSet();
+        set.addAll(listeIDSIR);
+        ArrayList distinctList = new ArrayList(set);
+
+        ArrayList<ArrayList<String>> Patients;
+        for (int i = 0; i < listeIDSIR.size(); i++) {
+            String IDSIR = listeIDSIR.get(1).get(i);
+            ArrayList<ArrayList<String>> infoPatient = select("*", "dmr", "(IDSIR = '" + IDSIR + "')");
+
+        }
+        return null;
+    }
+
+}
+
+// -------------------------------------- Historique des Méthodes  --------------------------------------
+/*   
     
     public ArrayList<String> requetePstmt(Personnel pers) throws SQLException, ClassNotFoundException {
             int arrSize = 3;
@@ -279,39 +342,5 @@ public class DbConnection {
                     pstmt.close();
                 } catch (SQLException e) {e.printStackTrace();}}return listResultat;} 
         
-       
-        // Renvoie un objet Personnel() avec Prénom/Nom/Statut à partir d'une recherche prénom
-        public Personnel infoPersonnel(String prenomPers) throws SQLException {
-            DbConnection con = new DbConnection();
-            Personnel pers = new Personnel();
-            Statut statut = pers.getStatut();
-            ArrayList<ArrayList<String>> info = con.requetePstmt();
-            pers.setPrenom(info.get(1).get(1));
-            pers.setNom(info.get(2).get(1));
-            pers.setStatut(statut.valueOf(info.get(3).get(1)));
-            return pers;
-        }
     
-    
-   
-        // Stocke le contenu d'un ResultSet dans une Arraylist
-        public ArrayList listePersonnel(ResultSet resultat) throws SQLException {
-            ArrayList liste = new ArrayList();
-            while (resultat.next()) {
-                for (int i = 1; i < liste.size(); i++) {
-                    if (resultat.getObject(i) != null) {
-                        liste.add(resultat.getObject(i).toString());
-                    } else {
-                        System.out.println("erreur : champ null");
-                    }
-                    // affiche le contenu de liste dans la console
-                    for (int j = 0; j < liste.size(); j++) {
-                        System.out.println(liste.get(j));
-                    }
-                }
-            }
-            return liste;
-        }
-     
-     */
-}
+ */

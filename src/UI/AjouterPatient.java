@@ -333,10 +333,10 @@ public class AjouterPatient extends javax.swing.JFrame {
     
     public Sexe getSexe(){
         if(jRadioButton1.isSelected()){
-            return Sexe.F;
+            return Sexe.Femme;
         }
         else{
-            return Sexe.H;
+            return Sexe.Homme;
         }
     }
     /**

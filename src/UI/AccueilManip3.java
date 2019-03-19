@@ -6,6 +6,8 @@
 package UI;
 
 import FC.*;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
@@ -19,11 +21,26 @@ public class AccueilManip3 extends javax.swing.JFrame {
     /**
      * Creates new form AccueilManip3
      */
-    SIR sir;
-
-    public AccueilManip3() {
-
+    private SIR sir;
+    private String IDPERS;
+    private DMR dmr;
+    private Examen ex;
+    private ArrayList<Patient> listPatient; // Liste des Patient pris en charge par ce Medecin
+    private ArrayList<DMR> listDMR; // Liste DMR par Patient 
+    private ArrayList<Examen> listExamen; // Liste Exam par Patient
+    private int[] NbExam ; // Liste Nombre d'Examen par Patient
+    private ArrayList<String> DateExam; // Liste date du dernier Exam par Patient
+    
+    public AccueilManip3(){}
+    
+    public AccueilManip3(String IDPERS) throws SQLException {
+        DbConnection c = new DbConnection();
+        c.connexionP();
+        this.IDPERS = IDPERS;
+        ArrayList<ArrayList<String>> listExam = c.listeExam(IDPERS);
         initComponents();
+        
+        
     }
 
     /**
@@ -330,6 +347,15 @@ public class AccueilManip3 extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
+ 
+
+    
+    
+    
+    
+    
+    
+    
 
     private void remplirTableauFiche() {
         DefaultTableModel dtm = new DefaultTableModel(0, 4);
