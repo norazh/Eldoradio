@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Imane
  */
-public class Secretaire_RechercherPatient extends javax.swing.JFrame {
+public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
 
 //    private ArrayList<Patient> lp = new ArrayList<Patient>();
 //    private Fonctions f = new Fonctions();
@@ -30,34 +30,11 @@ public class Secretaire_RechercherPatient extends javax.swing.JFrame {
     /**
      * Creates new form AccueilSecretaire2
      */
-    public Secretaire_RechercherPatient() throws SQLException, ParseException {
+    public Manipulateur_RechercherPatient() throws SQLException, ParseException {
         initComponents();
         jLabel2.setText("Jean Bono");
         TabInit();
 
-//        DbConnection c = new DbConnection();
-//        c.connexionP();
-//
-//        //on initialise le liste de patients totale à afficher dans le tableau
-//        ConnexionBD c1 = new ConnexionBD();
-//        c1.connexion();
-//        this.lp = c1.recupListeP();
-//        DefaultTableModel model = new DefaultTableModel();
-//        Object[] title = {"IPP", "IDDMR", "Prenom", "Nom", "DateNaissance", "Sexe"};
-//        model.setColumnIdentifiers(title);
-//        for (int i = 0; i < lp.size(); i++) {
-//            Object[] unPatient = new Object[6];
-//            unPatient[0] = lp.get(i).getIPP();
-//            unPatient[1] = lp.get(i).getidDMR();
-//            unPatient[2] = lp.get(i).getPrenom();
-//            unPatient[3] = lp.get(i).getNom();
-//            unPatient[4] = lp.get(i).getDateDeNaissance();
-//            unPatient[5] = lp.get(i).getSexe();
-//
-//            model.addRow(unPatient);
-//        }
-//        tablepatients.setModel(model);
-//        tablepatients.revalidate();
     }
 
     /**
@@ -330,7 +307,7 @@ public class Secretaire_RechercherPatient extends javax.swing.JFrame {
             setTable(rs);
             c.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_OK_nompatientActionPerformed
 
@@ -349,7 +326,7 @@ public class Secretaire_RechercherPatient extends javax.swing.JFrame {
             setTable(rs);
             c.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_OK_prenompatientActionPerformed
 
@@ -379,7 +356,8 @@ public class Secretaire_RechercherPatient extends javax.swing.JFrame {
 //            System.out.println(p.getIPP() + p.getidDMR() + p.getNom() + p.getPrenom() + p.getAdresse() + p.getVille() + p.getCodePostal() + p.getDateDeNaissance().toString() + p.getSexe());
 
             //On affiche la nouvelle fenêtre destinée à afficher le DMR du patient sélectionné.
-            UI.Secretaire_AfficherDMR admr = new UI.Secretaire_AfficherDMR();
+            UI.Manipulateur_AfficherDMR admr;
+            admr = new UI.Manipulateur_AfficherDMR();
             admr.setVisible(true);
 
 //            while (rs.next()) {
@@ -395,7 +373,7 @@ public class Secretaire_RechercherPatient extends javax.swing.JFrame {
 //                }
 //            }
         } catch (SQLException ex) {
-            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_tablepatientsMouseClicked
@@ -417,30 +395,14 @@ public class Secretaire_RechercherPatient extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -462,11 +424,11 @@ public class Secretaire_RechercherPatient extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Secretaire_RechercherPatient().setVisible(true);
+                    new Manipulateur_RechercherPatient().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Secretaire_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
                 } catch (ParseException ex) {
-                    Logger.getLogger(Secretaire_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });

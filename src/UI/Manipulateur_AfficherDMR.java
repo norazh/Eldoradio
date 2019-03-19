@@ -18,15 +18,15 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Imane
  */
-public class Secretaire_AfficherDMR extends javax.swing.JFrame {
+public class Manipulateur_AfficherDMR extends javax.swing.JFrame {
 
-    private Patient patient;
+    private static Patient patient;
     private static Examen examen;
 
     /**
      * Creates new form AccueilSecretaire2
      */
-    public Secretaire_AfficherDMR() throws SQLException {
+    public Manipulateur_AfficherDMR() throws SQLException {
 
         initComponents();
 
@@ -34,7 +34,7 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
         jLabel2.setText("Jean Bono");
 
         //On récupère l'instance de Patient créée dans UI.Medecin_RechercherPatient
-        patient = UI.Secretaire_RechercherPatient.getPatient();
+        patient = UI.Manipulateur_RechercherPatient.getPatient();
 
         //Initialisation des labels concernant le patient en fonction des données du patient
         label_adresse.setText(patient.getAdresse() + "    " + patient.getCodePostal() + "    " + patient.getVille());
@@ -90,6 +90,7 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
         label_adresse = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         label_ipp = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         label_iddmr = new javax.swing.JLabel();
@@ -99,7 +100,7 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jButton4 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Accueil : Secrétaire médicale");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setForeground(new java.awt.Color(255, 255, 255));
@@ -239,6 +240,13 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton1.setText("Ajouter un examen au DMR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         jPanel5.setBackground(new java.awt.Color(255, 255, 255));
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2), "Informations du DMR", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -286,6 +294,7 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(32, 32, 32)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -302,7 +311,9 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -361,28 +372,34 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        UI.Manipulateur_AjouterExamen ae = new UI.Manipulateur_AjouterExamen();
+        ae.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
 
         //On récupère l'ID du patient, correspondant à la première valeur de la ligne sélectionnée dans le tableau
-//        String IDExam = getIDExam();
-//
-//        DbConnection c = new DbConnection();
-//        c.connexionP();
-//        String query = "SELECT * from examen WHERE (idExamen = '" + IDExam + "') ";
-//        ResultSet rs = c.select(query);
-//
-//        try {
-//            //Initialisation de Examen examen avec les données de la BD
-//            while (rs.next()) {
-//                examen = new Examen(rs.getString("idExamen"));
-//            }
-//
-//            UI.Medecin_AfficherUNExamenAPartirDuDMR aueapdm = new UI.Medecin_AfficherUNExamenAPartirDuDMR();
-//            aueapdm.setVisible(true);
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(Secretaire_AfficherDMR1.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+        String IDExam = getIDExam();
+
+        DbConnection c = new DbConnection();
+        c.connexionP();
+        String query = "SELECT * from examen WHERE (idExamen = '" + IDExam + "') ";
+        ResultSet rs = c.select(query);
+
+        try {
+            //Initialisation de Examen examen avec les données de la BD
+            while (rs.next()) {
+                examen = new Examen(rs.getString("idExamen"));
+            }
+
+            UI.Manipulateur_AfficherUNExamenAPartirDuDMR aueapdm = new UI.Manipulateur_AfficherUNExamenAPartirDuDMR();
+            aueapdm.setVisible(true);
+
+        } catch (SQLException ex) {
+            Logger.getLogger(Manipulateur_AfficherDMR.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 
     }//GEN-LAST:event_tableMouseClicked
@@ -404,30 +421,14 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_AfficherDMR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherDMR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_AfficherDMR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherDMR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_AfficherDMR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherDMR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Secretaire_AfficherDMR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherDMR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -449,15 +450,16 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Secretaire_AfficherDMR().setVisible(true);
+                    new Manipulateur_AfficherDMR().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Secretaire_AfficherDMR.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Manipulateur_AfficherDMR.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
@@ -532,4 +534,9 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
         String idExamenSelectedRow = table.getValueAt(table.getSelectedRow(), 0).toString();
         return idExamenSelectedRow;
     }
+    
+    public static Patient getPatient(){
+        return patient;
+    }
+    
 }
