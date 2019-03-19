@@ -10,13 +10,15 @@ package FC;
  * @author menar
  */
 public enum Sexe {
-    H ("H"),
-    F ("F");
+    Homme("Homme"),
+    Femme("Femme");
     private String sexe;
-    private Sexe (String sexe){
-        this.sexe=sexe;
-        
+
+    private Sexe(String sexe) {
+        this.sexe = sexe;
+
     }
+
     public String toString() {
         return sexe;
     }

@@ -12,6 +12,8 @@ package FC;
 
 
 public class Date implements Comparable {
+
+
     private int jour;
     private int mois;
     private int annee;
@@ -158,7 +160,7 @@ public class Date implements Comparable {
     public boolean equals(Object o) {// méthode qui permet de vérifier si deux dates sont identiques , retourne true si les 2 dates correspondent, false sinon   
         if (o instanceof Date) { // si l'objet o est une instance de Date
             Date d = (Date)o;// crée une variable d égale à l'objet
-            return (annee == d.annee) && (mois == d.mois) && (jour == d.jour) && (heure == d.heure) && (minute == d.minute);// retourne true si c'est la même date, false si c'est pas la même date
+            return (annee == d.annee) && (mois == d.mois) && (getJour() == d.getJour()) && (heure == d.heure) && (minute == d.minute);// retourne true si c'est la même date, false si c'est pas la même date
             }
         else
             return false;// si l'objet n'est pas une date, on retourne false
@@ -166,7 +168,7 @@ public class Date implements Comparable {
      public boolean equalsBasique(Object o) {// méthode qui permet de vérifier si deux dates sont identiques , retourne true si les 2 dates correspondent, false sinon   
         if (o instanceof Date) { // si l'objet o est une instance de Date
             Date d = (Date)o;// crée une variable d égale à l'objet
-            return (annee == d.annee) && (mois == d.mois) && (jour == d.jour);// retourne true si c'est la même date, false si c'est pas la même date
+            return (annee == d.annee) && (mois == d.mois) && (getJour() == d.getJour());// retourne true si c'est la même date, false si c'est pas la même date
             }
         else
             return false;// si l'objet n'est pas une date, on retourne false
@@ -191,7 +193,7 @@ public class Date implements Comparable {
             return mois  - d.mois;// renvoie la différence des mois
         // ici on a forcement annee == d.annee et mois == d.mois :
 		if (getJour() != d.getJour()){// si passe à ce if, mois égal
-			return jour - d.jour;// renvoie la différence des jours
+			return getJour() - d.getJour();// renvoie la différence des jours
 		}
 		if ( heure != d.heure){// si passe à ce if, jour égal
 			return heure - d.heure ; // renvoie la différence d'heures 
@@ -282,6 +284,41 @@ public class Date implements Comparable {
         return s;
     }
 	
+    
+        /**
+     * @param jour the jour to set
+     */
+    public void setJour(int jour) {
+        this.jour = jour;
+    }
+
+    /**
+     * @param mois the mois to set
+     */
+    public void setMois(int mois) {
+        this.mois = mois;
+    }
+
+    /**
+     * @param annee the annee to set
+     */
+    public void setAnnee(int annee) {
+        this.annee = annee;
+    }
+
+    /**
+     * @param heure the heure to set
+     */
+    public void setHeure(int heure) {
+        this.heure = heure;
+    }
+
+    /**
+     * @param minute the minute to set
+     */
+    public void setMinute(int minute) {
+        this.minute = minute;
+    }
     
     }
 

@@ -12,20 +12,20 @@ package FC;
 public enum TypeExamen {
     RADIOLOGIE("RADIOLOGIE"),
     IRM("IRM"),
-    SCAN("SCAN"),
+    SCANNER("SCANNER"),
     ECHOGRAPHIE("ECHOGRAPHIE"),
     ANGIOGRAPHIE("ANGIOGRAPHIE"),
     ECHOENDOGRAPHIE("ECHOENDOGRAPHIE"),
     MAMMOGRAPHIE("MAMMOGRAPHIE"),
     RADIOTHERAPIE("RADIOTHERAPIE"),
     PET("PET");
-    
+
     private String type;
-     private TypeExamen(String type) {
+
+    private TypeExamen(String type) {
         this.type = type;
     }
 
-    
     public String toString() {
         return type;
     }

@@ -38,6 +38,7 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
 //    File selectedFile;
     public String path;
     public Traitement panel_traitement = new Traitement();
+    public RecupererCheminImage r;
 
     /**
      * Creates new form NewJFrame
@@ -66,17 +67,20 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         Bouton_Eclaircir = new javax.swing.JButton();
         Bouton_Assombrir = new javax.swing.JButton();
-        Bouton_EnregistrerImage = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        Bouton_reinitialiser = new javax.swing.JButton();
         jButton_chargerImage = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jButton10 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTextPane1 = new javax.swing.JTextPane();
+        Bouton_EnregistrerImage = new javax.swing.JButton();
+        Bouton_enregistrerDansPacs = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Traitement d'image", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(247, 246, 246));
+
+        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2), "Traitement d'image", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 12))); // NOI18N
 
         Bouton_RotationD.setText("Rotation 90° horaire");
         Bouton_RotationD.addActionListener(new java.awt.event.ActionListener() {
@@ -129,17 +133,10 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
             }
         });
 
-        Bouton_EnregistrerImage.setText("Enregistrer");
-        Bouton_EnregistrerImage.addActionListener(new java.awt.event.ActionListener() {
+        Bouton_reinitialiser.setText("Réinitialiser");
+        Bouton_reinitialiser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Bouton_EnregistrerImageActionPerformed(evt);
-            }
-        });
-
-        jButton5.setText("Enregistrer dans le PACS");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                Bouton_reinitialiserActionPerformed(evt);
             }
         });
 
@@ -147,9 +144,14 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(92, 92, 92)
+                .addComponent(jLabel2)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Bouton_reinitialiser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(Bouton_Assombrir)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -160,17 +162,6 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
                     .addComponent(Bouton_Inverser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(Bouton_RotationG, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
                 .addGap(30, 30, 30))
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(92, 92, 92)
-                        .addComponent(jLabel2))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(Bouton_EnregistrerImage, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -191,145 +182,112 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Bouton_Eclaircir)
                     .addComponent(Bouton_Assombrir))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(Bouton_EnregistrerImage, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addGap(29, 29, 29)
+                .addComponent(Bouton_reinitialiser, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        jButton_chargerImage.setText("Charger une image");
+        jButton_chargerImage.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jButton_chargerImage.setText("CHARGER UNE IMAGE");
+        jButton_chargerImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2));
+        jButton_chargerImage.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jButton_chargerImage.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_chargerImageActionPerformed(evt);
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 3));
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 3));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 751, Short.MAX_VALUE)
+            .addGap(0, 779, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 487, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jButton10.setText("Retour");
 
-        jTextPane1.setBorder(javax.swing.BorderFactory.createTitledBorder("Annotations"));
-        jScrollPane1.setViewportView(jTextPane1);
+        Bouton_EnregistrerImage.setText("Enregistrer");
+        Bouton_EnregistrerImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bouton_EnregistrerImageActionPerformed(evt);
+            }
+        });
+
+        Bouton_enregistrerDansPacs.setText("Enregistrer dans le PACS");
+        Bouton_enregistrerDansPacs.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Bouton_enregistrerDansPacsActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton_chargerImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton10)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(40, Short.MAX_VALUE))
+                .addGap(23, 23, 23)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jButton10, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jButton_chargerImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(Bouton_enregistrerDansPacs, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(Bouton_EnregistrerImage, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+                .addGap(27, 27, 27)
                 .addComponent(jButton10)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(27, 27, 27)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jButton_chargerImage, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(113, 113, 113))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Bouton_enregistrerDansPacs, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Bouton_EnregistrerImage, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1081, Short.MAX_VALUE)
+            .addGap(0, 1117, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 778, Short.MAX_VALUE)
+            .addGap(0, 777, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void Bouton_RotationDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_RotationDActionPerformed
-        panel_traitement.rotationDroite();
-    }//GEN-LAST:event_Bouton_RotationDActionPerformed
-
-    private void Bouton_InverserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_InverserActionPerformed
+    private void Bouton_enregistrerDansPacsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_enregistrerDansPacsActionPerformed
         // TODO add your handling code here:
-        panel_traitement.inversionNiveauGris();
-    }//GEN-LAST:event_Bouton_InverserActionPerformed
-
-    private void Bouton_RotationGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_RotationGActionPerformed
-        panel_traitement.rotationGauche();
-    }//GEN-LAST:event_Bouton_RotationGActionPerformed
-
-    private void Bouton_SymetrieVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_SymetrieVActionPerformed
-        panel_traitement.symetrieVerticale();
-    }//GEN-LAST:event_Bouton_SymetrieVActionPerformed
-
-    private void Bouton_SymetrieHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_SymetrieHActionPerformed
-        // TODO add your handling code here:
-        panel_traitement.symetrieHorizontale();
-    }//GEN-LAST:event_Bouton_SymetrieHActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton_chargerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_chargerImageActionPerformed
-        // TODO add your handling code here:
-        RecupererCheminImage c = new RecupererCheminImage();
-        panel_traitement.afficherImageChargee(new File(c.getPath()));
-        panel_traitement.setPreferredSize(jPanel2.getSize());
-        jPanel2.setLayout(new FlowLayout());
-        jPanel2.add(panel_traitement);
-        this.revalidate();
-    }//GEN-LAST:event_jButton_chargerImageActionPerformed
-
-    private void Bouton_EclaircirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_EclaircirActionPerformed
-
-        panel_traitement.imageEclaircie();
-
-    }//GEN-LAST:event_Bouton_EclaircirActionPerformed
-
-    private void Bouton_AssombrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_AssombrirActionPerformed
-        // TODO add your handling code here:
-        panel_traitement.imageSombre();
-    }//GEN-LAST:event_Bouton_AssombrirActionPerformed
+    }//GEN-LAST:event_Bouton_enregistrerDansPacsActionPerformed
 
     private void Bouton_EnregistrerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_EnregistrerImageActionPerformed
         // TODO add your handling code here:
@@ -342,8 +300,63 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
             } catch (FileNotFoundException ex) {
             }
         }
-
     }//GEN-LAST:event_Bouton_EnregistrerImageActionPerformed
+
+    private void jButton_chargerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_chargerImageActionPerformed
+        // TODO add your handling code here:
+        RecupererCheminImage r = new RecupererCheminImage();
+        path = r.getPath();
+        panel_traitement.afficherImageChargee(new File(path));
+       
+        panel_traitement.setPreferredSize(jPanel2.getSize());
+        //jPanel2.setLayout(new FlowLayout());
+        jPanel2.setLayout(new BorderLayout());
+
+        jPanel2.add(panel_traitement);
+
+        this.revalidate();
+    }//GEN-LAST:event_jButton_chargerImageActionPerformed
+
+    private void Bouton_reinitialiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_reinitialiserActionPerformed
+        // TODO add your handling code here:
+        panel_traitement.afficherImageChargee(new File(path));
+        panel_traitement.setPreferredSize(jPanel2.getSize());
+        jPanel2.setLayout(new FlowLayout());
+        jPanel2.add(panel_traitement);
+        //this.revalidate();
+    }//GEN-LAST:event_Bouton_reinitialiserActionPerformed
+
+    private void Bouton_AssombrirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_AssombrirActionPerformed
+        // TODO add your handling code here:
+        panel_traitement.imageSombre();
+    }//GEN-LAST:event_Bouton_AssombrirActionPerformed
+
+    private void Bouton_EclaircirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_EclaircirActionPerformed
+
+        panel_traitement.imageEclaircie();
+    }//GEN-LAST:event_Bouton_EclaircirActionPerformed
+
+    private void Bouton_SymetrieHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_SymetrieHActionPerformed
+        // TODO add your handling code here:
+        panel_traitement.symetrieHorizontale();
+    }//GEN-LAST:event_Bouton_SymetrieHActionPerformed
+
+    private void Bouton_SymetrieVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_SymetrieVActionPerformed
+        panel_traitement.symetrieVerticale();
+    }//GEN-LAST:event_Bouton_SymetrieVActionPerformed
+
+    private void Bouton_RotationGActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_RotationGActionPerformed
+        panel_traitement.rotationGauche();
+    }//GEN-LAST:event_Bouton_RotationGActionPerformed
+
+    private void Bouton_InverserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_InverserActionPerformed
+        // TODO add your handling code here:
+        panel_traitement.inversionNiveauGris();
+    }//GEN-LAST:event_Bouton_InverserActionPerformed
+
+    private void Bouton_RotationDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_RotationDActionPerformed
+        panel_traitement.rotationDroite();
+    }//GEN-LAST:event_Bouton_RotationDActionPerformed
 
 //    public void RotateImage(int angle){
 //        rotate_angle=angle*3.6;
@@ -412,15 +425,14 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
     private javax.swing.JButton Bouton_RotationG;
     private javax.swing.JButton Bouton_SymetrieH;
     private javax.swing.JButton Bouton_SymetrieV;
+    private javax.swing.JButton Bouton_enregistrerDansPacs;
+    private javax.swing.JButton Bouton_reinitialiser;
     private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton_chargerImage;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextPane jTextPane1;
     // End of variables declaration//GEN-END:variables
 
 }

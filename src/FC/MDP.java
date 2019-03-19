@@ -11,6 +11,7 @@ package FC;
  */
 public class MDP {
     private String mdp;
+    
     public MDP (String mdp){
         if (MdpValide(mdp)){
         this.mdp=mdp;
