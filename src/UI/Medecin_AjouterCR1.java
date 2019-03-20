@@ -22,16 +22,17 @@ import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
  *
  * @author Imane
  */
-public class Medecin_AjouterCR extends javax.swing.JFrame {
+public class Medecin_AjouterCR1 extends javax.swing.JFrame {
 private Examen examen;
     /**
      * Creates new form Secretaire_AjouterNouveauPersonnel
      */
-    public Medecin_AjouterCR() {
+    public Medecin_AjouterCR1() {
         
         initComponents();
         
         examen = UI.Medecin_AfficherTOUSLESExamens.getExamen();
+        
         
     }
 
@@ -180,7 +181,7 @@ private Examen examen;
             c.modifierBD(query2);
         } catch (SQLException ex) {
 
-            Logger.getLogger(Medecin_AjouterCR.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Medecin_AjouterCR1.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         System.out.println("ajouté !");
@@ -206,14 +207,18 @@ private Examen examen;
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AjouterCR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Medecin_AjouterCR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AjouterCR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Medecin_AjouterCR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AjouterCR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Medecin_AjouterCR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AjouterCR.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Medecin_AjouterCR1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -222,7 +227,7 @@ private Examen examen;
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Medecin_AjouterCR().setVisible(true);
+                new Medecin_AjouterCR1().setVisible(true);
             }
         });
     }

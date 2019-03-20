@@ -5,7 +5,10 @@
  */
 package FC;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Random;
+import java.util.Date;
 
 /**
  *
@@ -63,6 +66,23 @@ public class Patient {
         this.idDMR = iddmr;
     }
 
+    public Patient(int ipp, String nom, String prenom, String adresse, String ville, int codePostal, Date date, Sexe sexe) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.ville = ville;
+        this.codePostal = codePostal;
+        this.idDMR = idDMR;
+        this.dateNaissance = date;
+        this.sexe = sexe;
+        this.IPP = ipp;
+        
+    }
+    
+    public Patient(int ipp){
+        this.IPP = ipp;
+    }
+    
 //    public String toString() {
 //
 //        return "FICHE PATIENT" + "\n" + "Prénom: " + getPrenom() + "\n " + "Nom : " + getNom() + " \n " + "Adresse: " + getAdresse() + "\n" + "Ville : " + getVille() + "\n" + "Code Postal: " + getCodePostal() + "\n" + "IPP: " + getIPP() + "\n" + "idDMR: " + getidDMR() + "\n" + "Date de naissance: " + getDateDeNaissance().toString() + " \n " + "Sexe : " + getSexe() + " \n ";
@@ -186,4 +206,8 @@ public class Patient {
 		}
         return minute - d.minute;// différence des minutes
         }*/
+    
+    
+    
+    
 }

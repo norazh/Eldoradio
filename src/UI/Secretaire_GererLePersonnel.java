@@ -11,11 +11,14 @@ package UI;
  */
 public class Secretaire_GererLePersonnel extends javax.swing.JFrame {
 
+    RemplissageTableau rt = new RemplissageTableau();
     /**
      * Creates new form Secretaire_GererLePersonnel
      */
     public Secretaire_GererLePersonnel() {
         initComponents();
+        String s = "SELECT IDPERS, Nom, Prenom, Spécialité from personnel";
+        rt.TabInit(s, tableau_personnel);
     }
 
     /**
@@ -34,7 +37,7 @@ public class Secretaire_GererLePersonnel extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tableau_personnel = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -81,7 +84,7 @@ public class Secretaire_GererLePersonnel extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel4.setText("MEMBRES DU PERSONNEL");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tableau_personnel.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -100,7 +103,7 @@ public class Secretaire_GererLePersonnel extends javax.swing.JFrame {
                 return types [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tableau_personnel);
 
         jButton1.setBackground(new java.awt.Color(255, 255, 255));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -247,6 +250,6 @@ public class Secretaire_GererLePersonnel extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tableau_personnel;
     // End of variables declaration//GEN-END:variables
 }
