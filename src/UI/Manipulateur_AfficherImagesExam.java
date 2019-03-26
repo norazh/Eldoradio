@@ -19,12 +19,12 @@ import javax.swing.JOptionPane;
  *
  * @author Imane
  */
-public class Medecin_AfficherImagesExam extends javax.swing.JFrame {
+public class Manipulateur_AfficherImagesExam extends javax.swing.JFrame {
 
     /**
      * Creates new form Medecin_AfficherImagesExam
      */
-    public Medecin_AfficherImagesExam() throws SQLException {
+    public Manipulateur_AfficherImagesExam() throws SQLException {
         initComponents();
         
         
@@ -82,23 +82,24 @@ public class Medecin_AfficherImagesExam extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AfficherImagesExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherImagesExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AfficherImagesExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherImagesExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AfficherImagesExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherImagesExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AfficherImagesExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherImagesExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    new Medecin_AfficherImagesExam().setVisible(true);
+                    new Manipulateur_AfficherImagesExam().setVisible(true);
                 } catch (SQLException ex) {
-                    Logger.getLogger(Medecin_AfficherImagesExam.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(Manipulateur_AfficherImagesExam.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         });
@@ -119,7 +120,7 @@ public class Medecin_AfficherImagesExam extends javax.swing.JFrame {
             byte[] img = rs.getBytes("Fichier");
             ImageIcon image = new ImageIcon(img);
 //            liste_images.add(image);
-            UI.Medecin_AfficherImagesExam aie = new UI.Medecin_AfficherImagesExam();
+            UI.Manipulateur_AfficherImagesExam aie = new UI.Manipulateur_AfficherImagesExam();
             aie.label.setIcon(image);
         }
 

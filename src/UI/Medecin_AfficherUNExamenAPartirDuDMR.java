@@ -13,6 +13,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import UI.Medecin_AfficherTOUSLESExamens;
+import java.sql.Blob;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -38,8 +39,6 @@ public class Medecin_AfficherUNExamenAPartirDuDMR extends javax.swing.JFrame {
 
         //On récupère l'instance de Patient créée dans UI.Medecin_RechercherPatient
         patient = UI.Medecin_RechercherPatient.getPatient();
-        
-        
 
         //Nécessité de faire une requête pour récupérer les informaions relatives à un examen
         DbConnection c = new DbConnection();
@@ -472,22 +471,27 @@ public class Medecin_AfficherUNExamenAPartirDuDMR extends javax.swing.JFrame {
 
         DbConnection c = new DbConnection();
         c.connexionP();
-        String requete = "SELECT * FROM pacs WHERE idExam = '" + idExam + "'";
+        String requete = "SELECT * FROM pacs WHERE idExam = '" + idExam + "' AND Fichier IS NOT NULL";
         ResultSet rs = c.select(requete);
 
         try {
-            if (!rs.next()) {
+            if (rs.first() == false) {
+                System.out.println("pas d'images");
                 JOptionPane.showMessageDialog(this, "Cet examen ne contient pas d'images.", "Aucun résultat", JOptionPane.INFORMATION_MESSAGE);
 
             } else {
+
                 rs.beforeFirst(); //On remet le curseur sur la ligne avant la première ligne des résultats
                 while (rs.next()) {
+                    System.out.println("il y a une image");
                     byte[] img = rs.getBytes("Fichier");
+
                     ImageIcon image = new ImageIcon(img);
 //            liste_images.add(image);
                     UI.Medecin_AfficherImagesExam aie = new UI.Medecin_AfficherImagesExam();
                     aie.label.setIcon(image);
                     aie.setVisible(true);
+
                 }
             }
         } catch (SQLException ex) {
@@ -648,6 +652,5 @@ public class Medecin_AfficherUNExamenAPartirDuDMR extends javax.swing.JFrame {
     public static Examen getExamen() {
         return examen;
     }
-    
-   
+
 }

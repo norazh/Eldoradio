@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Imane
  */
-public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
+public class Manipulateur_AfficherTOUSLESExamens extends javax.swing.JFrame {
 
     public String idExam = "";
     private String query = "";
@@ -36,7 +36,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
     /**
      * Creates new form AccueilSecretaire2
      */
-    public Medecin_AfficherTOUSLESExamens() {
+    public Manipulateur_AfficherTOUSLESExamens() {
         initComponents();
         jLabel2.setText("Jean Bono");
         TabInit();
@@ -320,7 +320,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
             setTable(rs);
             c.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Manipulateur_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_nomBtActionPerformed
 
@@ -333,7 +333,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
             setTable(rs);
             c.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Manipulateur_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_prenomBtActionPerformed
 
@@ -355,7 +355,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
                 setTable(rs);
                 c.close();
             } catch (SQLException ex) {
-                Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Manipulateur_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
             TabInit();
@@ -415,7 +415,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
                 }
 
             } catch (SQLException ex) {
-                Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Manipulateur_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_ComboBoxActionPerformed
@@ -474,7 +474,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
             UI.Medecin_AfficherUNExamen a = new UI.Medecin_AfficherUNExamen();
             a.setVisible(true);
         } catch (SQLException ex) {
-            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Manipulateur_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -497,14 +497,46 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherTOUSLESExamens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherTOUSLESExamens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherTOUSLESExamens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_AfficherTOUSLESExamens.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -541,7 +573,7 @@ public class Medecin_AfficherTOUSLESExamens extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Medecin_AfficherTOUSLESExamens().setVisible(true);
+                new Manipulateur_AfficherTOUSLESExamens().setVisible(true);
             }
         });
     }

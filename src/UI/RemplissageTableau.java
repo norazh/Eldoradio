@@ -20,6 +20,7 @@ public class RemplissageTableau {
     
     private ResultSet rs;
     
+    
     public void TabInit(String requete, JTable table) {
         try {
             DbConnection c = new DbConnection();
@@ -79,4 +80,6 @@ public class RemplissageTableau {
         }
 
     }
+    
+    
 }

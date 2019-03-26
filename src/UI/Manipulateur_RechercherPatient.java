@@ -35,6 +35,29 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
         jLabel2.setText("Jean Bono");
         TabInit();
 
+//        DbConnection c = new DbConnection();
+//        c.connexionP();
+//
+//        //on initialise le liste de patients totale à afficher dans le tableau
+//        ConnexionBD c1 = new ConnexionBD();
+//        c1.connexion();
+//        this.lp = c1.recupListeP();
+//        DefaultTableModel model = new DefaultTableModel();
+//        Object[] title = {"IPP", "IDDMR", "Prenom", "Nom", "DateNaissance", "Sexe"};
+//        model.setColumnIdentifiers(title);
+//        for (int i = 0; i < lp.size(); i++) {
+//            Object[] unPatient = new Object[6];
+//            unPatient[0] = lp.get(i).getIPP();
+//            unPatient[1] = lp.get(i).getidDMR();
+//            unPatient[2] = lp.get(i).getPrenom();
+//            unPatient[3] = lp.get(i).getNom();
+//            unPatient[4] = lp.get(i).getDateDeNaissance();
+//            unPatient[5] = lp.get(i).getSexe();
+//
+//            model.addRow(unPatient);
+//        }
+//        tablepatients.setModel(model);
+//        tablepatients.revalidate();
     }
 
     /**
@@ -59,12 +82,9 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
         field_prenompatient = new javax.swing.JTextField();
         OK_nompatient = new javax.swing.JButton();
         OK_prenompatient = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        bouton_reinitialiser = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Rechercher un patient");
@@ -128,7 +148,8 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tablepatients);
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Critères de recherche"));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2), "Critères de recherche", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jLabel4.setText("Nom du patient : ");
 
@@ -154,9 +175,12 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
             }
         });
 
-        jLabel6.setText("Trier par : ");
-
-        jCheckBox1.setText("Nom");
+        bouton_reinitialiser.setText("Réinitialiser");
+        bouton_reinitialiser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bouton_reinitialiserActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -177,31 +201,26 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
                         .addComponent(field_prenompatient, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(OK_prenompatient, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel6)
-                .addGap(36, 36, 36)
-                .addComponent(jCheckBox1)
-                .addGap(391, 391, 391))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(bouton_reinitialiser, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(field_nompatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(OK_nompatient))
-                .addGap(2, 2, 2)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(jCheckBox1))
-                .addGap(2, 2, 2)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(field_prenompatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(OK_prenompatient))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4)
+                            .addComponent(field_nompatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(OK_nompatient))
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(field_prenompatient, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(OK_prenompatient)))
+                    .addComponent(bouton_reinitialiser, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
 
@@ -222,7 +241,7 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
                 .addGap(23, 23, 23)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 407, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
                 .addGap(34, 34, 34))
         );
 
@@ -234,15 +253,6 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
         jLabel2.setText("jLabel2");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton4.setText("Déconnexion");
-
-        jButton3.setText("Retour");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -250,16 +260,13 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton3)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -268,9 +275,7 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton3))
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -307,13 +312,9 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
             setTable(rs);
             c.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_OK_nompatientActionPerformed
-
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
 
     private void OK_prenompatientActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OK_prenompatientActionPerformed
         // TODO add your handling code here:
@@ -326,7 +327,7 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
             setTable(rs);
             c.close();
         } catch (SQLException ex) {
-            Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_OK_prenompatientActionPerformed
 
@@ -356,8 +357,8 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
 //            System.out.println(p.getIPP() + p.getidDMR() + p.getNom() + p.getPrenom() + p.getAdresse() + p.getVille() + p.getCodePostal() + p.getDateDeNaissance().toString() + p.getSexe());
 
             //On affiche la nouvelle fenêtre destinée à afficher le DMR du patient sélectionné.
-            UI.Manipulateur_AfficherDMR admr;
-            admr = new UI.Manipulateur_AfficherDMR();
+            UI.Medecin_AfficherDMR admr;
+            admr = new UI.Medecin_AfficherDMR();
             admr.setVisible(true);
 
 //            while (rs.next()) {
@@ -373,10 +374,19 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
 //                }
 //            }
         } catch (SQLException ex) {
-            Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Medecin_AfficherTOUSLESExamens.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }//GEN-LAST:event_tablepatientsMouseClicked
+
+    private void bouton_reinitialiserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_reinitialiserActionPerformed
+        try {
+            // TODO add your handling code here:
+            TabInit();
+        } catch (SQLException ex) {
+            Logger.getLogger(Manipulateur_RechercherPatient.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_bouton_reinitialiserActionPerformed
 
     /**
      * @param args the command line arguments
@@ -437,17 +447,14 @@ public class Manipulateur_RechercherPatient extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton OK_nompatient;
     private javax.swing.JButton OK_prenompatient;
+    private javax.swing.JButton bouton_reinitialiser;
     private javax.swing.JTextField field_nompatient;
     private javax.swing.JTextField field_prenompatient;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

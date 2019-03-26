@@ -5,6 +5,7 @@
  */
 package UI;
 
+import FC.DbConnection;
 import FC.RecupererCheminImage;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -24,7 +25,17 @@ import FC.Traitement;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.image.DataBufferByte;
+import java.awt.image.WritableRaster;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.JFrame;
 
 /**
  *
@@ -286,7 +297,51 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void Bouton_enregistrerDansPacsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_enregistrerDansPacsActionPerformed
-        // TODO add your handling code here:
+        // Insérer une image dans le pacs
+        DbConnection c = new DbConnection();
+        c.connexionP();
+        BufferedImage image_panel = panel_traitement.getImagePanneau();
+
+        //tester pour voir si on récupère bien l'image du panneau
+        JFrame frame = new JFrame();
+        frame.getContentPane().setLayout(new FlowLayout());
+        frame.setSize(500, 500);
+        frame.getContentPane().add(new JLabel(new ImageIcon(image_panel)));
+        frame.setVisible(true);
+        //fin du test
+
+        try {
+            //File image = new File("image.jpg");
+            //ImageIO.write(image_panel, "jpg", image);
+            //FileInputStream fis = new FileInputStream(image);
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            ImageIO.write(image_panel, "jpg", baos);
+            byte[] imageInByte = baos.toByteArray();
+            //System.out.println("j'ai converti mon image en tableau de byte");
+            
+            
+            String sql = "INSERT INTO `pacs`(`NumArchivage`, `IPP`, `idExam`, `Fichier`) VALUES (?,?,?,?)";
+            PreparedStatement pst = c.getConnection().prepareStatement(sql);
+            System.out.println("test");
+            pst.setString(1, "3");
+            pst.setString(2, "2");
+            pst.setInt(3, 2);
+            pst.setBytes(4,imageInByte);
+            pst.executeUpdate();
+            //System.out.println("test2");
+
+            //String s = "UPDATE `pacs` SET `Fichier`='" + blFile + "' WHERE IPP=2 AND idExam=2 AND NumArchivage=3";
+            //c.modifierBD(s);
+
+        } catch (IOException ex) {
+            Logger.getLogger(InterfaceTraitementImage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(InterfaceTraitementImage.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(InterfaceTraitementImage.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
     }//GEN-LAST:event_Bouton_enregistrerDansPacsActionPerformed
 
     private void Bouton_EnregistrerImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Bouton_EnregistrerImageActionPerformed
@@ -307,7 +362,7 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
         RecupererCheminImage r = new RecupererCheminImage();
         path = r.getPath();
         panel_traitement.afficherImageChargee(new File(path));
-       
+
         panel_traitement.setPreferredSize(jPanel2.getSize());
         //jPanel2.setLayout(new FlowLayout());
         jPanel2.setLayout(new BorderLayout());

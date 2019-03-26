@@ -58,16 +58,18 @@ public class DbConnection {
     }
 
     public Connection getConnection() throws ClassNotFoundException, SQLException {
-        try {
+//        try {
             if (con == null) {
                 setConnection();
             }
             return con;
-        } finally {
-            if (con != null) {
-                con.close();
-            }
-        }
+//        } 
+        
+//        finally {
+//            if (con != null) {
+//                con.close();
+//            }
+//        }
     }
 
     private void setConnection() throws ClassNotFoundException {

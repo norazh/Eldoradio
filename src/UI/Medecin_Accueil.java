@@ -44,7 +44,7 @@ public class Medecin_Accueil extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Accueil : Secrétaire médicale");
+        setTitle("Accueil : Médecin");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setForeground(new java.awt.Color(255, 255, 255));
         setResizable(false);
