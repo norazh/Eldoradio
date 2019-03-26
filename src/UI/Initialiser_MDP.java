@@ -1,10 +1,7 @@
 package UI;
 
 import FC.Cryptage;
-import FC.Cryptage;
 import FC.DbConnection;
-import FC.DbConnection;
-import FC.MDP;
 import FC.MDP;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -80,7 +77,7 @@ public class Initialiser_MDP extends javax.swing.JFrame {
         PanelGauche.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2));
 
         Defaut_MDP.setFont(new java.awt.Font("Lucida Grande", 2, 13)); // NOI18N
-        Defaut_MDP.setText("Votre Mot de Passe par défaut");
+        Defaut_MDP.setText("Votre Mot de Passe provisoire");
         Defaut_MDP.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 Defaut_MDPMouseClicked(evt);
@@ -147,6 +144,11 @@ public class Initialiser_MDP extends javax.swing.JFrame {
         NewMDP_Txt.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 NewMDP_TxtMouseClicked(evt);
+            }
+        });
+        NewMDP_Txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                NewMDP_TxtActionPerformed(evt);
             }
         });
 
@@ -309,6 +311,10 @@ public class Initialiser_MDP extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_NewMDP_BtActionPerformed
+
+    private void NewMDP_TxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NewMDP_TxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_NewMDP_TxtActionPerformed
 
     /**
      * @param args the command line arguments

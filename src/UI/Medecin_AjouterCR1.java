@@ -7,16 +7,10 @@ package UI;
 
 import FC.DbConnection;
 import FC.Examen;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 
 /**
  *
@@ -170,15 +164,15 @@ private Examen examen;
         // TODO add your handling code here:
 
         String cr = label_ajouter_cr.getText();
-        String idExam = examen.getidExamen();
+        String idExam = String.valueOf(examen.getidExamen());
 
         DbConnection c = new DbConnection();
-        c.connexionP();
+        c.connexionB();
 
         String query2 = "UPDATE `examen` SET `CompteRendu`= '" + cr + "' WHERE (idExamen= '" + idExam + "')";
         try {
 
-            c.modifierBD(query2);
+            c.update(query2);
         } catch (SQLException ex) {
 
             Logger.getLogger(Medecin_AjouterCR1.class.getName()).log(Level.SEVERE, null, ex);

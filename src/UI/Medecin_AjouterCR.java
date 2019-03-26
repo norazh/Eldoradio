@@ -7,16 +7,10 @@ package UI;
 
 import FC.DbConnection;
 import FC.Examen;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import static javax.swing.JOptionPane.OK_CANCEL_OPTION;
 
 /**
  *
@@ -31,7 +25,7 @@ private Examen examen;
         
         initComponents();
         
-        examen = UI.Medecin_AfficherTOUSLESExamens.getExamen();
+        examen = UI.Medecin_AfficherDMR.getExamen();
         
     }
 
@@ -172,18 +166,16 @@ private Examen examen;
         String idExam = examen.getidExamen();
 
         DbConnection c = new DbConnection();
-        c.connexionP();
+        c.connexionB();
 
         String query2 = "UPDATE `examen` SET `CompteRendu`= '" + cr + "' WHERE (idExamen= '" + idExam + "')";
         try {
 
-            c.modifierBD(query2);
+            c.update(query2);
         } catch (SQLException ex) {
 
             Logger.getLogger(Medecin_AjouterCR.class.getName()).log(Level.SEVERE, null, ex);
         }
-
-        System.out.println("ajouté !");
 
         JOptionPane.showMessageDialog(null, "Le compte-rendu a bien été mis à jour. Veuillez ouvrir l'examen à nouveau afin de visuliaser les modifications apportées", "Information", JOptionPane.INFORMATION_MESSAGE);
         dispose();

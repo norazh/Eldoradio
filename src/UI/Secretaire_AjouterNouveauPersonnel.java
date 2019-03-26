@@ -11,6 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -229,7 +230,7 @@ public class Secretaire_AjouterNouveauPersonnel extends javax.swing.JFrame {
         // TODO add your handling code here:
         //On crée la connexion
         DbConnection c = new DbConnection();
-        c.connexionP();
+        c.connexionB();
 
         //On initialise le nom, le prenom, la profession, l'identifiant, le mdp avec les données entrés par la secréataire
         String nom = field_nom.getText();
@@ -262,7 +263,9 @@ public class Secretaire_AjouterNouveauPersonnel extends javax.swing.JFrame {
         String p = "INSERT INTO personnel (`IDPERS`,`Nom`, `Prenom`, `Spécialité`, `Identifiant`,`Token`) VALUES ('" + IDPERS + "','" + nom + "','" + prenom + "','" + profession
                 + "','" + identifiant + "','" + tk + "' )";
         try {
-            c.modifierBD(p);
+            c.update(p);
+                                JOptionPane.showMessageDialog(null, "Le nouveau membre du personnel a bien été ajouté à la base de données.", "Information", JOptionPane.INFORMATION_MESSAGE);
+
         } catch (SQLException ex) {
             Logger.getLogger(Secretaire_AjouterNouveauPersonnel.class.getName()).log(Level.SEVERE, null, ex);
         }

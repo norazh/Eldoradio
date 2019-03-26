@@ -32,7 +32,7 @@ import javax.swing.JOptionPane;
  *
  * @author Imane
  */
-public class InterfaceTraitementImage extends javax.swing.JFrame {
+public class Manipulateur_InterfaceTraitementImage extends javax.swing.JFrame {
 
     private static Examen examen;
     public String path;
@@ -43,11 +43,11 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public InterfaceTraitementImage() {
+    public Manipulateur_InterfaceTraitementImage() {
 
         initComponents();
 
-        examen = UI.Medecin_AfficherDMR.getExamen();
+        examen = UI.Manipulateur_AfficherDMR.getExamen();
         System.out.println(examen.getidExamen());
     }
 
@@ -317,9 +317,9 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "L'image a bien été ajoutée à la base de données.", "Information", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (IOException ex) {
-            Logger.getLogger(InterfaceTraitementImage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Manipulateur_InterfaceTraitementImage.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(InterfaceTraitementImage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Manipulateur_InterfaceTraitementImage.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -432,21 +432,23 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Manipulateur_InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfaceTraitementImage().setVisible(true);
+                new Manipulateur_InterfaceTraitementImage().setVisible(true);
             }
         });
     }

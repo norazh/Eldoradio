@@ -6,37 +6,17 @@
 package FC;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
-import java.awt.image.ConvolveOp;
-import java.awt.image.Kernel;
 import java.awt.image.RescaleOp;
 import java.awt.image.WritableRaster;
-import java.io.BufferedOutputStream;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
-import java.net.URLConnection;
-import java.sql.Blob;
 import javax.swing.JPanel;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
-import java.util.Random;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.JOptionPane;
 
@@ -63,33 +43,10 @@ public class Traitement extends JPanel {
         }
     }
 
-    public void reduireImage() { // Reduire la taille d'une image
-        BufferedImage imageReduite = new BufferedImage((int) (monImage.getWidth() * 0.5), (int) (monImage.getHeight() * 0.5), monImage.getType());
-        AffineTransform reduire = AffineTransform.getScaleInstance(0.5, 0.5);
-        int interpolation = AffineTransformOp.TYPE_BICUBIC;
-        AffineTransformOp retaillerImage = new AffineTransformOp(reduire, interpolation);
-        retaillerImage.filter(monImage, imageReduite);
-        monImage = imageReduite;
-        repaint();
-    }
-
-    public void agrandirImage() { // Agrandir la taille de l'image
-        BufferedImage imageZoomer = new BufferedImage((int) (monImage.getWidth() * 1.5), (int) (monImage.getHeight() * 1.5), monImage.getType());
-        AffineTransform agrandir = AffineTransform.getScaleInstance(1.5, 1.5);
-        int interpolation = AffineTransformOp.TYPE_BICUBIC;
-        AffineTransformOp retaillerImage = new AffineTransformOp(agrandir, interpolation);
-        retaillerImage.filter(monImage, imageZoomer);
-        monImage = imageZoomer;
-        repaint();
-    }
-
-    public void imageEclaircie() { // Eclaircir l'image
-        /*
-		 *    RescaleOp brillance = new RescaleOp(A, K, null);
-		 *    1.  A< 1, l’image devient plus sombre.
-   			  2.  A > 1, l’image devient  plus brillante.
-   			  3. K est compris entre 0 et 256 et ajoute un éclairement .
-         */
+    /**
+     * Eclaircit une image
+     */
+    public void imageEclaircie() {
         BufferedImage imgBrillant = new BufferedImage(monImage.getWidth(), monImage.getHeight(), BufferedImage.TYPE_INT_RGB);
         RescaleOp brillance = new RescaleOp(1.2f, 0, null);
         Graphics2D surfaceImg = imgBrillant.createGraphics();
@@ -100,14 +57,10 @@ public class Traitement extends JPanel {
 
     }
 
-    public void imageSombre() { // Assombrir l'image
-        /* RescaleOp assombrir = new RescaleOp(A, K, null);
-		 *    
-		 *    1.  A < 1, l’image devient plus sombre.
-   			  2.  A > 1, l’image devient  plus brillante.
-   			  3.  K est compris entre 0 et 256 et ajoute un éclairement .
-		 *    
-         */
+    /**
+     * Assombrit une image
+     */
+    public void imageSombre() {
         BufferedImage imgSombre = new BufferedImage(monImage.getWidth(), monImage.getHeight(), BufferedImage.TYPE_INT_RGB);
         RescaleOp assombrir = new RescaleOp(0.7f, 10, null);
         Graphics2D surfaceImg = imgSombre.createGraphics();
@@ -117,6 +70,9 @@ public class Traitement extends JPanel {
         repaint();
     }
 
+    /**
+     * Fait une inversion en niveau de gris
+     */
     public void inversionNiveauGris() {
         BufferedImage imageInv = new BufferedImage(monImage.getWidth(), monImage.getHeight(), monImage.getType());
 
@@ -128,6 +84,9 @@ public class Traitement extends JPanel {
         repaint();
     }
 
+    /**
+     * Fait une rotation à droite
+     */
     public void rotationDroite() {
         BufferedImage imageRot = new BufferedImage(monImage.getWidth(), monImage.getHeight(), monImage.getType());
         Graphics2D surfaceImg = imageRot.createGraphics();
@@ -138,6 +97,9 @@ public class Traitement extends JPanel {
         repaint();
     }
 
+    /**
+     * Fait une rotation à gauche
+     */
     public void rotationGauche() {
         BufferedImage imageRot = new BufferedImage(monImage.getWidth(), monImage.getHeight(), monImage.getType());
         Graphics2D surfaceImg = imageRot.createGraphics();
@@ -148,6 +110,9 @@ public class Traitement extends JPanel {
         repaint();
     }
 
+    /**
+     * Symétrise verticalement
+     */
     public void symetrieVerticale() {
         int width = monImage.getWidth();
         int height = monImage.getHeight();
@@ -158,6 +123,9 @@ public class Traitement extends JPanel {
         repaint();
     }
 
+    /**
+     * Symétrise horizontalement
+     */
     public void symetrieHorizontale() {
         int width = monImage.getWidth();
         int height = monImage.getHeight();
@@ -168,7 +136,12 @@ public class Traitement extends JPanel {
         repaint();
     }
 
-    public void afficherImageChargee(File fichierImage) {   // dessiner une image à l'ecran	
+    /**
+     * Affiche l'image chargée dans le panel d'affichage
+     *
+     * @param fichierImage
+     */
+    public void afficherImageChargee(File fichierImage) {
         if (this.getExtension(fichierImage).contentEquals("pgm")) {
             try {
 
@@ -198,7 +171,7 @@ public class Traitement extends JPanel {
         repaint();
     }
 
-    public BufferedImage getImage(File fichierImage) {   // retourner une BufferedImage d'un fichier Image	
+    public BufferedImage getImage(File fichierImage) {
         if (this.getExtension(fichierImage).contentEquals("pgm")) {
             try {
 
@@ -225,7 +198,12 @@ public class Traitement extends JPanel {
 
     }
 
-    public BufferedImage getImagePanneau() {      // récupérer une image du panneau
+    /**
+     * Récupère l'image du panel d'intérêt
+     *
+     * @return une BufferedImage
+     */
+    public BufferedImage getImagePanneau() {
         int width = this.getWidth();
         int height = this.getHeight();
         BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
@@ -235,7 +213,13 @@ public class Traitement extends JPanel {
         return image;
     }
 
-    public void enregistrerImage(File fichierImage) throws FileNotFoundException { //Enregistrer une image en local
+    /**
+     * Enregistre l'image affichée en local
+     *
+     * @param fichierImage
+     * @throws FileNotFoundException
+     */
+    public void enregistrerImage(File fichierImage) throws FileNotFoundException {
         String format = "JPG";
         BufferedImage image = monImage;
         if (monImage == null) {
@@ -251,67 +235,13 @@ public class Traitement extends JPanel {
 
     }
 
-//        public void getFromPacsURL() throws SQLException { // Récupérer une image à partir d'un URL stocké dans le PACS
-//        int numArch = 2;
-//        String user = System.getProperty("user.home");
-//        ConnexionBD c = new ConnexionBD();
-//        boolean b = c.connexion();
-//        URL url = null;
-//        File target = null;
-//        ResultSet resultat = c.exec("SELECT * FROM `hostis_dmr`.`PACS` WHERE `NumArchivage` = " + numArch);
-//        String chemin = null;
-//        if (resultat.next()) {
-//            url = resultat.getURL(2);
-//        }
-//
-//        try {
-//            InputStream fileIn = url.openStream();
-//            //target = File.createTempFile("image", ".pgm");
-//            Random random = new Random();
-//            int randomNum = random.nextInt(6) + 100;
-//            target = new File("PGM" + randomNum + ".pgm");
-//            BufferedOutputStream fileOut = new BufferedOutputStream(new FileOutputStream("PGM" + randomNum + ".pgm"));
-//            int b2;
-//            while ((b2 = fileIn.read()) != -1) {
-//                fileOut.write(b2);
-//            }
-//            fileOut.flush();
-//            fileOut.close();
-//
-//            fileIn.close();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//        this.ajouterImage(target);
-//        c.close();
-//
-//    }
-//                
-//        public void getFromPacs(int numArch) { // Récupérer une image en local à parti de son chemin stocké dans le PACS
-//
-//        String user = System.getProperty("user.home");
-//        ConnexionBD c = new ConnexionBD();
-//        boolean b = c.connexion();
-//        URL url = null;
-//        File target = null;
-//        ResultSet resultat = c.exec("SELECT * FROM `hostis_dmr`.`PACS` WHERE `NumArchivage` = " + numArch);
-//        String chemin = null;
-//
-//        try {
-//            if (resultat.next()) {
-//                chemin = resultat.getString(2);
-//            }
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PanDessin.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//
-//        File targt = new File(chemin);
-//        this.ajouterImage(targt);
-//        c.close();
-//
-//    }
-    public String getExtension(File f) { // Retourne l'extension d'un fichier
+    /**
+     * Retourne l'extension d'un fichier
+     *
+     * @param f Fichier
+     * @return l'extension d'un fichier en String
+     */
+    public String getExtension(File f) {
         if (f != null) {
             String filename = f.getName();
             int i = filename.lastIndexOf('.');
@@ -322,7 +252,12 @@ public class Traitement extends JPanel {
         return null;
     }
 
-    public int getMax() { // Retourne la valeur maximum des pixels de l'image
+    /**
+     * Retourne la valeur maximum des pixels de l'image
+     *
+     * @return le int correspondant à la valeur maximum des pixels de l'image
+     */
+    public int getMax() {
         int max = monImage.getRGB(0, 0);
         int pivot;
 
@@ -340,81 +275,4 @@ public class Traitement extends JPanel {
 
     }
 
-//    public void writeInPacs() { // ajouter une image au PACS pour un nouvel Examen
-//
-//        ConnexionBD c = new ConnexionBD();
-//        boolean b = c.connexion();
-//        Random random = new Random();
-//        int randomNum = random.nextInt(999) + 1000;
-//        int max1 = 0;
-//        int max2 = 0;
-//        String path = "C:\\Users\\Julien\\Desktop\\PACS\\" + randomNum + ".jpg";
-//        String file = randomNum + ".jpg";
-//
-//        File fichierEnregistrement = new File(path);
-//        if (b) {
-//            ResultSet ph4 = c.exec("SELECT MAX(`id`) AS 'max1' FROM `hostis_dmr`.`PACS`");
-//
-//            try {
-//                while (ph4.next()) {
-//                    max1 = ph4.getInt("max1");
-//                }
-//            } catch (SQLException ex) {
-//                Logger.getLogger(PanDessin.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//            ResultSet ph5 = c.exec("SELECT MAX(`NumArchivage`) AS 'max2' FROM `hostis_dmr`.`Examen`");
-//
-//            try {
-//                while (ph5.next()) {
-//                    max2 = ph5.getInt("max2");
-//                }
-//            } catch (SQLException ex) {
-//                Logger.getLogger(PanDessin.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//            c.insererBD("INSERT INTO `hostis_dmr`.`PACS` (`id`,`NumArchivage`, `FichierImage`)VALUES ('" + (max1 + 1) + "','" + (max2 + 1) + "','" + file + "')");
-//
-//        }
-//        try {
-//            this.enregistrerImage(fichierEnregistrement);
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(PanDessin.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        c.close();
-//
-//    }
-//
-//    public void writeInPacs(int n) { // ajouter une image au PACS pour un examen existant déjà (numArchivage = n)
-//        int numArch = n;
-//        ConnexionBD c = new ConnexionBD();
-//        boolean b = c.connexion();
-//        Random random = new Random();
-//        int randomNum = random.nextInt(6) + 100;
-//        int max1 = 0;
-//
-//        String path = "C:\\Users\\Julien\\Desktop\\PACS\\" + randomNum + ".jpg";
-//        String file = randomNum + ".jpg";
-//
-//        File fichierEnregistrement = new File(path);
-//        if (b) {
-//            ResultSet ph4 = c.exec("SELECT MAX(`id`) AS 'max1' FROM `hostis_dmr`.`PACS`");
-//
-//            try {
-//                while (ph4.next()) {
-//                    max1 = ph4.getInt("max1");
-//                }
-//            } catch (SQLException ex) {
-//                Logger.getLogger(PanDessin.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//
-//            c.insererBD("INSERT INTO `hostis_dmr`.`PACS` (`id`,`NumArchivage`, `FichierImage`)VALUES ('" + (max1 + 1) + "','" + numArch + "','" + file + "')");
-//
-//        }
-//        try {
-//            this.enregistrerImage(fichierEnregistrement);
-//        } catch (FileNotFoundException ex) {
-//            Logger.getLogger(PanDessin.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        c.close();
-//    }
 }

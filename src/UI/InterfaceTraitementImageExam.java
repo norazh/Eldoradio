@@ -32,7 +32,7 @@ import javax.swing.JOptionPane;
  *
  * @author Imane
  */
-public class InterfaceTraitementImage extends javax.swing.JFrame {
+public class InterfaceTraitementImageExam extends javax.swing.JFrame {
 
     private static Examen examen;
     public String path;
@@ -43,11 +43,11 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
     /**
      * Creates new form NewJFrame
      */
-    public InterfaceTraitementImage() {
+    public InterfaceTraitementImageExam() {
 
         initComponents();
 
-        examen = UI.Medecin_AfficherDMR.getExamen();
+        examen = UI.Medecin_AfficherTOUSLESExamens.getExamen();
         System.out.println(examen.getidExamen());
     }
 
@@ -293,6 +293,7 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
 //        frame.getContentPane().add(new JLabel(new ImageIcon(image_panel)));
 //        frame.setVisible(true);
         /* --------------------------------- fin du test --------------------------------- */
+
         try {
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             ImageIO.write(image_panel, "jpg", baos);
@@ -317,9 +318,9 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "L'image a bien été ajoutée à la base de données.", "Information", JOptionPane.INFORMATION_MESSAGE);
 
         } catch (IOException ex) {
-            Logger.getLogger(InterfaceTraitementImage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InterfaceTraitementImageExam.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
-            Logger.getLogger(InterfaceTraitementImage.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InterfaceTraitementImageExam.class.getName()).log(Level.SEVERE, null, ex);
         }
 
 
@@ -432,21 +433,23 @@ public class InterfaceTraitementImage extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceTraitementImageExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceTraitementImageExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceTraitementImageExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(InterfaceTraitementImage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(InterfaceTraitementImageExam.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new InterfaceTraitementImage().setVisible(true);
+                new InterfaceTraitementImageExam().setVisible(true);
             }
         });
     }

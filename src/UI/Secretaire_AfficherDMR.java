@@ -8,6 +8,7 @@ package UI;
 import FC.DbConnection;
 import FC.Examen;
 import FC.Patient;
+import FC.Personnel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,6 +23,7 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
 
     private Patient patient;
     private static Examen examen;
+    Personnel p;
 
     /**
      * Creates new form AccueilSecretaire2
@@ -30,8 +32,8 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
 
         initComponents();
 
-        //On récupère les données de la personne connectée pour initialiser le label indiquant qui est connecté
-        jLabel2.setText("Jean Bono");
+        this.p = UI.Secretaire_Accueil.getPersonnel(); // Attributs de Personnel p récupérés depuis UI.Medecin_Accueil 
+        jLabel2.setText(p.getPrenom() + " " + p.getNom());
 
         //On récupère l'instance de Patient créée dans UI.Medecin_RechercherPatient
         patient = UI.Secretaire_RechercherPatient.getPatient();
@@ -47,7 +49,7 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
 
         //Initialisation des labels concernant les examens. Nécessité de faire une requête.
         DbConnection c = new DbConnection();
-        c.connexionP();
+        c.connexionB();
         String query = "SELECT IPP , pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pat.IDDMR, DMRPapier FROM `examen` e,`patients` pat WHERE (IPP = '" + String.valueOf(patient.getIPP()) + "') AND (pat.IDDMR = e.IDDMR)";
         ResultSet rs = c.select(query);
         while (rs.next()) {
@@ -97,7 +99,6 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Accueil : Secrétaire médicale");
@@ -302,7 +303,7 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -312,8 +313,6 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("jLabel2");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jButton4.setText("Déconnexion");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -326,8 +325,7 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton4))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -338,8 +336,7 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton4))
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -383,7 +380,6 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
 //        } catch (SQLException ex) {
 //            Logger.getLogger(Secretaire_AfficherDMR1.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
 
     }//GEN-LAST:event_tableMouseClicked
 
@@ -458,7 +454,6 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -513,7 +508,7 @@ public class Secretaire_AfficherDMR extends javax.swing.JFrame {
     public void TabInit() {
         try {
             DbConnection c = new DbConnection();
-            c.connexionP();
+            c.connexionB();
             String query = "SELECT idExamen, TypeExamen, DateExamen, p1.Prenom, p1.Nom, p2.Prenom, p2.Nom FROM examen e, personnel p1, patients p2 WHERE (p2.IDDMR = e.IDDMR) AND (p1.IDPERS = e.IDPERS) AND IPP='" + String.valueOf(patient.getIPP()) + "'";
             ResultSet rs = c.select(query);
             setTable(rs);

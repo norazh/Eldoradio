@@ -317,7 +317,7 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
         int IPP = 0;
         int IDDMR = 0;
         DbConnection c = new DbConnection();
-        c.connexionP();
+        c.connexionB();
 
         //Vérification que tous les champs sont remplis
         if (field_date.getText().equals("") | field_nom.getText().equals("") | field_prenom.getText().equals("") | field_adresse.getText().equals("") | field_cp.getText().equals("")
@@ -374,7 +374,7 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
                         String s = "INSERT INTO patients (`IPP`,`Nom`, `Prenom`, `Sexe`, `DateNaissance`,`Adresse`,`CodePostal`,`Ville`,`IDDMR`) VALUES ('" + IPP + "','" + field_nom.getText() + "','" + field_prenom.getText() + "','" + "Homme"
                                 + "','" + field_date.getText() + "','" + field_adresse.getText() + "', '" + field_cp.getText() + "','" + field_ville.getText() + "', '" + IDDMR + "')";
                         try {
-                            c.modifierBD(s);
+                            c.update(s);
                         } catch (SQLException ex) {
                             Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -384,7 +384,7 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
                             String p = "INSERT INTO patients (`IPP`,`Nom`, `Prenom`, `Sexe`, `DateNaissance`,`Adresse`,`CodePostal`,`Ville`,`IDDMR`) VALUES ('" + IPP + "','" + field_nom.getText() + "','" + field_prenom.getText() + "','" + "Femme"
                                     + "','" + field_date.getText() + "','" + field_adresse.getText() + "', '" + field_cp.getText() + "','" + field_ville.getText() + "', '" + IDDMR + "' )";
                             try {
-                                c.modifierBD(p);
+                                c.update(p);
                             } catch (SQLException ex) {
                                 Logger.getLogger(Secretaire_AjouterNouveauPatient.class.getName()).log(Level.SEVERE, null, ex);
                             }
@@ -396,8 +396,7 @@ public class Secretaire_AjouterNouveauPatient extends javax.swing.JFrame {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(null, "Le format de la date est erroné, veuillez la renseigner à nouveau.", "Attention", JOptionPane.ERROR_MESSAGE);
-
+                JOptionPane.showMessageDialog(null, "Le format de la date est erroné, veuillez la renseigner à nouveau.", "Attention", JOptionPane.INFORMATION_MESSAGE);
             }
 
             dispose();

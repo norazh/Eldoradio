@@ -20,12 +20,21 @@ public class MDP {
             System.out.println("Mot de passe incorrect. Le mdp doit avoir au minimum 5 caractères, au minimum 1 majuscule, 1 minuscule, au moins 1 chiffre et au moins u caractère spécial");
         }
     }
-    public boolean MdpValide(String mdp){
-        // 8 caractères minimum
-        // 1 majuscule minimum
-        // 1 minuscule minimum
-        // 1 chiffre minimum
-        //1 lettre minimum
+    
+    
+    
+    /**
+     * Vérifie si un mot de passe est valide suivant les critères suivants : 
+     * - 8 caractères minimum
+     * 1 majuscule minimum
+     * 1 chiffre minimum
+     * 1 minuscule minimum
+     * 1 lettre minimum
+     * 1 caractère spécial minimum parmi % # : $ * ! " & + , - . / ; < = > ? @ ^ _ ~ 
+     * @param mdp
+     * @return 
+     */
+    public static boolean MdpValide(String mdp){
         char c;
         int i=0;
         boolean majuscule = false;

@@ -20,40 +20,13 @@ public class Patient {
     private String prenom;
     private String adresse;
     private String ville;
-    private int codePostal;
-//        private String idSIR;
-//        private String idSIH;
+    private String codePostal;
     private int IPP;
     private int idDMR;
     private Date dateNaissance;
     private Sexe sexe;
 
-//    public Patient(String nom, String prenom, String adresse, String ville, String codePostal, String idSIR, String idSIH, Date date, Sexe sexe) {
-//        this.nom = nom;
-//        this.prenom = prenom;
-//        this.adresse = adresse;
-//        this.ville = ville;
-//        this.codePostal = codePostal;
-//        this.idSIR = idSIR;
-//        this.idSIH = idSIH;
-//        this.dateNaissance = date;
-//        this.sexe = sexe;
-//
-//    }
-//    public Patient(String nom, String prenom, String adresse, String ville, String codePostal, String idSIR, String idSIH, String idDMR, Date date, Sexe sexe) {
-//        this.nom = nom;
-//        this.prenom = prenom;
-//        this.adresse = adresse;
-//        this.ville = ville;
-//        this.codePostal = codePostal;
-//        this.idSIR = idSIR;
-//        this.idSIH = idSIH;
-//        this.idDMR = idDMR;
-//        this.dateNaissance = date;
-//        this.sexe = sexe;
-//
-//    }
-    public Patient(int ipp, int iddmr, String nom, String prenom, String adresse, String ville, int codePostal, Date date, Sexe sexe) {
+    public Patient(int ipp, int iddmr, String nom, String prenom, String adresse, String ville, String codePostal, Date date, Sexe sexe) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -66,7 +39,7 @@ public class Patient {
         this.idDMR = iddmr;
     }
 
-    public Patient(int ipp, String nom, String prenom, String adresse, String ville, int codePostal, Date date, Sexe sexe) {
+    public Patient(int ipp, String nom, String prenom, String adresse, String ville, String codePostal, Date date, Sexe sexe) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -76,20 +49,15 @@ public class Patient {
         this.dateNaissance = date;
         this.sexe = sexe;
         this.IPP = ipp;
-        
+
     }
-    
-    public Patient(int ipp){
+
+    public Patient() {
+    }
+
+    public Patient(int ipp) {
         this.IPP = ipp;
     }
-    
-//    public String toString() {
-//
-//        return "FICHE PATIENT" + "\n" + "Prénom: " + getPrenom() + "\n " + "Nom : " + getNom() + " \n " + "Adresse: " + getAdresse() + "\n" + "Ville : " + getVille() + "\n" + "Code Postal: " + getCodePostal() + "\n" + "IPP: " + getIPP() + "\n" + "idDMR: " + getidDMR() + "\n" + "Date de naissance: " + getDateDeNaissance().toString() + " \n " + "Sexe : " + getSexe() + " \n ";
-//
-//        return "FICHE PATIENT" + "\n" + "Prénom: " + getPrenom() + "\n " + "Nom : " + getNom() + " \n " + "Adresse: " + getAdresse() + "\n" + "Ville : " + getVille() + "\n" + "Code Postal: " + getCodePostal() + "\n" + "IPP: " + getIPP() + "\n" + "\n" + "idDMR: " + getidDMR() + "\n" + "Date de naissance: " + getDateDeNaissance().toString() + " \n " + "Sexe : " + getSexe() + " \n ";
-//
-//    }
 
     public String toStringNom() {
         return getNom();
@@ -124,7 +92,7 @@ public class Patient {
         return ville;
     }
 
-    public int getCodePostal() {
+    public String getCodePostal() {
         return codePostal;
     }
 
@@ -132,9 +100,6 @@ public class Patient {
         return IPP;
     }
 
-//    public String getidSIH() {
-//        return idSIH;
-//    }
     public int getidDMR() {
         return idDMR;
     }
@@ -145,6 +110,10 @@ public class Patient {
 
     public Sexe getSexe() {
         return sexe;
+    }
+
+    public void setIPP(int IPP) {
+        this.IPP = IPP;
     }
 
     public void setNom(String n) {
@@ -163,17 +132,10 @@ public class Patient {
         this.ville = v;
     }
 
-    public void setCodePostal(int cp) {
+    public void setCodePostal(String cp) {
         this.codePostal = cp;
     }
 
-//    public void setidSIR(int id) {
-//        this.idSIR = id;
-//    }
-//
-//    public void setidSIH(int id) {
-//        this.idSIH = id;
-//    }
     public void setidDMR(int id) {
         this.idDMR = id;
     }
@@ -186,28 +148,4 @@ public class Patient {
         this.sexe = s;
     }
 
-    /*public int compareTo(Object o) {
-        String n= (String)o;
-        n=n.toLowerCase();
-        if (!nom.equals(n)){// si c'est pas la même année
-            int nom1= (int)
-            if ((char)nom>(char)n){
-            return annee - d.annee;
-            }
-        }
-        if (mois != d.mois) //si passe a ce deuxieme if annee égale
-            return mois  - d.mois;// renvoie la différence des mois
-        // ici on a forcement annee == d.annee et mois == d.mois :
-		if (getJour() != d.getJour()){// si passe à ce if, mois égal
-			return jour - d.jour;// renvoie la différence des jours
-		}
-		if ( heure != d.heure){// si passe à ce if, jour égal
-			return heure - d.heure ; // renvoie la différence d'heures 
-		}
-        return minute - d.minute;// différence des minutes
-        }*/
-    
-    
-    
-    
 }

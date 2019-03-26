@@ -5,6 +5,7 @@
  */
 package UI;
 
+import FC.Personnel;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.util.logging.Level;
@@ -16,12 +17,15 @@ import java.util.logging.Logger;
  */
 public class Secretaire_Accueil extends javax.swing.JFrame {
 
+    private static Personnel p;
     /**
      * Creates new form AccueilSecretaire2
      */
     public Secretaire_Accueil() {
+        
         initComponents();
-        jLabel2.setText("Jean Bono");
+        this.p = UI.Connexion.getP(); // Attributs de Personnel p récupérés depuis UI.Connexion
+        jLabel2.setText(p.getPrenom() + " " + p.getNom());
     }
 
     /**
@@ -264,4 +268,9 @@ UI.Secretaire_RechercherPatient rp;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
     // End of variables declaration//GEN-END:variables
+
+
+public static Personnel getPersonnel() {
+        return p;
+    }
 }

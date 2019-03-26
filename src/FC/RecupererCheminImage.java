@@ -18,6 +18,10 @@ public class RecupererCheminImage {
 
     private String path;
 
+    /**
+     * Ouvre un JFileChooser pour choisir l'image à charger dans l'interface de traitement d'image
+     * @return le chemin de l'image
+     */
     public String getPath() {
         JFileChooser file = new JFileChooser();
         int result = file.showOpenDialog(null);

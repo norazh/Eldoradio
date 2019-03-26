@@ -8,13 +8,11 @@ package UI;
 import FC.DbConnection;
 import FC.Examen;
 import FC.Patient;
+import FC.Personnel;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import UI.Medecin_AfficherTOUSLESExamens;
-import java.sql.Blob;
-import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -26,6 +24,7 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
 
     private static Examen examen;
     private Patient patient;
+    private Personnel pers;
 
     /**
      * Creates new form AccueilSecretaire2
@@ -33,20 +32,26 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
     public Manipulateur_AfficherUNExamenAPartirDuDMR() throws SQLException {
 
         initComponents();
+        
+        /*  On récupère les données de la personne connectée pour initialiser le label indiquant qui est connecté */
+        pers = UI.Connexion.getP();
+        jLabel2.setText(pers.getPrenom() + " " + pers.getNom());
 
-        //On récupère l'instance de Examen créée dans UI.Medecin_AfficherDMR
-        examen = UI.Manipulateur_AfficherDMR.getExam();
+        /* On récupère l'instance de Examen créée dans UI.Medecin_AfficherDMR */
+        examen = UI.Manipulateur_AfficherDMR.getExamen();
 
-        //On récupère l'instance de Patient créée dans UI.Medecin_RechercherPatient
+        /* On récupère l'instance de Patient créée dans UI.Medecin_RechercherPatient */
         patient = UI.Manipulateur_RechercherPatient.getPatient();
+        
+        
 
-        //Nécessité de faire une requête pour récupérer les informaions relatives à un examen
+        /* Nécessité de faire une requête pour récupérer les informaions relatives à un examen */
         DbConnection c = new DbConnection();
-        c.connexionP();
+        c.connexionB();
         String query = "SELECT IPP, pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, idExamen, Ville, pers.Nom, pers.Prenom, TypeExamen, DateExamen, DMRPapier, CompteRendu FROM `examen` e,`patients` pat,`personnel` pers WHERE (idExamen = '" + examen.getidExamen() + "') AND (pat.IDDMR = e.IDDMR) AND (pers.IDPERS=e.IDPERS)";
         ResultSet rs = c.select(query);
         while (rs.next()) {
-            label_idExam.setText(examen.getidExamen());
+            label_idExam.setText(String.valueOf(examen.getidExamen()));
             label_nomMedecin.setText(rs.getString("pers.Nom"));
             label_prenomMedecin.setText(rs.getString("pers.Prenom"));
             label_typeExam.setText(rs.getString("TypeExamen"));
@@ -92,7 +97,7 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
         label_ipp = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
         label_adresse = new javax.swing.JLabel();
-        jButton2 = new javax.swing.JButton();
+        btn_voirImages = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
@@ -107,14 +112,12 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
         jPanel6 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         cr = new javax.swing.JTextArea();
-        bouton_impression = new javax.swing.JButton();
+        bouton_impressionCR = new javax.swing.JButton();
+        btn_ajouterImage = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton4 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Accueil : Secrétaire médicale");
         setBounds(new java.awt.Rectangle(0, 0, 0, 0));
         setForeground(new java.awt.Color(255, 255, 255));
         setResizable(false);
@@ -133,17 +136,17 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(539, 539, 539)
                 .addComponent(jLabel3)
-                .addGap(470, 470, 470))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
@@ -241,11 +244,11 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jButton2.setText("Voir les images de l'examen");
-        jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 3));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_voirImages.setText("Voir les images de l'examen");
+        btn_voirImages.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 3));
+        btn_voirImages.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_voirImagesActionPerformed(evt);
             }
         });
 
@@ -287,7 +290,7 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
                         .addComponent(jLabel13)
                         .addGap(18, 18, 18)
                         .addComponent(label_typeExam)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 224, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel25)
                     .addComponent(jLabel22))
@@ -345,11 +348,19 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        bouton_impression.setText("Imprimer le compte-rendu");
-        bouton_impression.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2));
-        bouton_impression.addActionListener(new java.awt.event.ActionListener() {
+        bouton_impressionCR.setText("Imprimer le compte-rendu");
+        bouton_impressionCR.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 2));
+        bouton_impressionCR.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                bouton_impressionActionPerformed(evt);
+                bouton_impressionCRActionPerformed(evt);
+            }
+        });
+
+        btn_ajouterImage.setText("Ajouter une image");
+        btn_ajouterImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(236, 187, 32), 3));
+        btn_ajouterImage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_ajouterImageActionPerformed(evt);
             }
         });
 
@@ -360,29 +371,36 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(24, 24, 24)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 395, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(bouton_impression, javax.swing.GroupLayout.PREFERRED_SIZE, 411, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                        .addComponent(btn_voirImages, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35)
+                        .addComponent(btn_ajouterImage, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 169, Short.MAX_VALUE)
+                        .addComponent(bouton_impressionCR, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(186, 186, 186))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jPanel4Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {bouton_impressionCR, btn_ajouterImage, btn_voirImages});
+
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+            .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(62, 62, 62)
+                .addGap(53, 53, 53)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(bouton_impression, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(64, Short.MAX_VALUE))
+                    .addComponent(btn_voirImages, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_ajouterImage, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(bouton_impressionCR, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(81, Short.MAX_VALUE))
         );
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
@@ -392,15 +410,6 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("jLabel2");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        jButton4.setText("Déconnexion");
-
-        jButton1.setText("Retour");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -414,10 +423,7 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton4))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -427,9 +433,7 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton4)
-                    .addComponent(jButton1))
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -451,54 +455,60 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-        String idExam = examen.getidExamen();
+    private void btn_voirImagesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_voirImagesActionPerformed
+        String idExam = String.valueOf(examen.getidExamen());
 
         DbConnection c = new DbConnection();
-        c.connexionP();
-        String requete = "SELECT * FROM pacs WHERE idExam = '" + idExam + "' AND Fichier IS NOT NULL";
+        c.connexionB();
+        String requete = "SELECT * FROM pacs WHERE idExam = '" + idExam + "'";
         ResultSet rs = c.select(requete);
 
         try {
-            if (rs.first() == false) {
-                System.out.println("pas d'images");
+            if (!rs.next()) {
                 JOptionPane.showMessageDialog(this, "Cet examen ne contient pas d'images.", "Aucun résultat", JOptionPane.INFORMATION_MESSAGE);
 
             } else {
-
                 rs.beforeFirst(); //On remet le curseur sur la ligne avant la première ligne des résultats
                 while (rs.next()) {
-                    System.out.println("il y a une image");
                     byte[] img = rs.getBytes("Fichier");
-
                     ImageIcon image = new ImageIcon(img);
 //            liste_images.add(image);
-                    UI.Medecin_AfficherImagesExam aie = new UI.Medecin_AfficherImagesExam();
+                    UI.Manipulateur_AfficherImagesExam aie = new UI.Manipulateur_AfficherImagesExam();
                     aie.label.setIcon(image);
                     aie.setVisible(true);
-
                 }
             }
         } catch (SQLException ex) {
             Logger.getLogger(Manipulateur_AfficherUNExamenAPartirDuDMR.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void bouton_impressionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_impressionActionPerformed
+    }//GEN-LAST:event_btn_voirImagesActionPerformed
+    
+    
+    /**
+     * Ouvre une fenêtre ApercuAvantImpression pour imprimer le contenu de 
+     * l'examen (CR, informations patient)
+     * @param evt 
+     */
+    private void bouton_impressionCRActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bouton_impressionCRActionPerformed
         // Mise en page du compte-rendu à imprimer
-
+        
         String s = ("Nom du patient : " + patient.getNom() + "\n" + "Prenom du patient: " + patient.getPrenom() + "\n" + "Nom du médecin: " + this.label_nomMedecin.getText() + "\n" + "Date de l'examen : " + this.label_dateExam.getText() + "\n" + "COMPTE RENDU : " + "\n" + this.cr.getText());
 
         UI.ApercuAvantImpression a = new UI.ApercuAvantImpression(s);
         a.jTextArea1.setText(s);
         a.setVisible(true);
 
-    }//GEN-LAST:event_bouton_impressionActionPerformed
+    }//GEN-LAST:event_bouton_impressionCRActionPerformed
+    
+    /**
+     * Ouvre une fenêtre InterfaceTraitementImage pour ajouter une 
+     * image à la BD
+     * @param evt 
+     */
+    private void btn_ajouterImageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_ajouterImageActionPerformed
+       Manipulateur_InterfaceTraitementImage iTi = new Manipulateur_InterfaceTraitementImage();
+       iTi.setVisible(true);
+    }//GEN-LAST:event_btn_ajouterImageActionPerformed
 
     /**
      * @param args the command line arguments
@@ -667,11 +677,10 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton bouton_impression;
+    private javax.swing.JButton bouton_impressionCR;
+    private javax.swing.JButton btn_ajouterImage;
+    private javax.swing.JButton btn_voirImages;
     public javax.swing.JTextArea cr;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
@@ -706,16 +715,12 @@ public class Manipulateur_AfficherUNExamenAPartirDuDMR extends javax.swing.JFram
     public javax.swing.JLabel label_typeExam;
     // End of variables declaration//GEN-END:variables
 
-//    public void FenetreInit() throws SQLException {
-//        DbConnection c = new DbConnection();
-//        c.connexionP();
-//        String query = "SELECT IPP, pat.Prenom, pat.Nom, DateNaissance, Sexe, Adresse, CodePostal, Ville, pers.Nom, pers.Prenom, TypeExamen, DateExamen, DMRPapier, CompteRendu FROM `examen` e,`patients` pat,`personnel` pers WHERE (idExamen = '" + label_idExam.getText() + "') AND (pat.IDDMR = e.IDDMR) AND (pers.IDPERS=e.IDPERS)";
-//        ResultSet rs = c.select(query);
-//        label_ipp.setText(rs.getString("IPP"));
-//        c.close();
-//    }
+    /**
+     * @return Examen intialisé à partir de cette classe 
+     */
     public static Examen getExamen() {
         return examen;
     }
-
+    
+   
 }

@@ -10,16 +10,18 @@ package FC;
  * @author menar
  */
 public enum Metier {
-    INTERNE ("INTERNE"),
-    MEDECIN ("MEDECIN"),
-    MANIP ("MANIP"),
-    SECRETAIRE ("SECRETAIRE");
+    INTERNE("INTERNE"),
+    MEDECIN("MEDECIN"),
+    MANIP("MANIP"),
+    SECRETAIRE("SECRETAIRE");
     private String metier;
-    private Metier (String metier){
-        this.metier=metier;
+
+    private Metier(String metier) {
+        this.metier = metier;
     }
+
     public String toString() {
         return metier;
     }
-    
+
 }

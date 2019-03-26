@@ -26,7 +26,5 @@ public enum TypeExamen {
         this.type = type;
     }
 
-    public String toString() {
-        return type;
-    }
+    
 }

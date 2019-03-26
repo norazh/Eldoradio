@@ -230,7 +230,7 @@ public class Connexion extends javax.swing.JFrame {
                                 case "SECRET":
                                     p.setNom(nom);
                                     p.setPrenom(prenom);
-                                    Secretaire_Accueil aS = new Secretaire_Accueil(p);
+                                    Secretaire_Accueil aS = new Secretaire_Accueil();
                                     this.setVisible(false);
                                     aS.setVisible(true);
                                     break;
@@ -238,14 +238,14 @@ public class Connexion extends javax.swing.JFrame {
                                     p.setNom(nom);
                                     p.setPrenom(prenom);
                                     this.setVisible(false);
-                                    Manipulateur_Accueil aI = new Manipulateur_Accueil(p);
+                                    Manipulateur_Accueil aI = new Manipulateur_Accueil();
                                     aI.setVisible(true);
                                     break;
                                 case "MANIP":
                                     p.setNom(nom);
                                     p.setPrenom(prenom);
                                     this.setVisible(false);
-                                    Manipulateur_Accueil aMP = new Manipulateur_Accueil(p);
+                                    Manipulateur_Accueil aMP = new Manipulateur_Accueil();
                                     aMP.setVisible(true);
                                     break;
                                 case "DECO":
@@ -323,7 +323,7 @@ public class Connexion extends javax.swing.JFrame {
         }
         //</editor-fold>
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
